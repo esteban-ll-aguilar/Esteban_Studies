@@ -3,9 +3,19 @@ class Censo:
     def __init__(self):
         self.__id = 0
         self.__fecha = ''
-        self.__nene = Persona()
+        self.__nene = None
         self.__peso = 0.0
         self.__estatura = ''   
+        self.__censador =''
+
+
+    @property
+    def _censador(self):
+        return self.__censador
+
+    @_censador.setter
+    def _censador(self, value):
+        self.__censador = value
 
     @property
     def _id(self):
@@ -46,4 +56,25 @@ class Censo:
     @_estatura.setter
     def _estatura(self, value):
         self.__estatura = value
-     
+
+
+    @property
+    def serialize(self):
+        return {
+            "id": self._id,
+            "fecha": self._fecha,
+            "nene": Persona().serialize if self._nene != None else self._nene.serialize,
+            "peso": self._peso,
+            "estatura": self._estatura,
+            "censador": self._censador
+        }
+    
+    def deserializar(self, data):
+        censo = Censo()
+        censo._id = data['id']
+        censo._fecha = data['fecha']
+        censo._nene = Persona.serialize(data['nene']) if self._nene != None else self._nene.deserializar(data['nene']),
+        censo._peso = data['peso']
+        censo._estatura = data['estatura']
+        censo._censador = data['censador']
+        return censo

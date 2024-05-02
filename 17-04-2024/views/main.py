@@ -18,11 +18,11 @@ from controls.tda.linked.linkedList import Linked_List
 from controls.personaControl import PersonaControl
 from controls.personaDaoControl import PersonaDaoControl
 from controls.censoDao import CensoDao
-import json
 pc = PersonaControl()
 cd = CensoDao()
 pcd = PersonaDaoControl()
 try:
+    
     pc._persona._apellidos = "Leon"
     pc._persona._nombre = "Esteban"
     pc._persona._dni = "12345678"
@@ -69,13 +69,16 @@ try:
     pc.save
     
     print("Lista de personas")
-    print(pcd._lista)
+
+    cd.get_censo()._nombre = "Censo 1"
+    cd.get_censo()._descripcion = "Censo de la ciudad"
+    cd.save
+    
     
 
 
 except Exception as e:
     print(e)
-
 
 
 #Listas Enlazadas

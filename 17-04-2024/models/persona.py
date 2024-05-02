@@ -71,6 +71,17 @@ class Persona:
             'tipoIdentificacion': self.__tipoIdentificacion.name
         }
 
+    @property
+    def deserializar(self, data):
+        persona = Persona()
+        persona._id = data['id']
+        persona._nombre = data['nombre']
+        persona._apellidos = data['apellidos']
+        persona._dni = data['dni']
+        persona._direccion = data['direccion']
+        persona._telefono = data['telefono']
+        persona.__tipoIdentificacion = [data['tipoIdentificacion']]
+        return persona
         
 
     def __str__(self):

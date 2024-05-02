@@ -11,8 +11,8 @@ class PersonaDaoControl(DaoAdapter):
     @property
     def _persona(self):
         if self.__persona == None:
-            self.__persona = Persona()
-            self.__persona._id = self._list()._length
+            self._persona = Persona()
+            #self.__persona._id = self._list()._length
         return self.__persona
     
     @_persona.setter
@@ -25,7 +25,8 @@ class PersonaDaoControl(DaoAdapter):
     
     @property
     def save(self):
-        self._save(self.__persona)
+        self.__persona._id = self._lista._length + 1
+        self._save(self._persona)
 
 
 

@@ -72,6 +72,9 @@ class Linked_List(object):
                 count += 1
             return node
         
+    def get(self, pos):
+        return self.getNode(pos)._data
+        
 
     def add(self, data, pos):
         if self.isEmpty:
@@ -85,7 +88,13 @@ class Linked_List(object):
             self.__length += 1
     
     
-    
+    @property
+    def clear(self):
+        self.__head = None
+        self.__last = None
+        self.__length = 0
+
+
     @property    
     def toArray(self):
         out = []
@@ -94,7 +103,7 @@ class Linked_List(object):
         else:
             node = self.__head
             while node!= None:
-                out.append(node._data.serialize)
+                out.append(node._data.__name)
                 node = node._next
 
         return out
