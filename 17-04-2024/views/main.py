@@ -36,7 +36,6 @@ try:
     pcd._persona._direccion = "Calle 1"
     pcd._persona._apellidos = "Leon"
     pcd.save
-
     pc._persona = None
     pcd._persona = None
     pc._persona._nombre = "Christian"
@@ -53,12 +52,19 @@ try:
     pcd.save
 
     pc._persona = None
+    pcd._persona = None
     pc._persona._nombre = "Santiago"
     pc._persona._apellidos = "Robles"
     pc._persona._dni = "12345678"
     pc._persona._telefono = "0993114884"
     pc._persona._direccion = "Calle 1"
     pc.save
+    pcd._persona._nombre = "Santiago"
+    pcd._persona._apellidos = "Robles"
+    pcd._persona._dni = "12345678"
+    pcd._persona._telefono = "0993114884"
+    pcd._persona._direccion = "Calle 1"
+    pcd.save
 
     pc._persona = None
     pc._persona._nombre = "Jose"
@@ -66,13 +72,14 @@ try:
     pc._persona._dni = "12345678"
     pc._persona._telefono = "0993114884"
     pc._persona._direccion = "Calle 1"
+    
     pc.save
     
     print("Lista de personas")
 
-    cd.get_censo()._nombre = "Censo 1"
-    cd.get_censo()._descripcion = "Censo de la ciudad"
-    cd.save
+    # cd.get_censo()._nombre = "Censo 1"
+    # cd.get_censo()._descripcion = "Censo de la ciudad"
+    # cd.save
     
     
 

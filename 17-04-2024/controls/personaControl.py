@@ -6,8 +6,6 @@ class PersonaControl:
     def __init__(self):
         self.__persona = None
         self.__lista = Linked_List()
-        self.URL = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  + "/data/"
-        self.file = "persona.json"
         
 
     @property
@@ -32,9 +30,6 @@ class PersonaControl:
     @property
     def save(self):
         self.__persona._id = self.__lista._length + 1
+        print('Persona Control:')
         print(self.__persona.serialize)
         self.__lista.add(self.__persona, self.__lista._length)
-       
-        
-
-    

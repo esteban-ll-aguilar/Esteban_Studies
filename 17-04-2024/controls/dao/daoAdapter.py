@@ -10,8 +10,8 @@ class DaoAdapter(Generic[T]):
         self.lista = Linked_List()
         self.file = atype.__name__.lower() + ".json"
         self.URL = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  + "/data/"
-
-        print(self.atype.__name__)
+        print('Url: '+self.URL)
+        print('Clase: '+self.atype.__name__)
     
     
     def _list(self) -> T:
@@ -25,7 +25,7 @@ class DaoAdapter(Generic[T]):
             f.close()
         return self.lista
     
-
+    
     def __transform__(self):
         aux = '['
         for i in range(0, self.lista._length):
@@ -38,8 +38,9 @@ class DaoAdapter(Generic[T]):
                 
     
     def _save(self, data: T) -> T:
-        self._list()
+        self._list
         self.lista.add(data, self.lista._length)
         f = open(self.URL + self.file, "w")
+        print("Nombre del archivo"+self.file)
         f.write(self.__transform__())
         f.close()
