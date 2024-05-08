@@ -4,8 +4,8 @@ import os, json
 T = TypeVar("T")
 
 class DaoAdapter(Generic[T]):
-    atype: Type[T]
-    def __init__(self, atype: Type[T]):
+    atype: T
+    def __init__(self, atype: T):
         self.atype = atype
         self.lista = Linked_List()
         self.file = atype.__name__.lower() + ".json"
@@ -15,12 +15,16 @@ class DaoAdapter(Generic[T]):
     
     
     def _list(self) -> T:
+        print("Listando")
+        
         if os.path.isfile(self.URL + self.file):
             f = open(self.URL + self.file, "r")
+            
             datos = json.load(f)
             self.lista.clear
             for data in datos:
-                a = self.atype.deserializar(data)
+                print("Tipo: "+str(self.atype))
+                a = self.atype().deserializar(data)
                 self.lista.add(a, self.lista._length)
             f.close()
         return self.lista
@@ -36,11 +40,18 @@ class DaoAdapter(Generic[T]):
         aux += ']'
         return aux
                 
-    
+    def to_dict(self):
+        aux = []
+        self._list()
+        for i in range(0, self.lista._length):
+            aux.append(self.lista.get(i).serialize)
+        return aux
+
     def _save(self, data: T) -> T:
-        self._list
+        print("Guardando")
+        self._list()
         self.lista.add(data, self.lista._length)
         f = open(self.URL + self.file, "w")
-        print("Nombre del archivo"+self.file)
+        print("Nombre del archivo: "+self.file)
         f.write(self.__transform__())
         f.close()

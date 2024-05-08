@@ -75,11 +75,13 @@ try:
     
     pc.save
     
-    print("Lista de personas")
+    print("CENSO")
 
-    # cd.get_censo()._nombre = "Censo 1"
-    # cd.get_censo()._descripcion = "Censo de la ciudad"
-    # cd.save
+    cd.get_censo().__nombre = "Censo 1"
+    cd.get_censo()._descripcion = "Censo de la ciudad"
+    cd.get_censo()._fecha = "2021-04-17"
+    
+    cd.save
     
     
 

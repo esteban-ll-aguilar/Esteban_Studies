@@ -26,6 +26,7 @@ class PersonaDaoControl(DaoAdapter):
     @property
     def save(self):
         #Falta ponerle el id
+        self.__persona._id = self._lista._length +1
         print('Persona Dao Control:')
         print(self.__persona.serialize)
         self._save(self.__persona)

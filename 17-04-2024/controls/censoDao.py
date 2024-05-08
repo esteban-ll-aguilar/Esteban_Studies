@@ -14,12 +14,12 @@ class CensoDao(DaoAdapter):
         self.censo = value
 
     @property
-    def _list(self):
+    def _lista(self):
         return self._list()
 
     @property
     def save(self):
-        self.get_censo()._id = self._list()._length + 1
+        self.get_censo()._id = self._lista._length + 1
         self._save(self.get_censo())
 
 
