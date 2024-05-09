@@ -12,6 +12,15 @@ class Persona:
         self.__tipoIdentificacion = EnumTipoIdentificacion.CEDULA
 
     @property
+    def _tipoIdentificacion(self):
+        return self.__tipoIdentificacion
+
+    @_tipoIdentificacion.setter
+    def _tipoIdentificacion(self, value):
+        self.__tipoIdentificacion = value
+
+
+    @property
     def _id(self):
         return self.__id
 
@@ -68,7 +77,8 @@ class Persona:
             'dni': self._dni,
             'direccion': self._direccion,
             'telefono': self._telefono,
-            'tipoIdentificacion': self.__tipoIdentificacion.name
+            #'tipoIdentificacion': self.__tipoIdentificacion
+            'tipoIdentificacion': self._tipoIdentificacion
         }
 
     def deserializar(self, data):
