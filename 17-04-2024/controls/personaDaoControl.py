@@ -31,6 +31,9 @@ class PersonaDaoControl(DaoAdapter):
         print(self.__persona.serialize)
         self._save(self.__persona)
 
+    def merge(self, pos):
+        self._merge(self.__persona, pos)
+
 
 
 """ #Alta ecuacion
