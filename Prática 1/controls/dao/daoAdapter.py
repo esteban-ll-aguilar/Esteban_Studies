@@ -50,6 +50,8 @@ class DaoAdapter(Generic[T]):
         self.lista.add(data, self.lista._length)
         f = open(self.URL + self.file, "w")
         print("Nombre del archivo: "+self.file)
+    
+        
         f.write(self.__transform__())
         f.close()
 

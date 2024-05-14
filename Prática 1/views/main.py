@@ -39,6 +39,8 @@ try:
     fcd._factura._NComprobante = "001-001-000000001"
     
     fcd._factura._producto._producto = product1
+    print(fcd._factura._producto.to_dict())
+    fcd._factura._producto = None
     
     fcd._factura._iva = 0.12
     
