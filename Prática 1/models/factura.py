@@ -50,7 +50,7 @@ class Factura:
     def _producto(self):
         if self.__producto == None:
             #CONTOL PRODUCTO
-            self.__producto = Linked_List()
+            self.__producto = ProductoDaoControl()
         return self.__producto
 
     @_producto.setter
@@ -76,6 +76,7 @@ class Factura:
     @property
     def serialize(self):
         print('Factura Serialize:')
+        print(self._producto._producto)
         return {
             'id': self._id,
             'fecha': self._fecha,
@@ -89,15 +90,20 @@ class Factura:
         #print('Factura Deserializar:')
         #print(data['producto'])
         #producto = {'id': 0, 'nombre': 'Producto 1', 'precio': 0.0, 'cantidad': 10}
-        
-        print('cccccccccccccccccccccccccccccccccccccc')
+        #ProductoDaoControl()._producto.deserializar(data['producto'])
+        #print(data['producto'])
+        #print('Factura : HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
         factura = Factura()
         factura._id = data['id']
         factura._fecha = data['fecha']
         factura._NComprobante = data['NComprobante']
         factura._personaId = Persona().deserializar(data['personaId'])
-        factura._producto = ProductoDaoControl()._producto.deserializar(data['producto'])
+        factura._producto._producto = Producto().deserializar(data['producto'])
         factura._iva = data['iva']
         factura._total = data['total']
         
         return factura
+    
+    
+    def __str__(self) -> str:
+        return f'Factura: {self.serialize}'

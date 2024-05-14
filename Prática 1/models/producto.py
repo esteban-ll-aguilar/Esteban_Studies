@@ -13,8 +13,6 @@ class Producto:
     def _cantidad(self, value):
         self.__cantidad = value
 
-        self.__precio = 0.0
-
     @property
     def _id(self):
         return self.__id
@@ -56,5 +54,6 @@ class Producto:
         producto._cantidad = data['cantidad']
         return producto
     
-
+    def __str__(self):
+        return f'Producto: {self._nombre}'
     

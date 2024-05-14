@@ -1,14 +1,1 @@
-[
-    {
-        "idProduct": 1,
-        "nombre": "Producto 1",
-        "precio": 0.0,
-        "cantidad": 10
-    },
-    {
-        "idProduct": 2,
-        "nombre": "Producto 2",
-        "precio": 0.0,
-        "cantidad": 10
-    }
-]
+[{"idProduct": 1, "nombre": "Coca Cola", "precio": 1.5, "cantidad": 2}]

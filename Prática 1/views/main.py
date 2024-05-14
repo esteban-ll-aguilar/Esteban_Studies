@@ -22,43 +22,27 @@ from controls.productoDaoControl import ProductoDaoControl
 pcd = PersonaDaoControl()
 fcd = FacturaDaoControl()
 prodcd = ProductoDaoControl()
-
 try:
+
+    
+    product1 = prodcd._producto
+    product1._nombre = "Coca Cola"
+    product1._precio = 1.5
+    product1._cantidad = 2
+    prodcd.save
     
     
     
-    """ pcd._persona._apellidos = "Leon"
-    pcd._persona._nombre = "Esteban"
-    pcd._persona._dni = "12345678"
-    pcd._persona._telefono = "0993114884"
-    pcd._persona._direccion = "Calle 1"
-    pcd._persona._apellidos = "Leon"
-    pcd.save """
-    
-    """ producto1 = prodcd._producto    
-    producto1._nombre = "Producto 1"
-    producto1._precio = 10.0
-    producto1._cantidad = 10
-    prodcd.save """
     
     fcd._factura._personaId = pcd._list().get(0)
     fcd._factura._fecha = "2021-07-10"
     fcd._factura._NComprobante = "001-001-000000001"
-    """ fcd._factura._producto._lista.add(producto1, fcd._factura._producto._lista._length)
-    fcd._factura._producto._lista.add(producto1, fcd._factura._producto._lista._length) """
-    fcd._factura._producto._producto._nombre = "Producto 1"
-    fcd._factura._producto._producto._precio = 10.0
-    fcd._factura._producto._producto._cantidad = 10
-    fcd._factura._producto.save
-    fcd._factura._producto._producto = None
-    fcd._factura._producto._producto._nombre = "Producto 2"
-    fcd._factura._producto._producto._precio = 10.0
-    fcd._factura._producto._producto._cantidad = 10
-    fcd._factura._producto.save
+    
+    fcd._factura._producto._producto = product1
+    
+    fcd._factura._iva = 0.12
     
     fcd.save
-    
-    
     
     
     

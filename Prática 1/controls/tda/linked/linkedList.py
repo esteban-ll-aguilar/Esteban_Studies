@@ -147,10 +147,5 @@ class Linked_List(object):
             while node!= None:
                 out += str(node._data) +'\t'
                 node = node._next
-            
-
         return out
     
-            
-
-        return out
