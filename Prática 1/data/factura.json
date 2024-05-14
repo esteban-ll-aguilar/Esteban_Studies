@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "fecha": "2021-07-10",
+        "NComprobante": "001-001-000000001",
+        "personaId": {
+            "id": 1,
+            "nombre": "Esteban",
+            "apellidos": "Leon",
+            "dni": "12345678",
+            "direccion": "Calle 1",
+            "telefono": "0993114884",
+            "tipoIdentificacion": "CEDULA"
+        },
+        "producto": {
+            "idProduct": 2,
+            "nombre": "Producto 2",
+            "precio": 0.0,
+            "cantidad": 10
+        },
+        "iva": 0.0,
+        "total": 0.0
+    }
+]
