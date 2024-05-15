@@ -8,9 +8,26 @@ class Factura:
         self.__fecha = ''
         self.__NComprobante = ''
         self.__personaId = None
-        self.__producto = None
         self.__iva = 0.0
         self.__total = 0.0
+        self.__subtotal = 0.0
+        self.__detalle = ''
+
+    @property
+    def _subtotal(self):
+        return self.__subtotal
+
+    @_subtotal.setter
+    def _subtotal(self, value):
+        self.__subtotal = value
+
+    @property
+    def _detalle(self):
+        return self.__detalle
+
+    @_detalle.setter
+    def _detalle(self, value):
+        self.__detalle = value
 
     @property
     def _id(self):
@@ -47,17 +64,6 @@ class Factura:
         self.__personaId = value
 
     @property
-    def _producto(self):
-        if self.__producto == None:
-            #CONTOL PRODUCTO
-            self.__producto = ProductoDaoControl()
-        return self.__producto
-
-    @_producto.setter
-    def _producto(self, value):
-        self.__producto = value
-
-    @property
     def _iva(self):
         return self.__iva
 
@@ -76,29 +82,25 @@ class Factura:
     @property
     def serialize(self):
         print('Factura Serialize:')
-        print(self._producto._producto)
         return {
             'id': self._id,
             'fecha': self._fecha,
             'NComprobante': self._NComprobante,
             'personaId': self._personaId.serialize,
-            'producto': self._producto._producto.serialize,
+            'detalle': self._detalle,
+            'subtotal': self._subtotal,
             'iva': self._iva,
             'total': self._total
         }
     def deserializar(self, data):
-        #print('Factura Deserializar:')
-        #print(data['producto'])
-        #producto = {'id': 0, 'nombre': 'Producto 1', 'precio': 0.0, 'cantidad': 10}
-        #ProductoDaoControl()._producto.deserializar(data['producto'])
-        #print(data['producto'])
-        #print('Factura : HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+
         factura = Factura()
         factura._id = data['id']
         factura._fecha = data['fecha']
         factura._NComprobante = data['NComprobante']
         factura._personaId = Persona().deserializar(data['personaId'])
-        factura._producto._producto = Producto().deserializar(data['producto'])
+        factura._detalle = data['detalle']
+        factura._subtotal = data['subtotal']
         factura._iva = data['iva']
         factura._total = data['total']
         

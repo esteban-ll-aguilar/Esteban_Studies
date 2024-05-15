@@ -32,22 +32,58 @@ th {
                                 <div class="booking-form-body container col" >
                                     <div class="row">
                                         <!-- Primera columna -->
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="text-white-50">
+                                                <p class="text-white">Factura</p>
+                                            </div>
+                                            <div>
+                                                <input type="text" name="fecha" id="fecha" class="form-control" placeholder="Fecha de emisión" required>
+                                                <input type="text" name="numeroComprobante" id="numeroComprobante" class="form-control" placeholder="N° de Comprobante" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="text-white-50">
+                                                <p class="text-white">Datos Personales</p>
+                                            </div>
+                                            <div>
+                                                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
+                                                <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Dirección" required>
+                                                <input type="text" name="ruc" id="ruc" class="form-control" placeholder="RUC" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="text-white-50">
+                                                <p class="text-white">Contacto</p>
+                                            </div>
+                                            <div>
+                                                <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Teléfono" required>
+                                                <input type="text" name="correo" id="correo" class="form-control" placeholder="Correo" required>
+                                            </div>
+                                        </div>
+    
+                                        <!--<!-- Primera columna --
                                         <div class="col-lg-4 col-md-4 col-sm-12 text-white-50">
                                             <p class="text-white">Factura</p>
                                             <input type="text" name="fecha" id="fecha" class="form-control" placeholder="Fecha emicion" required>
                                             <input type="text" name="numeroComprobante" id="numeroComprobante" class="form-control" placeholder="N* Comprobante" required>
                                         </div>
-                                        <!-- Segunda columna -->
-                                        <div class="col-lg-4 col-md-4 col-sm-12">
-                                            <p class="text-white">Cliente</p>
-                                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
-                                            <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion" required>
-                                            <input type="text" name="ruc" id="ruc" class="form-control" placeholder="RUC" required>
-                                            <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Telefono" required>
-                                            <input type="text" name="correo" id="correo" class="form-control" placeholder="Correo" required>
-                                        </div>
+                                        <!-- Segunda columna --
+                                        <section class="col-lg-4 col-md-4 col-sm-12">
+                                            <div >
+                                                <p class="text-white">Cliente</p>
+                                                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
+                                                <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion" required>
+                                                <input type="text" name="ruc" id="ruc" class="form-control" placeholder="RUC" required>
+                                            </div>
+                                            <div >
+                                                <p class="text-black">C</p>
+                                                <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Telefono" required>
+                                                <input type="text" name="correo" id="correo" class="form-control" placeholder="Correo" required>
+                                            </div>
+                                        </section>
+                                    
 
-                                        <!-- Tercera columna -->
+                                        <!-- Tercera columna
                                         <div class="col-lg-4 col-md-4 col-sm-12">
                                             <p class="text-white">Vendedor</p>
                                             <input type="text" name="nombreVendedor" id="nombreVendedor" class="form-control" placeholder="Nombre" required>
@@ -56,51 +92,51 @@ th {
                                             <input type="text" name="telefonoVendedor" id="telefonoVendedor" class="form-control" placeholder="Telefono" required>
                                             <input type="text" name="correoVendedor" id="correoVendedor" class="form-control" placeholder="Correo" required>
                                         </div>
-                                    </div>
-                                    
+                                    </div>-->
 
-                                
+                                   
                                    <!--<input type="text" name="numero_comprobante" id="numero_comprobante" class="form-control" required>-->
                                    /br
-                                   <table class='text-bg-dark'>
-                                        <tr class='text-bg-light'>
-                                            <th>Cantidad</th>
-                                            <th>Descripccion</th>
-                                            <th>Precio Unitario</th>
-                                            <th>Total</th>
+                                   <table class='text-bg-dark' style='border-collapse: collapse; width: 100%; border: 1px solid #000;'>
+                                    <thead>
+                                        <tr class='text-bg-light text-center' style='background-color: #f0f0f0;'>
+                                            <th colspan="2">Detalle de la Factura</th>
+                                            <th></th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
                                         <tr>
-                                            <td>2</td>
-                                            <td>Producto 1</td>
-                                            <td>$10.00</td>
-                                            <td>$20.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Producto 1 xfdgsdgsd</td>
-                                            <td>$10.00</td>
-                                            <td>$20.00</td>
+                                            <td colspan="6">
+                                                <input type="text" name="detalle" id="detalle" class="form-control" placeholder="Detalle" required style='width: 100%; padding: 5px;'>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td colspan="2"><strong>IVA</strong></td>
+                                            <td colspan="3">Sub Total:</td>
                                             <td>
-                                                <select class='' required>
+                                                <input type="text" name="subtotal" id="subtotal" class="form-control" placeholder="Subtotal" required style='width: 100%; padding: 5px;'>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td colspan="3"><strong>IVA</strong></td>
+                                            <td>
+                                                <select class='' name="iva" required style='width: 100%; padding: 5px;'>
                                                     <option value="">Seleccione</option>
                                                     <option value="12">IVA 12%</option>
                                                     <option value="14">IVA 14%</option>
                                                     <option value="0">IVA 0%</option>
                                                 </select>
                                             </td>
-                                            
                                         </tr>
                                         <tr>
-                                            <td>
-                                            </td>
-                                            <td colspan="2"><strong>Total</strong></td>
+                                            <td></td>
+                                            <td colspan="3"><strong>Total</strong></td>
                                             <td><strong>$35.00</strong></td>
                                         </tr>
-                                    </table>
+                                    </tbody>
+                                </table>
+                                
                                     
                                 </div>
                                 <div class="text-center mt-4">

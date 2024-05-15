@@ -23,30 +23,14 @@ pcd = PersonaDaoControl()
 fcd = FacturaDaoControl()
 prodcd = ProductoDaoControl()
 try:
-
-    
-    product1 = prodcd._producto
-    product1._nombre = "Coca Cola"
-    product1._precio = 1.5
-    product1._cantidad = 2
-    prodcd.save
-    
-    
-    
-    
     fcd._factura._personaId = pcd._list().get(0)
     fcd._factura._fecha = "2021-07-10"
     fcd._factura._NComprobante = "001-001-000000001"
-    
-    fcd._factura._producto._producto = product1
-    print(fcd._factura._producto.to_dict())
-    fcd._factura._producto = None
-    
+    fcd._factura._detalle = "Venta de productos de limpieza y aseo personal 2021-07-10"
+    fcd._factura._subtotal = 100.0
     fcd._factura._iva = 0.12
-    
+    fcd._factura._total = 112.0
     fcd.save
-    
-    
     
     
     """ 
