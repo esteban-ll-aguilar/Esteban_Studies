@@ -77,7 +77,7 @@ class Linked_List(object):
         
 
     def add(self, data, pos):
-        if self.isEmpty:
+        if pos == 0:
             self.__addFirst__(data)
         elif pos == self._length:
             self.__addLast__(data)
@@ -118,9 +118,24 @@ class Linked_List(object):
         
     
     
-    def detele(self, pos=0):
-        #TODO
-        pass
+    def detele(self, pos):
+        if self.isEmpty:
+            raise LinkedEmptyException("List is Empty")
+        elif pos < 0 or pos >= self._length:
+            raise ArrayPositionException("Position is out of range")
+        elif pos == 0:
+            self.__head = self.__head._next
+            self.__length -= 1
+        elif pos == self._length -1:
+            node = self.getNode(pos-1)
+            node._next = None
+            self.__last = node
+            self.__length -= 1
+        else:
+            node_preview = self.getNode(pos-1)
+            node_last = node_preview._next._next
+            node_preview._next = node_last
+            self.__length -= 1
 
     
 
@@ -138,3 +153,13 @@ class Linked_List(object):
             
 
         return out
+    
+    @property
+    def print(self):
+       node = self.__head
+       data = ''
+
+       while node != None:
+            data += str(node._data)+ '    '
+            node = node._next
+       print(data) 
