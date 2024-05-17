@@ -56,8 +56,7 @@ Bootstrap 5 HTML CSS Template
                                             <p  class="text-white">Este es un sistema creado con la finalidad de realizar retenciones de una factura emitida
                                                 por una persona. 
                                             </p>
-                                            <a href="cliente" class="btn custom-btn custom-border-btn">Soy Cliente</a>
-                                            <a href="admin" class="btn custom-btn custom-border-btn">Soy Admin</a>
+                                            <a href="factura" class="btn custom-btn custom-border-btn">Generar Factura</a>
                                         </div>
                                     </section>
 
@@ -114,6 +113,6 @@ Bootstrap 5 HTML CSS Template
         <script src="{{ url_for('static', filename='js/jquery.sticky.js')}}"></script>
         <script src="{{ url_for('static', filename='js/vegas.min.js')}}"></script>
         <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
-
+        {% block script %}{% endblock %}
     </body>
 </html>

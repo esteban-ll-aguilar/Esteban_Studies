@@ -9,7 +9,7 @@ class Persona:
         self.__dni = ''
         self.__direccion = ''
         self.__telefono = ''
-        self.__tipoIdentificacion = EnumTipoIdentificacion.CEDULA
+        self.__tipoIdentificacion = EnumTipoIdentificacion
 
     @property
     def _tipoIdentificacion(self):

@@ -2,19 +2,19 @@
     {
         "id": 1,
         "nombre": "Esteban",
-        "apellidos": "Leon",
-        "dni": "12345678",
-        "direccion": "Calle 1",
+        "apellidos": "Leon Aguilar",
+        "dni": "0705743177",
+        "direccion": "Torricelli",
         "telefono": "0993114884",
-        "tipoIdentificacion": "CEDULA"
+        "tipoIdentificacion": "RUC EDUCATIVO"
     },
     {
         "id": 2,
-        "nombre": "Christian",
-        "apellidos": "Robles",
-        "dni": "12345678",
-        "direccion": "Calle 1",
+        "nombre": "Esteban",
+        "apellidos": "Leon Aguilar",
+        "dni": "0705743176",
+        "direccion": "Torricelli",
         "telefono": "0993114884",
-        "tipoIdentificacion": "CEDULA"
+        "tipoIdentificacion": "RUC PROFESIONAL"
     }
 ]

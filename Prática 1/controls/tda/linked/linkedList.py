@@ -108,6 +108,17 @@ class Linked_List(object):
 
         return out
     
+    def _filter(self, data):
+        out = []
+        if self.isEmpty:
+            out = "List is Empty"
+        else:
+            node = self.__head
+            while node!= None:
+                if node._data._clienteId == data:
+                    out.append(node._data.serialize)
+                node = node._next
+        return out
 
     
 
@@ -136,7 +147,14 @@ class Linked_List(object):
             self.__length -= 1
     
 
-        
+    def __exist__(self, data):
+        node = self.__head
+        while node != None:
+            if node._data._dni == data:
+                print('ya existe un nodo con este dato')
+                return True
+            node = node._next
+        return False
     
     def __str__(self) -> str:
         out = ""

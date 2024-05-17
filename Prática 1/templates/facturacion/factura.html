@@ -1,148 +1,127 @@
 {% extends "template.html" %}
+
 {% block title %}Retenciones{% endblock %}
+
 {% block style %}
 body {
     font-family: Arial, sans-serif;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
 }
+
 th, td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
+
 th {
     background-color: #f2f2f2;
 }
 {% endblock %}
 
-
-
 {% block content %}
+<form class="custom-video booking-form text-center" action="factura/generar" method="post" role="form">
+    <div class="text-center mb-4 pb-lg-2">
+        <em class="text-white">Universidad Nacional de Loja</em>
+        <h2 class="text-white">Generar Factura</h2>
+    </div>
+    <div class="booking-form-body container col">
+        <div class="row">
+            <!-- Primera columna -->
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="text-white-50">
+                    <p class="text-white">Factura</p>
+                </div>
+                <div>
+                    <input type="date" name="fecha" id="fecha" class="form-control" placeholder="Fecha de emisión" required>
+                    <input type="text" name="NComprobante" id="NComprobante" class="form-control" placeholder="N° de Comprobante" required>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="text-white-50">
+                    <p class="text-white">Datos Personales</p>
+                </div>
+                <div>
+                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
+                    <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder="Apellidos" required>
+                    <input type="text" name="dni" id="dni" class="form-control" placeholder="RUC" required>
+                    <select class="form-control" name="tipoIdentificacion" placeholder="RUC" required>
+                        <option value="" class="form-control text-bg-dark">Tipo de RUC</option>
+                        <option value="RUC EDUCATIVO" class="form-control text-bg-dark">RUC Educativo</option>
+                        <option value="RUC PROFESIONAL" class="form-control text-bg-dark">RUC Profesional</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="text-white-50">
+                    <p class="text-white">Contacto</p>
+                </div>
+                <div>
+                    <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Teléfono" required>
+                    <input type="text" name="correo" id="correo" class="form-control" placeholder="Correo" required>
+                    <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion" required>
+                </div>
+            </div>
+        </div>
+        <br>
+        <table class="text-bg-dark" style="border-collapse: collapse; width: 100%; border: 1px solid #000;">
+            <thead>
+                <tr class="text-bg-light text-center" style="background-color: #f0f0f0;">
+                    <th colspan="2">Detalle de la Factura</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>Sub Total:</td>
+                    <td>
+                        <input type="number" min="0" oninput="actualizarTotal()" name="subtotal" id="subtotal" class="form-control" placeholder="Subtotal" required style="width: 100%; padding: 5px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><strong>IVA</strong></td>
+                    <td>
+                        <select onchange="actualizarTotal()" class="form-control" name="iva" id="iva" required style="width: 100%; padding: 5px;">
+                            <option value="" class="form-control text-bg-dark">Seleccione</option>
+                            <option value="0" class="form-control text-bg-dark">0%</option>
+                            <option value="0.12" class="form-control text-bg-dark">12%</option>
+                            <option value="0.14" class="form-control text-bg-dark">14%</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><strong>Total</strong></td>
+                    <td><strong><input type="text" name="total" id="total" class="form-control" value="0" placeholder="Total" required readonly></strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary">Generar Factura</button>
+    </div>
+</form>
 
 
-                            <form class="custom-video booking-form text-center"  action="#" method="post" role="form" >
-                                <div class="text-center mb-4 pb-lg-2">
-                                    <em class="text-white">Universidad Nacional de Loja</em>
 
-                                    <h2 class="text-white">Generar Factura</h2>
-                                </div>
-                                <div class="booking-form-body container col" >
-                                    <div class="row">
-                                        <!-- Primera columna -->
-                                        <div class="col-lg-4 col-md-4 col-sm-12">
-                                            <div class="text-white-50">
-                                                <p class="text-white">Factura</p>
-                                            </div>
-                                            <div>
-                                                <input type="text" name="fecha" id="fecha" class="form-control" placeholder="Fecha de emisión" required>
-                                                <input type="text" name="numeroComprobante" id="numeroComprobante" class="form-control" placeholder="N° de Comprobante" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12">
-                                            <div class="text-white-50">
-                                                <p class="text-white">Datos Personales</p>
-                                            </div>
-                                            <div>
-                                                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
-                                                <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Dirección" required>
-                                                <input type="text" name="ruc" id="ruc" class="form-control" placeholder="RUC" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12">
-                                            <div class="text-white-50">
-                                                <p class="text-white">Contacto</p>
-                                            </div>
-                                            <div>
-                                                <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Teléfono" required>
-                                                <input type="text" name="correo" id="correo" class="form-control" placeholder="Correo" required>
-                                            </div>
-                                        </div>
-    
-                                        <!--<!-- Primera columna --
-                                        <div class="col-lg-4 col-md-4 col-sm-12 text-white-50">
-                                            <p class="text-white">Factura</p>
-                                            <input type="text" name="fecha" id="fecha" class="form-control" placeholder="Fecha emicion" required>
-                                            <input type="text" name="numeroComprobante" id="numeroComprobante" class="form-control" placeholder="N* Comprobante" required>
-                                        </div>
-                                        <!-- Segunda columna --
-                                        <section class="col-lg-4 col-md-4 col-sm-12">
-                                            <div >
-                                                <p class="text-white">Cliente</p>
-                                                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
-                                                <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion" required>
-                                                <input type="text" name="ruc" id="ruc" class="form-control" placeholder="RUC" required>
-                                            </div>
-                                            <div >
-                                                <p class="text-black">C</p>
-                                                <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Telefono" required>
-                                                <input type="text" name="correo" id="correo" class="form-control" placeholder="Correo" required>
-                                            </div>
-                                        </section>
-                                    
 
-                                        <!-- Tercera columna
-                                        <div class="col-lg-4 col-md-4 col-sm-12">
-                                            <p class="text-white">Vendedor</p>
-                                            <input type="text" name="nombreVendedor" id="nombreVendedor" class="form-control" placeholder="Nombre" required>
-                                            <input type="text" name="rucVendedor" id="rucVendedor" class="form-control" placeholder="RUC" required>
-                                            <input type="text" name="direccionVendedor" id="direccionVendedor" class="form-control" placeholder="Direccion" required>
-                                            <input type="text" name="telefonoVendedor" id="telefonoVendedor" class="form-control" placeholder="Telefono" required>
-                                            <input type="text" name="correoVendedor" id="correoVendedor" class="form-control" placeholder="Correo" required>
-                                        </div>
-                                    </div>-->
+{% endblock %}
+{% block script %}
 
-                                   
-                                   <!--<input type="text" name="numero_comprobante" id="numero_comprobante" class="form-control" required>-->
-                                   /br
-                                   <table class='text-bg-dark' style='border-collapse: collapse; width: 100%; border: 1px solid #000;'>
-                                    <thead>
-                                        <tr class='text-bg-light text-center' style='background-color: #f0f0f0;'>
-                                            <th colspan="2">Detalle de la Factura</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td colspan="6">
-                                                <input type="text" name="detalle" id="detalle" class="form-control" placeholder="Detalle" required style='width: 100%; padding: 5px;'>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td colspan="3">Sub Total:</td>
-                                            <td>
-                                                <input type="text" name="subtotal" id="subtotal" class="form-control" placeholder="Subtotal" required style='width: 100%; padding: 5px;'>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td colspan="3"><strong>IVA</strong></td>
-                                            <td>
-                                                <select class='' name="iva" required style='width: 100%; padding: 5px;'>
-                                                    <option value="">Seleccione</option>
-                                                    <option value="12">IVA 12%</option>
-                                                    <option value="14">IVA 14%</option>
-                                                    <option value="0">IVA 0%</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td colspan="3"><strong>Total</strong></td>
-                                            <td><strong>$35.00</strong></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                
-                                    
-                                </div>
-                                <div class="text-center mt-4">
-                                    <button type="submit" class="btn btn-primary">Generar Factura</button>
-                                </div>
-                            </form>
-
+    <script>
+        // Function to update total based on subtotal and VAT
+        function actualizarTotal() {
+            let subtotal = parseFloat(document.getElementById('subtotal').value) || 0;
+            let iva = parseFloat(document.getElementById('iva').value) || 0;
+            let total = subtotal * (1 + iva);
+            document.getElementById('total').value = total.toFixed(2); // Fixing to 2 decimal places
+        }
+    </script>
 
 {% endblock %}

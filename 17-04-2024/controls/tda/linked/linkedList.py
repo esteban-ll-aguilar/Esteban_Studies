@@ -154,6 +154,17 @@ class Linked_List(object):
 
         return out
     
+    
+    #si ya esxiste un nodo igual en la lista
+    def __exist__(self, data):
+        node = self.__head
+        while node != None:
+            if node._data == data:
+                print('ya existe un nodo con este dato')
+                return node._data.__id
+            node = node._next
+        return False
+    
     @property
     def print(self):
        node = self.__head

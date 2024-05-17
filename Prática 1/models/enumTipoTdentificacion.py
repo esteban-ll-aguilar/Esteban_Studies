@@ -1,8 +1,6 @@
 import enum
 
 class EnumTipoIdentificacion(enum.Enum):
-    CEDULA = 'CEDULA'
-    PASAPORTE = 'PASAPORTE'
     RUCEDUCATIVO = 'RUC EDUCATIVO'
     RUCPROFESIONAL = 'RUC PROFESIONAL'
     

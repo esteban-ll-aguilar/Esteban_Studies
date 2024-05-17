@@ -1,0 +1,48 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+
+                            <section class="custom-video booking-form text-center"  action="#" method="post" role="form">
+                                <div class="text-center mb-4 pb-lg-2">
+                                    <em class="text-white">Universidad Nacional de Loja</em>
+
+                                    <h2 class="text-white">Facturas registradas</h2>
+                                    
+                                    <em  class="text-white">Usuario: {{ persona.nombre }}</em></br>
+                                    <em  class="text-white" >{{ persona.tipoIdentificacion }}: {{ persona.dni }}</em><br>
+                                    <a href="personas/formulario" class="btn custom-btn custom-border-btn">Formulario</a>
+                                </div>
+
+                                <div class="booking-form-body">
+                                    letras de color blanco
+                                    <table class="table  table-bordered text-white" id="tabla">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <th>NComprobante</th>
+                                                <th>Subtotal</th>
+                                                <th>Iva</th>
+                                                <th>Total</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in lista %}
+                                            <tr>
+                                                <td>{{ item.fecha }}</td>
+                                                <td>{{ item.NComprobante }}</td>
+                                                <td>$ {{ item.subtotal }}</td>
+                                                <td>{{ item.iva }}%</td>
+                                                <td>$ {{ item.total }}</td>
+                                                <td>
+                                                    <a href="factura/censo/{{ item.id }}" class="btn custom-btn custom-border-btn ">Censar</a>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+
+
+{% endblock %}
