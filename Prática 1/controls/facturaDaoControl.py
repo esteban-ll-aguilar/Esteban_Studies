@@ -1,9 +1,11 @@
 from models.factura import Factura
+from controls.dao.stackDaoAdapter import StackDaoAdapter
 from controls.dao.daoAdapter import DaoAdapter
 class FacturaDaoControl(DaoAdapter):
     def __init__(self):
         super().__init__(Factura)
         self.__factura = None
+        
     
     @property
     def _factura(self):
@@ -22,10 +24,14 @@ class FacturaDaoControl(DaoAdapter):
 
     @property
     def save(self):
+        
         self.__factura._id = self._lista._length +1
         self._save(self.__factura)
         
         
     def merge(self, pos):
         self._merge(self.__factura, pos)
+        
+    def delete(self, pos):
+        self._delete(pos)
         

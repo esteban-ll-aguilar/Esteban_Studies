@@ -24,7 +24,7 @@ th {
 {% endblock %}
 
 {% block content %}
-<form class="custom-video booking-form text-center" action="factura/generar" method="post" role="form">
+<form class="custom-video booking-form text-center" action="generar/{{ data._id }}" method="post" role="form">
     <div class="text-center mb-4 pb-lg-2">
         <em class="text-white">Universidad Nacional de Loja</em>
         <h2 class="text-white">Generar Factura</h2>
@@ -46,14 +46,16 @@ th {
                     <p class="text-white">Datos Personales</p>
                 </div>
                 <div>
-                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>
-                    <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder="Apellidos" required>
-                    <input type="text" name="dni" id="dni" class="form-control" placeholder="RUC" required>
-                    <select class="form-control" name="tipoIdentificacion" placeholder="RUC" required>
+                    <input type="text" name="" id="nombre" value='{{ data._nombre }}' class="form-control" placeholder="Nombre" required readonly>
+                    <input type="text" name="" id="apellidos" value='{{ data._apellidos }}' class="form-control" placeholder="Apellidos" required readonly>
+                    <input type="text" name="dni" id="dni" class="form-control" value='{{ data._dni }}' placeholder="RUC" required readonly>
+                    <input type="text" name="" id="" class="form-control" value='{{ data._tipoIdentificacion }}' placeholder="RUC" required readonly>
+                    
+                    <!-- <select class="form-control" name="tipoIdentificacion"  placeholder="RUC" required>
                         <option value="" class="form-control text-bg-dark">Tipo de RUC</option>
                         <option value="RUC EDUCATIVO" class="form-control text-bg-dark">RUC Educativo</option>
                         <option value="RUC PROFESIONAL" class="form-control text-bg-dark">RUC Profesional</option>
-                    </select>
+                    </select>-->
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12">
@@ -61,9 +63,9 @@ th {
                     <p class="text-white">Contacto</p>
                 </div>
                 <div>
-                    <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Teléfono" required>
-                    <input type="text" name="correo" id="correo" class="form-control" placeholder="Correo" required>
-                    <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion" required>
+                    <input type="text" name="" id="telefono" class="form-control" placeholder="Teléfono"  value='{{ data._telefono }}'   required readonly>
+                    <input type="text" name="" id="correo" class="form-control"  value='{{ data._correo }}' placeholder="Correo" required readonly>
+                    <input type="text" name="" id="direccion" class="form-control" placeholder="Direccion"  value='{{ data._direccion }}' required readonly>
                 </div>
             </div>
         </div>

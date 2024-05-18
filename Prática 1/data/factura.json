@@ -1,1 +1,29 @@
-[{"id": 1, "fecha": "52542542452", "NComprobante": "452542452542", "clienteId": "0705743177", "subtotal": "5", "iva": "2", "total": "4.00"},{"id": 2, "fecha": "2005-06-29", "NComprobante": "452542452542", "clienteId": "0705743177", "subtotal": "4", "iva": "0", "total": "4.00"},{"id": 3, "fecha": "0006-02-05", "NComprobante": "452542452542", "clienteId": "0705743177", "subtotal": "4", "iva": "0", "total": "4.00"},{"id": 4, "fecha": "0005-02-04", "NComprobante": "452542452542", "clienteId": "0705743177", "subtotal": "4", "iva": "0", "total": "4.00"},{"id": 5, "fecha": "2022-06-05", "NComprobante": "452542452542", "clienteId": "0705743177", "subtotal": "4", "iva": "0", "total": "4.00"},{"id": 6, "fecha": "0005-05-05", "NComprobante": "452542452542", "clienteId": "0705743176", "subtotal": "4", "iva": "0", "total": "4.00"}]
+[
+    {
+        "id": 2,
+        "fecha": "2005-06-29",
+        "NComprobante": "452542452542",
+        "clienteId": "0705743177",
+        "subtotal": 4,
+        "iva": 0,
+        "total": 4.0
+    },
+    {
+        "id": 4,
+        "fecha": "2021-07-10",
+        "NComprobante": "001-001-000000001",
+        "clienteId": "0705743177",
+        "subtotal": 100.0,
+        "iva": 0.12,
+        "total": 112.0
+    },
+    {
+        "id": 5,
+        "fecha": "25252-02-05",
+        "NComprobante": "22222",
+        "clienteId": "0705743177",
+        "subtotal": "4",
+        "iva": "0",
+        "total": "4.00"
+    }
+]

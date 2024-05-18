@@ -19,28 +19,22 @@
                                         <thead>
                                             <tr>
                                                 <th>Fecha</th>
-                                                <th>NComprobante</th>
-                                                <th>Subtotal</th>
-                                                <th>Iva</th>
-                                                <th>Total</th>
-                                                <th>Acciones</th>
+                                                <th>N* Factura</th>
+                                                <th>Base Imponible</th>
+                                                <th>% Retencion</th>
+                                                
+                                                <th>Total Retenido</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {% for item in lista %}
                                             <tr>
-                                                <td>{{ item.fecha }}</td>
-                                                <td>{{ item.NComprobante }}</td>
-                                                <td>$ {{ item.subtotal }}</td>
-                                                <td>{{ item.iva }}%</td>
-                                                <td>$ {{ item.total }}</td>
-                                                <td>
-                                                    <form action='/retencion/{{item.id}}' method="post" role="form">
-                                                        <input type="hidden" name="id" value="{{ persona.id }}">
-                                                        <input type="hidden" name="tipoIdentificacion" value="{{ persona.tipoIdentificacion }}">
-                                                        <button type="submit" class="btn custom-btn custom-border-btn" style='padding: 4px 8px; font-size: 12px;'>Retener</button>
-                                                    </form>
-                                                </tr>
+                                                <td>{{ item.fechaEmicion }}</td>
+                                                <td>{{ item.facturaId }}</td>
+                                                <td>$ {{ item.porcentajeRetencion }}</td>
+                                                <td>{{ item.porcentajeRetencion }}</td>
+                                                <td>$ {{ item.totalRetenido }}</td>
+                                                
                                             {% endfor %}
                                         </tbody>
                                     </table>

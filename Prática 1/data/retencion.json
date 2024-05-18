@@ -1,0 +1,20 @@
+[
+    {
+        "id": 2,
+        "clienteId": "0705743177",
+        "facturaId": "001-001-000000001",
+        "fechaEmicion": "2024-05-18",
+        "baseImponible": 100.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 8.0
+    },
+    {
+        "id": 1,
+        "clienteId": "0705743177",
+        "facturaId": "452542452542",
+        "fechaEmicion": "2024-05-18",
+        "baseImponible": 1,
+        "porcentajeRetencion": 5,
+        "totalRetenido": 0.4
+    }
+]

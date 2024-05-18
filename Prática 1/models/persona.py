@@ -10,6 +10,16 @@ class Persona:
         self.__direccion = ''
         self.__telefono = ''
         self.__tipoIdentificacion = EnumTipoIdentificacion
+        self.__correo = ''
+
+    @property
+    def _correo(self):
+        return self.__correo
+
+    @_correo.setter
+    def _correo(self, value):
+        self.__correo = value
+
 
     @property
     def _tipoIdentificacion(self):
@@ -77,7 +87,7 @@ class Persona:
             'dni': self._dni,
             'direccion': self._direccion,
             'telefono': self._telefono,
-            #'tipoIdentificacion': self.__tipoIdentificacion
+            'correo': self._correo,
             'tipoIdentificacion': self._tipoIdentificacion.__str__()
             
         }
@@ -90,6 +100,7 @@ class Persona:
         persona._dni = data['dni']
         persona._direccion = data['direccion']
         persona._telefono = data['telefono']
+        persona._correo = data['correo']
         persona._tipoIdentificacion = data['tipoIdentificacion']
         return persona
         

@@ -17,59 +17,26 @@ from controls.tda.linked.linkedList import Linked_List
 from controls.personaControl import PersonaControl
 from controls.personaDaoControl import PersonaDaoControl
 from controls.facturaDaoControl import FacturaDaoControl
-from controls.productoDaoControl import ProductoDaoControl
-
+from controls.retencionDaoControl import RetencionDaoControl
+from controls.tda.stack.stack import Stack
 pcd = PersonaDaoControl()
 fcd = FacturaDaoControl()
-prodcd = ProductoDaoControl()
+rt = RetencionDaoControl()
+st = Stack(5)
 try:
-    fcd._factura._personaId = pcd._list().get(0)
-    fcd._factura._fecha = "2021-07-10"
-    fcd._factura._NComprobante = "001-001-000000001"
-    fcd._factura._detalle = "Venta de productos de limpieza y aseo personal 2021-07-10"
-    fcd._factura._subtotal = 100.0
-    fcd._factura._iva = 0.12
-    fcd._factura._total = 112.0
-    fcd.save
+    rt._retencion._fechaEmicion = "2021-07-10"
+    rt._retencion._NRetencion = "001-001-000000001"
+    rt._retencion.__baseImponible = "45.0"
+    st.push(rt._retencion)
+    st.push("Hola 2")
+    
+    #st.print
     
     
-    """ 
-
-    pcd._persona._apellidos = "Leon"
-    pcd._persona._nombre = "Esteban"
-    pcd._persona._dni = "12345678"
-    pcd._persona._telefono = "0993114884"
-    pcd._persona._direccion = "Calle 1"
-    pcd._persona._apellidos = "Leon"
-    pcd.save
-    pcd._persona = None
-
-    pcd._persona._nombre = "Christian"
-    pcd._persona._apellidos = "Robles"
-    pcd._persona._dni = "12345678"
-    pcd._persona._telefono = "0993114884"
-    pcd._persona._direccion = "Calle 1"
-    pcd.save
-
-    
-    pcd._persona = None
-
-    pcd._persona._nombre = "Santiago"
-    pcd._persona._apellidos = "Robles"
-    pcd._persona._dni = "12345678"
-    pcd._persona._telefono = "0993114884"
-    pcd._persona._direccion = "Calle 1"
-    pcd.save
-
-    pcd._persona = None
-
-    pcd._persona._nombre = "Mishel"
-    pcd._persona._apellidos = "Rodas"
-    pcd._persona._dni = "12345678"
-    pcd._persona._telefono = "0993114884"
-    pcd._persona._direccion = "Calle 1"
-    pcd._persona._tipoIdentificacion = "CEDULA"
-    pcd.save """
+    rt._retencion._fechaEmicion = "2021-07-10"
+    rt._retencion._NRetencion = "001 - 001 - 000000002"
+    rt._retencion.__baseImponible = "45.0"
+    rt.save    
 
 except Exception as e:
     print(e)
