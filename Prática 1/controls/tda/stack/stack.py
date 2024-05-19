@@ -1,6 +1,6 @@
 from controls.tda.stack.stackOperation import StackOperation
 class Stack:
-    def __init__(self, tope, useList=False):
+    def __init__(self, tope, useList):
         self.__stack = StackOperation(tope, useList)
 
     @property

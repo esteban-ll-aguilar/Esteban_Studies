@@ -22,7 +22,6 @@ from controls.tda.stack.stack import Stack
 pcd = PersonaDaoControl()
 fcd = FacturaDaoControl()
 rt = RetencionDaoControl()
-st = Stack(5)
 p = PersonaListControl()
 try:
     """ p._persona._nombre = "Esteban"
