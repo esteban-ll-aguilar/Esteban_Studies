@@ -11,7 +11,7 @@ https://www.tooplate.com/view/2137-barista-cafe
 -----------------------------------------*/
 :root {
   --white-color:                  #ffffff;
-  --primary-color:                #BC6C25;
+  --primary-color:                #19053b;
   --secondary-color:              #DDA15E;
   --section-bg-color:             #b78752;
   --custom-btn-bg-color:          #BC6C25;
@@ -198,7 +198,7 @@ strong {
   height: 25px;
   right: -12px;
   background-color: var(--white-color);
-  border: 5px solid #7c5c52;
+  border: 5px solid #ad5d45;
   top: 15px;
   border-radius: 50%;
   z-index: 1;
@@ -794,14 +794,23 @@ strong {
 /*---------------------------------------
   BOOKING SECTION              
 -----------------------------------------*/
+
 .booking-section {
+  position: relative;
+}
+.booking-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url('../images/young-female-barista-wear-face-mask-serving-take-away-hot-coffee-paper-cup-consumer-cafe.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  position: relative;
+  filter: blur(3px); /* Ajusta el valor de desenfoque según lo deseado */
 }
-
 .booking-form-wrap {
   background-color: rgba(0, 0, 0, 0.65);
   border-radius: var(--border-radius-medium);
@@ -964,8 +973,13 @@ strong {
 -----------------------------------------*/
 .site-footer {
   background-color: var(--primary-color);
+  color: var(--white-color);
   padding-top: 100px;
   padding-bottom: 100px;
+  position: relative;
+  overflow: hidden;
+  
+
 }
 
 .site-footer strong {
@@ -988,6 +1002,7 @@ strong {
   color: rgba(255, 255, 255, 0.75);
   text-decoration: underline;
 }
+
 
 .copyright-text {
   color: rgba(255, 255, 255, 0.75);

@@ -1,5 +1,7 @@
 from controls.tda.linked.node import Node
 from controls.exception.linkedListExeption import LinkedEmptyException, ArrayPositionException
+import sys
+
 class Linked_List(object):
     def __init__(self):
         self.__head = None
@@ -103,7 +105,7 @@ class Linked_List(object):
         else:
             node = self.__head
             while node!= None:
-                out.append(node._data.__name)
+                out.append(node._data)#.__name
                 node = node._next
 
         return out
@@ -178,6 +180,17 @@ class Linked_List(object):
                 node = node._next
         return out
     
+    #calcular la memoria utilizada por la lista
+    @property
+    def __sizeList__(self):
+        # Tamaño de los atributos de la lista
+        size = sys.getsizeof(self.__head) + sys.getsizeof(self.__last) + sys.getsizeof(self.__length)
+        
+        # Tamaño de cada nodo
+        node_size = sys.getsizeof(Node)
+        size += node_size * self.__length
+         # Convertir a megabytes
+        return size
     
     @property
     def print(self):

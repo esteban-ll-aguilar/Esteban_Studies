@@ -30,17 +30,17 @@ def generarRetencion(pos):
     generar_retencion._retencion._facturaId = data['NComprobante']
     generar_retencion._retencion._baseImponible =float(data['subtotal'])
     generar_retencion._retencion._fechaEmicion = datetime.today().strftime("%Y-%m-%d %H:%M")
+    print(data['tipoIdentificacion'])
     if data['tipoIdentificacion'] == 'RUC EDUCATIVO':
         generar_retencion._retencion._porcentajeRetencion = 0.08
     elif data['tipoIdentificacion']  == 'RUC PROFESIONAL':
-        generar_retencion._retencion._porcentajeRetencion = 0.1
+        generar_retencion._retencion._porcentajeRetencion = 0.10
     
     
 
     generar_retencion._retencion._totalRetenido = float(data['subtotal']) * generar_retencion._retencion._porcentajeRetencion
-    print(generar_retencion._retencion.serialize)
     generar_retencion.save
-    print(pos)
+    
     fdc._detele(pos)
     #fdc.delete(pos)
     

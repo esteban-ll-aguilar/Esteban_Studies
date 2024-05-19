@@ -3,8 +3,7 @@
 {% block content %}
 
 
-            <div class="col-lg-10 col-12 mx-auto">
-                <div class="booking-form-wrap">
+            
                     <div class="row">
                         <div class="col-lg-7 col-12 p-0">
                             <form class="custom-form booking-form" method="post" action="/nuevo_cliente/guardar" role="form">
@@ -17,7 +16,7 @@
                                         <li class="text-white">Al ser un Sistema de Retenciones su Identificacion 'DNI' sera a travez de un RUC</li>
                                     </p>
                                     
-                                    <a href="/personas" class="btn custom-btn custom-border-btn">Regresar</a>
+                                    <a href="/" class="btn custom-btn custom-border-btn">Regresar</a>
                                 </div>
 
                                 <div class="booking-form-body">
@@ -40,7 +39,7 @@
                                         <select name="tipoIdentificacion" id="tipoIdentificacion" class="form-control" class="col-lg-6 col-12" required>
                                             <option value="">Tipo de Identificacion</option>
                                             <option value="RUC EDUCATIVO">RUC Educativo</option>
-                                            <option value="RUCPROFESIONAL">RUC Profecional</option>
+                                            <option value="RUC PROFESIONAL">RUC Profecional</option>
                                         </select>
 
                                         <div class="col-lg-6 col-12">
@@ -68,9 +67,7 @@
 
                         </div>
                     </div>
-                </div>
-
-            </div>
+            
 
 {% endblock %}
 

@@ -3,8 +3,8 @@ from controls.dao.daoAdapter import DaoAdapter
 from controls.dao.stackDaoAdapter import StackDaoAdapter
 
 class RetencionListDaoControl(StackDaoAdapter):
-    def __init__(self):
-        super().__init__(Retencion)
+    def __init__(self, useList: bool, size: int):
+        super().__init__(Retencion, useList, size)
         self.__retencion = None
 
 

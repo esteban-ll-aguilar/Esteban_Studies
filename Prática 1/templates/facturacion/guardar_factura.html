@@ -37,10 +37,11 @@ th {
                     <p class="text-white">Factura</p>
                 </div>
                 <div>
-                    <input type="date" name="fecha" id="fecha" class="form-control" placeholder="Fecha de emisión" required>
+                    <input type="date" name="fecha" id="fecha" class="form-control" placeholder="Fecha de emisión" required >
                     <input type="text" name="NComprobante" id="NComprobante" class="form-control" placeholder="N° de Comprobante" required>
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="text-white-50">
                     <p class="text-white">Datos Personales</p>
@@ -103,10 +104,12 @@ th {
     </div>
     <div class="text-center mt-4">
         <button type="submit" class="btn btn-primary">Generar Factura</button>
+
     </div>
 </form>
 
 
+<a href='/cliente/detalle/{{data._id}}' class="btn btn-primary">Volver</a>
 
 
 {% endblock %}

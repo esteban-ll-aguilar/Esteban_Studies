@@ -5,9 +5,9 @@ T = TypeVar("T")
 
 class StackDaoAdapter(Generic[T]):
     atype: T
-    def __init__(self, atype: T):
+    def __init__(self, atype: T, useList: bool, size: int):
         self.atype = atype
-        self.lista = Stack(20, False)
+        self.lista = Stack(size, useList)
         self.file = atype.__name__.lower() + ".json"
         self.URL = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  + "/data/"
         #print('Url: '+self.URL)

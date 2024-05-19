@@ -13,8 +13,7 @@
                                     <em  class="text-white" >{{ persona.tipoIdentificacion }}: {{ persona.dni }}</em><br>
                                 </div>
 
-                                <div class="booking-form-body">
-                                    letras de color blanco
+                                <div class="booking-form-body table-responsive" >
                                     <table class="table  table-bordered text-white" id="tabla">
                                         <thead>
                                             <tr>
@@ -52,6 +51,7 @@
                                     </table>
                                 </div>
                             </section>
+                            <a href="/cliente/detalle/{{ persona.id }}" class="btn btn-primary" >Volver</a>
 
 
 {% endblock %}

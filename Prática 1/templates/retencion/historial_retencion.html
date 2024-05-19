@@ -11,9 +11,10 @@
                                     
                                     <em  class="text-white">Usuario: {{ persona.nombre }}</em></br>
                                     <em  class="text-white" >{{ persona.tipoIdentificacion }}: {{ persona.dni }}</em><br>
+
                                 </div>
 
-                                <div class="booking-form-body">
+                                <div class="booking-form-body table-responsive">
                                     <table class="table  table-bordered text-white display">
                                         <thead>
                                             <tr>
@@ -38,6 +39,7 @@
                                     </table>
                                 </div>
                             </section>
+                            <a href="/cliente/detalle/{{ persona.id }}" class="btn btn-primary" >Volver</a>
 
 
 {% endblock %}
