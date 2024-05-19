@@ -1,7 +1,7 @@
 from controls.tda.stack.stackOperation import StackOperation
 class Stack:
-    def __init__(self, tope):
-        self.__stack = StackOperation(tope)
+    def __init__(self, tope, useList=False):
+        self.__stack = StackOperation(tope, useList)
 
     @property
     def _stack(self):
@@ -11,9 +11,6 @@ class Stack:
     def _stack(self, value):
         self.__stack = value
 
-
-
-        
     def push(self, data):
         self.__stack.push(data)
     
@@ -23,7 +20,7 @@ class Stack:
     
     @property
     def print(self):
-        self.__stack.print
+        self.__stack._class.print
 
     @property
     def verify(self):

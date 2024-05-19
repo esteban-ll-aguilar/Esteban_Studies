@@ -27,7 +27,7 @@ class RetencionDaoControl(StackDaoAdapter):
     
     @property
     def save(self):
-        self.__retencion._id = self._lista._stack._length +1
+        self.__retencion._id = self._lista._stack._class._length +1
         self._save(self.__retencion)
         
         

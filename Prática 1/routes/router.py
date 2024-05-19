@@ -3,7 +3,6 @@ from controls.personaDaoControl import PersonaDaoControl
 from controls.facturaDaoControl import FacturaDaoControl
 from controls.retencionDaoControl import RetencionDaoControl
 from datetime import datetime
-
 from flask_cors import CORS
 
 router = Blueprint('router', __name__)
@@ -27,23 +26,24 @@ def generarRetencion(pos):
     generar_retencion = RetencionDaoControl()
     fdc._factura = fdc._lista.get(pos-1)
     data = request.form
-    generar_retencion._retencion._personaId = fdc._factura._clienteId
+    cliente = data['dni']
+    identificacion = data['tipoIdentificacion']
+    print(identificacion)
+    generar_retencion._retencion._clienteId = cliente
     generar_retencion._retencion._facturaId = fdc._factura._NComprobante
     generar_retencion._retencion._baseImponible = fdc._factura._subtotal
-    generar_retencion._retencion._fechaEmicion = datetime.today().strftime('%Y-%m-%d')
-    if data['tipoIdentificacion'] == 'RUC EDUCATIVO':
+    generar_retencion._retencion._fechaEmicion = datetime.today().strftime("%Y-%m-%d %H:%M")
+    if identificacion == 'RUC EDUCATIVO':
         generar_retencion._retencion._porcentajeRetencion = 0.08
-    elif data['tipoIdentificacion'] == 'RUC PROFESIONAL':
+    elif identificacion == 'RUC PROFESIONAL':
         generar_retencion._retencion._porcentajeRetencion = 0.1
     
     generar_retencion._retencion._totalRetenido = float(generar_retencion._retencion._baseImponible) * float(generar_retencion._retencion._porcentajeRetencion)
     generar_retencion.save
     
-    cliente = data['id']
+    #fdc.delete(pos)
     
-    fdc.delete(pos-1)
-    
-    return redirect(f'/historial_retenciones/{cliente}', code=302)
+    return redirect(f'/cliente/detalle/historial_retencion/{data['clienteId']}', code=302)
 
 @router.route('/clientes')
 def ver_clientes():
@@ -66,18 +66,16 @@ def ver_guardar():
 def generar_factura(pos):
     factura = FacturaDaoControl()
     data = request.form
-    """ if factura._lista.__exist__(data['NComprobante']):
-        print('Factura ya existe')
-    else:
-         """
-    factura._factura._fecha = data['fecha']
-    factura._factura._clienteId = data['dni']
-    factura._factura._NComprobante = data['NComprobante']
-    factura._factura._subtotal = data['subtotal']
-    factura._factura._iva = data['iva']
-    factura._factura._total = data['total']
-    factura._factura._clienteId = data['dni']
-    factura.save
+    if factura._lista.__exist__(data['NComprobante']) != True:
+        print('se guardo') 
+        factura._factura._fecha = data['fecha']
+        factura._factura._clienteId = data['dni']
+        factura._factura._NComprobante = data['NComprobante']
+        factura._factura._subtotal = data['subtotal']
+        factura._factura._iva = data['iva']
+        factura._factura._total = data['total']
+        factura._factura._clienteId = data['dni']
+        factura.save
     return redirect(f'/cliente/detalle/lista_factura/{pos}', code=302)
 
 
@@ -96,7 +94,6 @@ def lista_retencion(pos):
     retencion = RetencionDaoControl()
     persona._persona = persona._lista.get(pos-1)
     lista = retencion._lista._stack._filter(persona._persona._dni)
-    print(lista)
     return render_template('retencion/historial_retencion.html', lista=lista, persona=persona._persona.serialize)
 
 
@@ -105,7 +102,6 @@ def guardar_cliente():
     data = request.form
     pd = PersonaDaoControl()
     data = request.form
-    print(data['direccion'])
     if not 'nombre' in data.keys() or not 'apellidos' in data.keys() or not 'telefono' in data.keys() or not 'dni' in data.keys() or not 'direccion' in data.keys():
         abort(400)
     if pd._lista.__exist__(data['dni']) != True:

@@ -8,6 +8,8 @@ def create_app():
     with app.app_context():
         #from routes.api import api
         #app.register_blueprint(api)
+        #from routes.listas_version import listas_version
+        #app.register_blueprint(listas_version)
         from routes.router import router
         app.register_blueprint(router)
     return app

@@ -114,10 +114,12 @@ class Linked_List(object):
             out = "List is Empty"
         else:
             node = self.__head
-            while node!= None:
-                if node._data._clienteId == data:
+            for i in range(0, self._length):
+                if hasattr(node._data, '_clienteId') and node._data._clienteId == data:
                     out.append(node._data.serialize)
-                
+                elif hasattr(node._data, '_NComprobante') and node._data._NComprobante == data:
+                    out.append(node._data)
+                node = node._next
         return out
 
     
@@ -128,8 +130,9 @@ class Linked_List(object):
     
         
     
-    
+        
     def detele(self, pos):
+        pos = pos 
         if self.isEmpty:
             raise LinkedEmptyException("List is Empty")
         elif pos < 0 or pos >= self._length:
@@ -137,8 +140,11 @@ class Linked_List(object):
         elif pos == 0:
             self.__head = self.__head._next
             self.__length -= 1
+            
         elif pos == self._length -1:
             self.__last = self.getNode(pos-1)
+            #restarId
+            #self.__last._data._id = self.__last._data._id 
             self.__length -= 1
         else:
             node_preview = self.getNode(pos-1)
@@ -149,7 +155,7 @@ class Linked_List(object):
 
     def __exist__(self, data):
         node = self.__head
-        while node != None:
+        for i in range(0, self._length):
             if hasattr(node._data, '_dni') and node._data._dni == data:
                 print('Ya existe un nodo con este dato (_dni)')
                 return True

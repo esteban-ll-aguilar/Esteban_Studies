@@ -41,9 +41,6 @@ class Linked_List(object):
                 self.__last = node
                 self.__length += 1
 
-    """ def __addIntermed__(self, data, pos):
-            self.getNode(pos-1)._next = Node(data, self.getNode(pos))
-            self.__length += 1 """
 
                 
     def edit(self, data, pos=0):
@@ -155,15 +152,7 @@ class Linked_List(object):
         return out
     
     
-    #si ya esxiste un nodo igual en la lista
-    def __exist__(self, data):
-        node = self.__head
-        while node != None:
-            if node._data == data:
-                print('ya existe un nodo con este dato')
-                return node._data.__id
-            node = node._next
-        return False
+    
     
     @property
     def print(self):
@@ -174,3 +163,13 @@ class Linked_List(object):
             data += str(node._data)+ '    '
             node = node._next
        print(data) 
+       
+""" #si ya esxiste un nodo igual en la lista
+    def __exist__(self, data):
+        node = self.__head
+        while node != None:
+            if node._data == data:
+                print('ya existe un nodo con este dato')
+                return node._data.__id
+            node = node._next
+        return False """

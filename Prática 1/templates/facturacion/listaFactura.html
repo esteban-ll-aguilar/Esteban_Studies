@@ -36,7 +36,8 @@
                                                 <td>$ {{ item.total }}</td>
                                                 <td>
                                                     <form action='/retencion/{{item.id}}' method="post" role="form">
-                                                        <input type="hidden" name="id" value="{{ persona.id }}">
+                                                        <input type="hidden" name="clienteId" value="{{ persona.id }}">
+                                                        <input type="hidden" name="dni" value="{{ persona.dni }}">
                                                         <input type="hidden" name="tipoIdentificacion" value="{{ persona.tipoIdentificacion }}">
                                                         <button type="submit" class="btn custom-btn custom-border-btn" style='padding: 4px 8px; font-size: 12px;'>Retener</button>
                                                     </form>

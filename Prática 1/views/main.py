@@ -14,29 +14,36 @@ import sys
 sys.path.append('../')
 from controls.tdaArray import TDAArray
 from controls.tda.linked.linkedList import Linked_List
-from controls.personaControl import PersonaControl
 from controls.personaDaoControl import PersonaDaoControl
 from controls.facturaDaoControl import FacturaDaoControl
 from controls.retencionDaoControl import RetencionDaoControl
+from controls.personaListControl import PersonaListControl
 from controls.tda.stack.stack import Stack
 pcd = PersonaDaoControl()
 fcd = FacturaDaoControl()
 rt = RetencionDaoControl()
 st = Stack(5)
+p = PersonaListControl()
 try:
-    rt._retencion._fechaEmicion = "2021-07-10"
-    rt._retencion._NRetencion = "001-001-000000001"
-    rt._retencion.__baseImponible = "45.0"
-    st.push(rt._retencion)
-    st.push("Hola 2")
+    """ p._persona._nombre = "Esteban"
+    p._persona._apellidos = "Calle"
+    p._persona._dni = "12345678"
+    p._persona._tipoIdentificacion = "DNI"
+    p.save
+    p.print """
     
-    #st.print
+    rt._retencion._baseImponible = "45.0"
+    rt._retencion._porcentajeRetencion = "0.1"
+    rt._retencion._NRetencion = "4.5"
+    rt.save
+    rt._retencion._baseImponible = "45.0"
+    rt._retencion._porcentajeRetencion = "0.1"
+    rt._retencion._NRetencion = "4.5"
+    rt.save
     
     
-    rt._retencion._fechaEmicion = "2021-07-10"
-    rt._retencion._NRetencion = "001 - 001 - 000000002"
-    rt._retencion.__baseImponible = "45.0"
-    rt.save    
+    
+    
 
 except Exception as e:
     print(e)
