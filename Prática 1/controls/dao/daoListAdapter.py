@@ -52,7 +52,7 @@ class DaoListAdapter:
         
     def _detele(self, pos: int):
         self._list()
-        self.lista.detele(pos)
+        self.lista.detele(pos-1)
         f = open(self.URL + self.file, "w")
         f.write(self.__transform__())
         f.close()

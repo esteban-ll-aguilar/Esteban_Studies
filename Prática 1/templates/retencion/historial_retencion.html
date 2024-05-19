@@ -14,8 +14,7 @@
                                 </div>
 
                                 <div class="booking-form-body">
-                                    letras de color blanco
-                                    <table class="table  table-bordered text-white" id="tabla">
+                                    <table class="table  table-bordered text-white display">
                                         <thead>
                                             <tr>
                                                 <th>Fecha</th>
@@ -33,7 +32,7 @@
                                                 <td>$ {{ item.baseImponible }}</td>
                                                 <td>{{ item.porcentajeRetencion }}%</td>
                                                 <td>$ {{ item.totalRetenido }}</td>
-                                                
+                                            </tr>
                                             {% endfor %}
                                         </tbody>
                                     </table>

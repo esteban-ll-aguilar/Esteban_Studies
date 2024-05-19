@@ -11,7 +11,8 @@
         <style>{% block style %}{% endblock %}</style>
         <!-- CSS FILES -->                
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"/>
+
+        <link href="https://cdn.datatables.net/v/dt/dt-2.0.7/datatables.min.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,400;0,600;0,700;1,200;1,700&display=swap" rel="stylesheet">
@@ -39,6 +40,7 @@
                             <div class="booking-form-wrap align-bottom-center">
                                 <div class="row">
                                     
+
                                   {% block content %}
                                     <section class="custom-video booking-form text-center"  action="#" method="post" role="form">
                                         <div class="text-center mb-4 pb-lg-2">
@@ -54,7 +56,15 @@
 
                                   
                                   {% endblock %}
-
+                                  {% with messages = get_flashed_messages() %}
+                                    {% if messages %}
+                                        <ul class='text-center text-bg-info'>
+                                            {% for message in messages %}
+                                                <li class='text-light'>{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                  {% endwith %}
                                     
                                 </div>
                             </div>
@@ -98,10 +108,16 @@
                 </footer>
             </main>
 
-
+ 
+            
         <!-- JAVASCRIPT FILES -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/v/dt/dt-2.0.7/datatables.min.js"></script>
+        <script>
+            $(document).ready( function () {
+                $('#tabla').DataTable();
+            } );
+        </script>
         <script src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
         <script src="{{ url_for('static', filename='js/jquery.sticky.js')}}"></script>

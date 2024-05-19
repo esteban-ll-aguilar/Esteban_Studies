@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, make_response, request, render_template, redirect, abort
+from flask import Blueprint, jsonify, make_response, request, render_template, redirect, abort, flash
 from controls.personaListControl import PersonaListControl
 from controls.facturaListControl import FacturaListControl
 from controls.retencionListDaoControl import RetencionListDaoControl
@@ -36,10 +36,11 @@ def generarRetencion(pos):
         generar_retencion._retencion._porcentajeRetencion = 0.1
     
     
-    
+
     generar_retencion._retencion._totalRetenido = float(data['subtotal']) * generar_retencion._retencion._porcentajeRetencion
     print(generar_retencion._retencion.serialize)
     generar_retencion.save
+    print(pos)
     fdc._detele(pos)
     #fdc.delete(pos)
     
@@ -86,7 +87,9 @@ def lista_factura(pos):
     factura = FacturaListControl()
     persona._persona = persona._lista.get(pos-1)
     lista = factura._lista._filter(persona._persona._dni)
-    print(lista)
+    if lista == None:
+        flash('No hay facturas registradas', 'info')
+        return redirect(f'/cliente/detalle/{pos}', code=302, )
     return render_template('facturacion/listaFactura.html', lista=lista, persona=persona._persona.serialize)
 
 @listas_version.route('/cliente/detalle/historial_retencion/<int:pos>')
@@ -96,6 +99,10 @@ def lista_retencion(pos):
     persona._persona = persona._lista.get(pos-1)
     print(persona._persona._dni)
     lista = retencion._lista._stack._class._filter(persona._persona._dni)
+    if lista == None:
+        flash('No hay retenciones registradas', 'info')
+        return redirect(f'/cliente/detalle/{pos}', code=302)
+    
     return render_template('retencion/historial_retencion.html', lista=lista, persona=persona._persona.serialize)
 
 

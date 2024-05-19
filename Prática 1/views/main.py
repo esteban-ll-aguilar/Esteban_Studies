@@ -19,6 +19,8 @@ from controls.facturaDaoControl import FacturaDaoControl
 from controls.retencionListDaoControl import RetencionListDaoControl
 from controls.personaListControl import PersonaListControl
 from controls.tda.stack.stack import Stack
+#import cProfile
+
 pcd = PersonaDaoControl()
 fcd = FacturaDaoControl()
 rt = RetencionListDaoControl()
@@ -33,7 +35,6 @@ try:
     
     
     #{'id': 0, 'clienteId': '0705743177111', 'facturaId': '5454651151', 'fechaEmicion': '2024-05-19 01:55', 'baseImponible': '4', 'porcentajeRetencion': 0.08, 'totalRetenido': 0.32}
-    
     rt = RetencionListDaoControl()
     rt._retencion._clienteId = "0705743177111"
     rt._retencion._facturaId = "5454651151"
@@ -41,9 +42,8 @@ try:
     rt._retencion._fechaEmicion = "2024-05-19 01:55"
     rt._retencion._porcentajeRetencion = 0.08
     rt._retencion._totalRetenido = 0.32
+    
     rt.save
-    
-    
 
 except Exception as e:
     print(e)
