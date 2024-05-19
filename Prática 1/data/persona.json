@@ -1,1 +1,12 @@
-[{"id": 1, "nombre": "Esteban", "apellidos": "Calle", "dni": "12345678", "direccion": "", "telefono": "", "correo": "", "tipoIdentificacion": "DNI"},{"id": 2, "nombre": "Esteban", "apellidos": "Calle", "dni": "12345678", "direccion": "", "telefono": "", "correo": "", "tipoIdentificacion": "DNI"},{"id": 3, "nombre": "Esteban", "apellidos": "Calle", "dni": "12345678", "direccion": "", "telefono": "", "correo": "", "tipoIdentificacion": "DNI"},{"id": 4, "nombre": "Esteban", "apellidos": "Calle", "dni": "12345678", "direccion": "", "telefono": "", "correo": "", "tipoIdentificacion": "DNI"},{"id": 5, "nombre": "Esteban", "apellidos": "Calle", "dni": "12345678", "direccion": "", "telefono": "", "correo": "", "tipoIdentificacion": "DNI"}]
+[
+    {
+        "id": 1,
+        "nombre": "Esteban",
+        "apellidos": "Leon Aguilar",
+        "dni": "0705743177111",
+        "direccion": "Torricelli",
+        "telefono": "0993114884",
+        "correo": "esteban.h.aguilar32@gmail.com",
+        "tipoIdentificacion": "RUC EDUCATIVO"
+    }
+]

@@ -115,10 +115,11 @@ class Linked_List(object):
         else:
             node = self.__head
             for i in range(0, self._length):
+                
                 if hasattr(node._data, '_clienteId') and node._data._clienteId == data:
                     out.append(node._data.serialize)
                 elif hasattr(node._data, '_NComprobante') and node._data._NComprobante == data:
-                    out.append(node._data)
+                    out.append(node._data.serialize)
                 node = node._next
         return out
 
@@ -144,13 +145,14 @@ class Linked_List(object):
         elif pos == self._length -1:
             self.__last = self.getNode(pos-1)
             #restarId
-            #self.__last._data._id = self.__last._data._id 
             self.__length -= 1
         else:
             node_preview = self.getNode(pos-1)
             node_last = node_preview._next._next
             node_preview._next = node_last
             self.__length -= 1
+        for i in range(pos, self._length):
+            self.getNode(i)._data._id = i+1
     
 
     def __exist__(self, data):

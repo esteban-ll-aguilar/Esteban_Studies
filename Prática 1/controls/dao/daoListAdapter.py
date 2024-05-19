@@ -24,6 +24,12 @@ class DaoListAdapter:
             f.close()
         return self.lista
     
+    def to_dict(self):
+        aux = []
+        self._list()
+        for i in range(0, self.lista._length):
+            aux.append(self.lista._array[i].serialize)
+        return aux
     
     def __transform__(self):
         aux = '['
@@ -43,3 +49,12 @@ class DaoListAdapter:
         print("Nombre del archivo: "+self.file)
         f.write(self.__transform__())
         f.close()
+        
+    def _detele(self, pos: int):
+        self._list()
+        self.lista.detele(pos)
+        f = open(self.URL + self.file, "w")
+        f.write(self.__transform__())
+        f.close()
+        
+    

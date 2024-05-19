@@ -16,12 +16,12 @@ from controls.tdaArray import TDAArray
 from controls.tda.linked.linkedList import Linked_List
 from controls.personaDaoControl import PersonaDaoControl
 from controls.facturaDaoControl import FacturaDaoControl
-from controls.retencionDaoControl import RetencionDaoControl
+from controls.retencionListDaoControl import RetencionListDaoControl
 from controls.personaListControl import PersonaListControl
 from controls.tda.stack.stack import Stack
 pcd = PersonaDaoControl()
 fcd = FacturaDaoControl()
-rt = RetencionDaoControl()
+rt = RetencionListDaoControl()
 p = PersonaListControl()
 try:
     """ p._persona._nombre = "Esteban"
@@ -31,16 +31,17 @@ try:
     p.save
     p.print """
     
-    rt._retencion._baseImponible = "45.0"
-    rt._retencion._porcentajeRetencion = "0.1"
-    rt._retencion._NRetencion = "4.5"
-    rt.save
-    rt._retencion._baseImponible = "45.0"
-    rt._retencion._porcentajeRetencion = "0.1"
-    rt._retencion._NRetencion = "4.5"
-    rt.save
     
+    #{'id': 0, 'clienteId': '0705743177111', 'facturaId': '5454651151', 'fechaEmicion': '2024-05-19 01:55', 'baseImponible': '4', 'porcentajeRetencion': 0.08, 'totalRetenido': 0.32}
     
+    rt = RetencionListDaoControl()
+    rt._retencion._clienteId = "0705743177111"
+    rt._retencion._facturaId = "5454651151"
+    rt._retencion._baseImponible = 4
+    rt._retencion._fechaEmicion = "2024-05-19 01:55"
+    rt._retencion._porcentajeRetencion = 0.08
+    rt._retencion._totalRetenido = 0.32
+    rt.save
     
     
 

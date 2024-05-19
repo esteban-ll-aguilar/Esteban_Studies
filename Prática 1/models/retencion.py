@@ -5,9 +5,9 @@ class Retencion:
         self.__fechaEmicion = ''
         self.__facturaId = ''
         self.__clienteId = ''
-        self.__baseImponible = 0
-        self.__porcentajeRetencion = 0
-        self.__totalRetenido = 0
+        self.__baseImponible = 0.0
+        self.__porcentajeRetencion = 0.0
+        self.__totalRetenido = 0.0
         
         
     @property
@@ -95,8 +95,8 @@ class Retencion:
         retencion._clienteId = data['clienteId']
         retencion._facturaId = data['facturaId']
         retencion._fechaEmicion = data['fechaEmicion']
-        retencion._porcentajeRetencion = data['baseImponible']
-        retencion._baseImponible = data['id']
+        retencion._porcentajeRetencion = data['porcentajeRetencion']
+        retencion._baseImponible = data['baseImponible']
         retencion._totalRetenido = data['totalRetenido']
         
         return retencion

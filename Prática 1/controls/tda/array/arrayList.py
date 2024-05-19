@@ -3,6 +3,13 @@ class ArrayList:
     def __init__(self):
         self.__array = []
         self.__length = 0
+        
+    @property
+    def _array(self):
+        return self.__array
+    @_array.setter
+    def _array(self, value):
+        self.__array = value
 
 
     @property
@@ -42,8 +49,6 @@ class ArrayList:
         return self.__array[pos]
     
     def detele(self, pos):
-        if pos < 0 or pos >= self.__length:
-            raise ArrayPositionException("Position is out of range")
         self.__array.pop(pos)
         for i in range(0, self.__length-1):
             print(self.__array[i])
@@ -60,8 +65,36 @@ class ArrayList:
     def print(self):
         print("Length: "+str(self.__length))
         print(self.__array)
-            
     
+    def _filter(self, data):
+        out = []
+        if self.isEmpty:
+            out = "List is Empty"
+        else:
+            for i in range(0, self._length):
+                if hasattr(self.__array[i], '_dni') and self.__array[i]._dni == data:
+                    print('Encontrado')
+                    out.append(self.__array[i].serialize)
+                    
+                elif hasattr(self.__array[i], '_clienteId') and self.__array[i]._clienteId == data:
+                    out.append(self.__array[i].serialize)
+                    
+                elif hasattr(self.__array[i], '_NComprobante') and self.__array[i]._NComprobante == data:
+                    out.append(self.__array[i].serialize)
+                
+            return out
+    
+    
+    def __exist__(self, data):
+        for i in range(0, self._length):
+            if hasattr(self.__array[i], '_dni') and self.__array[i]._dni == data:
+                print('Ya existe un nodo con este dato (_dni)')
+                return True
+            elif hasattr(self.__array[i], '_NComprobante') and self.__array[i]._NComprobante == data:
+                print('Ya existe un nodo con este dato (_NComprobante)')
+                return True
+        
+        return False
         
         
         

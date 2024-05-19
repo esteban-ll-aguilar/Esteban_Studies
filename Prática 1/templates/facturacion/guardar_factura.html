@@ -51,11 +51,7 @@ th {
                     <input type="text" name="dni" id="dni" class="form-control" value='{{ data._dni }}' placeholder="RUC" required readonly>
                     <input type="text" name="" id="" class="form-control" value='{{ data._tipoIdentificacion }}' placeholder="RUC" required readonly>
                     
-                    <!-- <select class="form-control" name="tipoIdentificacion"  placeholder="RUC" required>
-                        <option value="" class="form-control text-bg-dark">Tipo de RUC</option>
-                        <option value="RUC EDUCATIVO" class="form-control text-bg-dark">RUC Educativo</option>
-                        <option value="RUC PROFESIONAL" class="form-control text-bg-dark">RUC Profesional</option>
-                    </select>-->
+                    
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12">
@@ -100,7 +96,7 @@ th {
                 <tr>
                     <td></td>
                     <td><strong>Total</strong></td>
-                    <td><strong><input type="text" name="total" id="total" class="form-control" value="0" placeholder="Total" required readonly></strong></td>
+                    <td><strong><input type="number" name="total" id="total" class="form-control"  placeholder="Total" required readonly></strong></td>
                 </tr>
             </tbody>
         </table>

@@ -11,7 +11,7 @@
         <style>{% block style %}{% endblock %}</style>
         <!-- CSS FILES -->                
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        
+        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,400;0,600;0,700;1,200;1,700&display=swap" rel="stylesheet">
@@ -100,6 +100,8 @@
 
 
         <!-- JAVASCRIPT FILES -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
         <script src="{{ url_for('static', filename='js/jquery.sticky.js')}}"></script>

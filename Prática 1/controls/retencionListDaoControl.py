@@ -2,7 +2,7 @@ from models.retencion import Retencion
 from controls.dao.daoAdapter import DaoAdapter
 from controls.dao.stackDaoAdapter import StackDaoAdapter
 
-class RetencionDaoControl(StackDaoAdapter):
+class RetencionListDaoControl(StackDaoAdapter):
     def __init__(self):
         super().__init__(Retencion)
         self.__retencion = None

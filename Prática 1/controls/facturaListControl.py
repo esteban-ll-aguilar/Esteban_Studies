@@ -2,7 +2,7 @@
 from controls.dao.daoListAdapter import DaoListAdapter
 from models.factura import Factura
 import json, os
-class PersonaListControl(DaoListAdapter):
+class FacturaListControl(DaoListAdapter):
     def __init__(self):
         super().__init__(Factura)
         self.__factura = None
@@ -25,6 +25,9 @@ class PersonaListControl(DaoListAdapter):
     def save(self):
         self.__factura._id = self._lista._length +1
         self._save(self.__factura)
+        
+    def de(self, pos):
+        self._detele(pos)
         
     @property
     def _print(self):

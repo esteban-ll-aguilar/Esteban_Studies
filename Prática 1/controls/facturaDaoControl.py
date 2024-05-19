@@ -33,6 +33,5 @@ class FacturaDaoControl(DaoAdapter):
         self._merge(self.__factura, pos)
         
     def delete(self, pos):
-        self.__factura._id = self._lista._length +1
         self._delete(pos)
         
