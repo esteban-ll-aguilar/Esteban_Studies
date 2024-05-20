@@ -179,17 +179,12 @@ class Linked_List(object):
                 out += str(node._data) +'\t'
                 node = node._next
         return out
-    
-    #calcular la memoria utilizada por la lista
+
     @property
     def __sizeList__(self):
-        # Tamaño de los atributos de la lista
         size = sys.getsizeof(self.__head) + sys.getsizeof(self.__last) + sys.getsizeof(self.__length)
-        
-        # Tamaño de cada nodo
         node_size = sys.getsizeof(Node)
         size += node_size * self.__length
-         # Convertir a megabytes
         return size
     
     @property

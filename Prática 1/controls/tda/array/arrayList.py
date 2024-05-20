@@ -101,13 +101,8 @@ class ArrayList:
         
     @property
     def __sizeList__(self):
-        # Tamaño de los atributos de la lista
         size = sys.getsizeof(self.__array) + sys.getsizeof(self.__length)
-        
-        # Tamaño de cada nodo
         if self.__length > 0:
-            node_size = sys.getsizeof(self.__array[0])  # Suponiendo que todos los elementos son del mismo tamaño
+            node_size = sys.getsizeof(self.__array[0]) 
             size += node_size * self.__length
-
-        # Convertir a megabytes (dividir por 1024*1024 para obtener el tamaño en MB)
         return size 

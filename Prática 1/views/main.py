@@ -19,17 +19,20 @@ from controls.personaDaoControl import PersonaDaoControl
 from controls.facturaDaoControl import FacturaDaoControl
 from controls.retencionListDaoControl import RetencionListDaoControl
 from controls.personaListControl import PersonaListControl
+from controls.facturaListControl    import FacturaListControl
 from controls.tda.stack.stack import Stack
 #import cProfile
 import os
 import psutil
 
+pcd = PersonaListControl()
+fdc = FacturaListControl()
+rtldc = RetencionListDaoControl(useList=False, size=25)
 
-
-pcd = PersonaDaoControl()
+""" pcd = PersonaDaoControl()
 fdc = FacturaDaoControl()
 rtldc = RetencionListDaoControl(useList=True, size=25)
-pl = PersonaListControl()
+pl = PersonaListControl() """
 try:
     tiempo_programa = time()
     time_inicio = time()
@@ -42,7 +45,7 @@ try:
     rtldc.save
     time_fin = time()
     print('-----------------------------------------------------------------------------------------')
-    print('-------------------------            Listas Enlazadas         ---------------------------')
+    print('-------------------------            Listas Arrays         ---------------------------')
     print('-----------------------------------------------------------------------------------------')
     
     print("\nTiempo de ejecucion al guardar la retension: ", time_fin - time_inicio)
