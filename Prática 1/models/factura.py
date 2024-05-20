@@ -79,6 +79,7 @@ class Factura:
             'iva': self._iva,
             'total': self._total
         }
+
     def deserializar(self, data):
         factura = Factura()
         factura._id = data['id']

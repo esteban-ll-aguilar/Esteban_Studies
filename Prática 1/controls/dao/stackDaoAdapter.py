@@ -22,6 +22,7 @@ class StackDaoAdapter(Generic[T]):
             # Insertar los elementos en orden inverso
             for item in reversed(temp_list):
                 self.lista.push(item)
+            
         return self.lista
     def __transform__(self):
         size = self.lista._stack._class._length

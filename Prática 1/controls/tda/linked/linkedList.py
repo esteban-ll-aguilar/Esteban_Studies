@@ -43,10 +43,6 @@ class Linked_List(object):
                 self.__last = node
                 self.__length += 1
 
-    """ def __addIntermed__(self, data, pos):
-            self.getNode(pos-1)._next = Node(data, self.getNode(pos))
-            self.__length += 1 """
-
                 
     def edit(self, data, pos=0):
         if pos == 0:
@@ -120,6 +116,8 @@ class Linked_List(object):
                 
                 if hasattr(node._data, '_clienteId') and node._data._clienteId == data:
                     out.append(node._data.serialize)
+                if hasattr(node._data, '_dni') and node._data._dni == data:
+                    out.append(node._data.serialize)
                 elif hasattr(node._data, '_NComprobante') and node._data._NComprobante == data:
                     out.append(node._data.serialize)
                 node = node._next
@@ -153,6 +151,7 @@ class Linked_List(object):
             node_last = node_preview._next._next
             node_preview._next = node_last
             self.__length -= 1
+            
         for i in range(pos, self._length):
             self.getNode(i)._data._id = i+1
     
@@ -160,13 +159,14 @@ class Linked_List(object):
     def __exist__(self, data):
         node = self.__head
         for i in range(0, self._length):
+            print(node._data)
             if hasattr(node._data, '_dni') and node._data._dni == data:
                 print('Ya existe un nodo con este dato (_dni)')
                 return True
             elif hasattr(node._data, '_NComprobante') and node._data._NComprobante == data:
                 print('Ya existe un nodo con este dato (_NComprobante)')
                 return True
-        node = node._next
+            node = node._next
         return False
     
     def __str__(self) -> str:

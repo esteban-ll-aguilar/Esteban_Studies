@@ -21,8 +21,6 @@ class RetencionListDaoControl(StackDaoAdapter):
         
     @property
     def _lista(self):
-
-        
         return self._list()
     
     @property

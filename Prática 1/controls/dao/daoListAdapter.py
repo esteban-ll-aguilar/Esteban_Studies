@@ -57,4 +57,11 @@ class DaoListAdapter:
         f.write(self.__transform__())
         f.close()
         
+    def _merge(self, data: T, pos: int):
+        self._list()
+        self.lista._array[pos-1] = data
+        f = open(self.URL + self.file, "w")
+        f.write(self.__transform__())
+        f.close()
+        
     

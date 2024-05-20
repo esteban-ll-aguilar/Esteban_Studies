@@ -26,7 +26,7 @@ class FacturaListControl(DaoListAdapter):
         self.__factura._id = self._lista._length +1
         self._save(self.__factura)
         
-    def de(self, pos):
+    def delete(self, pos):
         self._detele(pos)
         
     @property

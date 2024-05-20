@@ -30,4 +30,7 @@ class PersonaListControl(DaoListAdapter):
     def _print(self):
         self.lista.print
         
+    def merge(self, pos):
+        self._merge(self.__persona, pos)
+        
     

@@ -36,7 +36,6 @@ class ArrayList:
         
         if self.__length == 0 and pos == 0:
             
-            
             self.__addFirst__(data)
         elif pos == self.__length:
             self.__addLast__(data)

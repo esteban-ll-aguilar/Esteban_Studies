@@ -5,54 +5,55 @@ from controls.retencionListDaoControl import RetencionListDaoControl
 from datetime import datetime
 from flask_cors import CORS
 
-listas_version = Blueprint('listas_version', __name__)
+array_version = Blueprint('array_version', __name__)
 #get para presentar los datos
 #post para enviar los datos, modificar y iniciar sesion
 # monolito
 #RUTAS
-@listas_version.route('/')
+RETENCION = RetencionListDaoControl(False,25)
+
+@array_version.route('/')
 def home():
     return render_template('template.html')
 
-@listas_version.route('/cliente/detalle/factura/<int:pos>')
+@array_version.route('/cliente/detalle/factura/<int:pos>')
 def guardar_factura(pos):
     pd = PersonaListControl()
     nene = pd._list().get(pos-1)
     return render_template('facturacion/guardar_factura.html', data=nene)
 
-@listas_version.route('/retencion/<int:pos>', methods=['POST'])
+@array_version.route('/retencion/<int:pos>', methods=['POST'])
 def generarRetencion(pos):
     fdc = FacturaListControl()
     fdc._factura = fdc._lista.get(pos-1)
-    generar_retencion = RetencionListDaoControl()
     data = request.form
-    generar_retencion._retencion._clienteId = data['dni']
-    generar_retencion._retencion._facturaId = data['NComprobante']
-    generar_retencion._retencion._baseImponible =float(data['subtotal'])
-    generar_retencion._retencion._fechaEmicion = datetime.today().strftime("%Y-%m-%d %H:%M")
+    RETENCION._retencion._clienteId = data['dni']
+    RETENCION._retencion._facturaId = data['NComprobante']
+    RETENCION._retencion._baseImponible =float(data['subtotal'])
+    RETENCION._retencion._fechaEmicion = datetime.today().strftime("%Y-%m-%d %H:%M")
     print(data['tipoIdentificacion'])
     if data['tipoIdentificacion'] == 'RUC EDUCATIVO':
-        generar_retencion._retencion._porcentajeRetencion = 0.08
+        RETENCION._retencion._porcentajeRetencion = 0.08
     elif data['tipoIdentificacion']  == 'RUC PROFESIONAL':
-        generar_retencion._retencion._porcentajeRetencion = 0.10
+        RETENCION._retencion._porcentajeRetencion = 0.10
     
     
 
-    generar_retencion._retencion._totalRetenido = float(data['subtotal']) * generar_retencion._retencion._porcentajeRetencion
-    generar_retencion.save
+    RETENCION._retencion._totalRetenido = float(data['subtotal']) * RETENCION._retencion._porcentajeRetencion
+    RETENCION.save
     
     fdc._detele(pos)
     #fdc.delete(pos)
     
     return redirect(f'/cliente/detalle/historial_retencion/{data['clienteId']}', code=302)
 
-@listas_version.route('/clientes')
+@array_version.route('/clientes')
 def ver_clientes():
     pd = PersonaListControl()
     print(pd.to_dict())
     return render_template('cliente/lista.html', lista=pd.to_dict())
 
-@listas_version.route('/cliente/editar/<int:pos>')
+@array_version.route('/cliente/editar/<int:pos>')
 def ver_editar(pos):
     pd = PersonaListControl()
     nene = pd._list().get(pos-1)
@@ -60,11 +61,11 @@ def ver_editar(pos):
 
 
 
-@listas_version.route('/nuevo_cliente')
+@array_version.route('/nuevo_cliente')
 def ver_guardar():
     return render_template('cliente/guardar.html')
 
-@listas_version.route('/cliente/detalle/factura/generar/<int:pos>', methods=['POST'])
+@array_version.route('/cliente/detalle/factura/generar/<int:pos>', methods=['POST'])
 def generar_factura(pos):
     factura = FacturaListControl()
     data = request.form
@@ -81,32 +82,32 @@ def generar_factura(pos):
     return redirect(f'/cliente/detalle/lista_factura/{pos}', code=302)
 
 
-@listas_version.route('/cliente/detalle/lista_factura/<int:pos>')
+@array_version.route('/cliente/detalle/lista_factura/<int:pos>')
 def lista_factura(pos):
     persona = PersonaListControl()
     factura = FacturaListControl()
     persona._persona = persona._lista.get(pos-1)
     lista = factura._lista._filter(persona._persona._dni)
-    if lista == None:
+    if lista == None or len(lista) == 0:
         flash('No hay facturas registradas', 'info')
         return redirect(f'/cliente/detalle/{pos}', code=302, )
     return render_template('facturacion/listaFactura.html', lista=lista, persona=persona._persona.serialize)
 
-@listas_version.route('/cliente/detalle/historial_retencion/<int:pos>')
+@array_version.route('/cliente/detalle/historial_retencion/<int:pos>')
 def lista_retencion(pos):
     persona = PersonaListControl()
-    retencion = RetencionListDaoControl()
     persona._persona = persona._lista.get(pos-1)
     print(persona._persona._dni)
-    lista = retencion._lista._stack._class._filter(persona._persona._dni)
-    if lista == None:
+    lista = RETENCION._lista._stack._class._filter(persona._persona._dni)
+    if lista == None or len(lista) == 0:
         flash('No hay retenciones registradas', 'info')
         return redirect(f'/cliente/detalle/{pos}', code=302)
+    
     
     return render_template('retencion/historial_retencion.html', lista=lista, persona=persona._persona.serialize)
 
 
-@listas_version.route('/nuevo_cliente/guardar', methods=['POST'])
+@array_version.route('/nuevo_cliente/guardar', methods=['POST'])
 def guardar_cliente():
     data = request.form
     pd = PersonaListControl()
@@ -126,7 +127,7 @@ def guardar_cliente():
     
     return redirect('/clientes', code=302)
 
-@listas_version.route('/cliente/detalle/<int:pos>')
+@array_version.route('/cliente/detalle/<int:pos>')
 def ver_detalle_cliente(pos):
     pd = PersonaListControl()
     nene = pd._list().get(pos-1)
@@ -139,12 +140,11 @@ def ver_detalle_cliente(pos):
 
 
 
-@listas_version.route('/personas/modificar', methods=['POST'])
-def modificar_persona():
+@array_version.route('/cliente/modificar/<int:pos>', methods=['POST'])
+def modificar_persona(pos):
     pd = PersonaListControl()
     data = request.form
-    pos = int(data['id'])-1
-    nene = pd._list().get(pos)
+    nene = pd._list().get(pos-1)
    
     print('----------------------------------')
     print(nene)
@@ -159,7 +159,8 @@ def modificar_persona():
     pd._persona._telefono = data['telefono']
     pd._persona._dni = data['dni']
     pd._persona._direccion = data['direccion']
-    pd._persona._tipoIdentificacion = "CEDULA"
+    pd._persona._tipoIdentificacion = data['tipoIdentificacion']
+    pd._persona._correo = data['correo']
     pd.merge(pos)
-    return redirect('/personas', code=302)
+    return redirect('/clientes', code=302)
 

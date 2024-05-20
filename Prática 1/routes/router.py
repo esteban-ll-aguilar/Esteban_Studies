@@ -1,7 +1,7 @@
-from flask import Blueprint, jsonify, make_response, request, render_template, redirect, abort
+from flask import Blueprint, jsonify, make_response, request, render_template, redirect, abort, flash
+from controls.retencionListDaoControl import RetencionListDaoControl
 from controls.personaDaoControl import PersonaDaoControl
 from controls.facturaDaoControl import FacturaDaoControl
-from controls.retencionListDaoControl import RetencionListDaoControl
 from datetime import datetime
 from flask_cors import CORS
 
@@ -10,6 +10,8 @@ router = Blueprint('router', __name__)
 #post para enviar los datos, modificar y iniciar sesion
 # monolito
 #RUTAS
+RETENCION = RetencionListDaoControl(True,25)
+
 @router.route('/')
 def home():
     return render_template('template.html')
@@ -23,24 +25,24 @@ def guardar_factura(pos):
 @router.route('/retencion/<int:pos>', methods=['POST'])
 def generarRetencion(pos):
     fdc = FacturaDaoControl()
-    generar_retencion = RetencionListDaoControl()
     fdc._factura = fdc._lista.get(pos-1)
     data = request.form
-    cliente = data['dni']
-    identificacion = data['tipoIdentificacion']
-    print(identificacion)
-    generar_retencion._retencion._clienteId = cliente
-    generar_retencion._retencion._facturaId = fdc._factura._NComprobante
-    generar_retencion._retencion._baseImponible = fdc._factura._subtotal
-    generar_retencion._retencion._fechaEmicion = datetime.today().strftime("%Y-%m-%d %H:%M")
-    if identificacion == 'RUC EDUCATIVO':
-        generar_retencion._retencion._porcentajeRetencion = 0.08
-    elif identificacion == 'RUC PROFESIONAL':
-        generar_retencion._retencion._porcentajeRetencion = 0.1
+    RETENCION._retencion._clienteId = data['dni']
+    RETENCION._retencion._facturaId = data['NComprobante']
+    RETENCION._retencion._baseImponible =float(data['subtotal'])
+    RETENCION._retencion._fechaEmicion = datetime.today().strftime("%Y-%m-%d %H:%M")
+    print(data['tipoIdentificacion'])
+    if data['tipoIdentificacion'] == 'RUC EDUCATIVO':
+        RETENCION._retencion._porcentajeRetencion = 0.08
+    elif data['tipoIdentificacion']  == 'RUC PROFESIONAL':
+        RETENCION._retencion._porcentajeRetencion = 0.10
     
-    generar_retencion._retencion._totalRetenido = float(generar_retencion._retencion._baseImponible) * float(generar_retencion._retencion._porcentajeRetencion)
-    generar_retencion.save
     
+
+    RETENCION._retencion._totalRetenido = float(data['subtotal']) * RETENCION._retencion._porcentajeRetencion
+    RETENCION.save
+    
+    fdc.delete(pos)
     #fdc.delete(pos)
     
     return redirect(f'/cliente/detalle/historial_retencion/{data['clienteId']}', code=302)
@@ -85,15 +87,22 @@ def lista_factura(pos):
     factura = FacturaDaoControl()
     persona._persona = persona._lista.get(pos-1)
     lista = factura._lista._filter(persona._persona._dni)
-    
+    print(lista)
+    if lista == None or len(lista) == 0 or lista == 'List is Empty':
+        flash('No hay facturas registradas', 'info')
+        return redirect(f'/cliente/detalle/{pos}', code=302 )
     return render_template('facturacion/listaFactura.html', lista=lista, persona=persona._persona.serialize)
 
 @router.route('/cliente/detalle/historial_retencion/<int:pos>')
 def lista_retencion(pos):
     persona = PersonaDaoControl()
-    retencion = RetencionListDaoControl()
     persona._persona = persona._lista.get(pos-1)
-    lista = retencion._lista._stack._filter(persona._persona._dni)
+    lista = RETENCION._lista._stack._class._filter(persona._persona._dni)
+    if lista == None or len(lista) == 0:
+        flash('No hay retenciones registradas', 'info')
+        return redirect(f'/cliente/detalle/{pos}', code=302)
+    
+    
     return render_template('retencion/historial_retencion.html', lista=lista, persona=persona._persona.serialize)
 
 
@@ -101,15 +110,14 @@ def lista_retencion(pos):
 def guardar_cliente():
     data = request.form
     pd = PersonaDaoControl()
-    data = request.form
     if not 'nombre' in data.keys() or not 'apellidos' in data.keys() or not 'telefono' in data.keys() or not 'dni' in data.keys() or not 'direccion' in data.keys():
         abort(400)
     if pd._lista.__exist__(data['dni']) != True:
         pd._persona._nombre = data['nombre']
         pd._persona._apellidos = data['apellidos']
         pd._persona._telefono = data['telefono']
-        pd._persona._dni = data['dni']
         pd._persona._correo = data['correo']
+        pd._persona._dni = data['dni']
         pd._persona._direccion = data['direccion']
         pd._persona._tipoIdentificacion = data['tipoIdentificacion']
         pd.save
@@ -125,4 +133,25 @@ def ver_detalle_cliente(pos):
 
 
 
+
+@router.route('/cliente/modificar/<int:pos>', methods=['POST'])
+def modificar_persona(pos):
+    pd = PersonaDaoControl()
+    data = request.form
+    nene = pd._list().get(pos-1)
+   
+
+    if not 'nombre' in data.keys() or not 'apellidos' in data.keys() or not 'telefono' in data.keys() or not 'dni' in data.keys() or not 'direccion' in data.keys():
+        abort(400)
+    #TODO validar
+    pd._persona = nene
+    pd._persona._nombre = data['nombre']
+    pd._persona._apellidos = data['apellidos']
+    pd._persona._telefono = data['telefono']
+    pd._persona._dni = data['dni']
+    pd._persona._direccion = data['direccion']
+    pd._persona._tipoIdentificacion = data['tipoIdentificacion']
+    pd._persona._correo = data['correo']
+    pd.merge(pos)
+    return redirect('/clientes', code=302)
 

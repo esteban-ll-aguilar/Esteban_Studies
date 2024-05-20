@@ -1,1 +1,12 @@
-[{"id": 1, "nombre": "Esteban", "apellidos": "Calle", "dni": "0705743177", "direccion": "Calle 1", "telefono": "0987654321", "correo": "@gamil.com", "tipoIdentificacion": "Cedula"},{"id": 2, "nombre": "Esteban", "apellidos": "Calle", "dni": "0705743177", "direccion": "Calle 1", "telefono": "0987654321", "correo": "@gamil.com", "tipoIdentificacion": "Cedula"}]
+[
+    {
+        "id": 1,
+        "nombre": "Esteban Hermel",
+        "apellidos": "Leon Aguilar",
+        "dni": "1787116882158",
+        "direccion": "Loja",
+        "telefono": "0993114884",
+        "correo": "esteban.leon@unl.edu.ec",
+        "tipoIdentificacion": "RUC EDUCATIVO"
+    }
+]

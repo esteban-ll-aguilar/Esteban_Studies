@@ -63,7 +63,7 @@ class DaoAdapter(Generic[T]):
         
     def _delete(self, pos) -> T:
         self._list()
-        self.lista.detele(pos)
+        self.lista.detele(pos-1)
         f = open(self.URL + self.file, "w")
         print("Nombre del archivo: "+self.file)
         f.write(self.__transform__())

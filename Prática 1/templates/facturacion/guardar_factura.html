@@ -120,6 +120,7 @@ th {
         function actualizarTotal() {
             let subtotal = parseFloat(document.getElementById('subtotal').value) || 0;
             let iva = parseFloat(document.getElementById('iva').value) || 0;
+            
             let total = subtotal * (1 + iva);
             document.getElementById('total').value = total.toFixed(2); // Fixing to 2 decimal places
         }
