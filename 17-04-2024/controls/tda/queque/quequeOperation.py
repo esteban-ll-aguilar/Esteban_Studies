@@ -30,7 +30,7 @@ class QuequeOperation(Linked_List):
         if self.isEmpty:
             raise LinkedEmptyException("Queque is Empty")
         else:
-            self.detele(0)
+            return self.detele(0)
 
 
     
