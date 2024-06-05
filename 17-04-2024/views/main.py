@@ -37,16 +37,26 @@ try:
     lista.print
     
     lista1 = Linked_List()
-    lista1.add("Hola")
-    lista1.add("Mundo")
-    lista1.add("Cruel")
+    lista1.add("Cale")
+    lista1.add("Esteban")
+    lista1.add("Alejandra")
+    lista1.add("Cristian")
+    lista1.add("Juan")
+
     lista1.print
     lista1.sort(0)
     lista1.print
+
     
-    pdc._list().print
-    listaa = pdc._list().sort_models("_apellidos", 1)
-    listaa.print
+    
+    """ pdc._list().print
+    listaAux = pdc._list().sort_models("_apellidos", 1)
+    listaAux.print """
+
+    listita = lista1.search_number_equals('c')
+    print("Listita")
+    listita.print
+
     
     
     

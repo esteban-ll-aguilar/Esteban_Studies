@@ -228,7 +228,17 @@ class Linked_List(object):
         return self
     
         
-    
+    def search_number_equals(self, data):
+        lista = Linked_List()
+        if self.isEmpty:
+            raise LinkedEmptyException("List empty")
+        else:
+            array = self.toArray
+            for i in range(0, len(array)):
+                if (array[i].lower().startswith(data.lower())):
+                    lista.add(array[i], lista._length)
+
+        return lista
             
     
             
