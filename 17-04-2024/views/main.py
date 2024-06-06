@@ -22,17 +22,27 @@ from controls.personaDaoControl import PersonaDaoControl
 from controls.censoDao import CensoDao
 from controls.tda.stack.stack import Stack
 from controls.tda.queque.queque import Queque
+from controls.tda.linked.ordenation_methods.quickSort import QuickSort
+from controls.tda.linked.ordenation_methods.selection import Selection
+from controls.tda.linked.ordenation_methods.shell import Shell
+from controls.tda.linked.search_methods.binary_search import BinarySearch
+
 import time
 
 
 
 lista = Linked_List()
 pdc = PersonaDaoControl()
+qs = QuickSort()
+sl = Selection()
+sll = Shell()
+
 try:
     
-    for i in range(10):
-        lista.add(random.randint(-100, 100))  
-    lista.print
+    """ for i in range(10):
+        list.append(i) """
+        #lista.add(random.randint(-100, 100))  
+    """ lista.print
     lista.sort(1)
     lista.print
     
@@ -45,7 +55,7 @@ try:
 
     lista1.print
     lista1.sort(0)
-    lista1.print
+    lista1.print """
 
     
     
@@ -53,10 +63,22 @@ try:
     listaAux = pdc._list().sort_models("_apellidos", 1)
     listaAux.print """
 
-    listita = lista1.search_number_equals('c')
+    """ listita = lista1.search_number_equals('c')
     print("Listita")
-    listita.print
-
+    listita.print """
+    list = []
+    for i in range(4):
+        list.append(random.randint(1, 10))
+    
+    print(list)
+    #print(qs.quick_sort_acendent(list))
+    #print(sl.selection_sort_descendent(list))
+    #print(sll.shell_sort_desendent(list))
+    list = qs.quick_sort(list)
+    print(list)
+    bs =BinarySearch(list)
+    print(bs.binary_search(5))
+    
     
     
     
