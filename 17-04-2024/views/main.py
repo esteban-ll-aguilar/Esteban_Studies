@@ -67,8 +67,8 @@ try:
     print("Listita")
     listita.print """
     list = []
-    for i in range(4):
-        list.append(random.randint(1, 10))
+    for i in range(10):
+        list.append(random.randint(0, 10))
     
     print(list)
     #print(qs.quick_sort_acendent(list))
@@ -76,6 +76,8 @@ try:
     #print(sll.shell_sort_desendent(list))
     list = qs.quick_sort(list)
     print(list)
+
+    # bs =BinarySearch(list)
     bs =BinarySearch(list)
     print(bs.binary_search(5))
     
