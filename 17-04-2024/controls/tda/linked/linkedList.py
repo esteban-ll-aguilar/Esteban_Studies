@@ -107,25 +107,28 @@ class Linked_List(object):
             return element
 
     
-    def delete(self, pos = 0):
-        
+    def detele(self, pos):
+        pos = pos 
         if self.isEmpty:
-            raise LinkedEmptyException("List empty")
-        elif pos < 0 or pos >= self.__length:
-            raise ArrayPositionException("Position out range")
+            raise LinkedEmptyException("List is Empty")
+        elif pos < 0 or pos >= self._length:
+            raise ArrayPositionException("Position is out of range")
         elif pos == 0:
-            return self.deleteFirst()
-        elif pos == (self.__length - 1):
-            return self.deleteLast()
+            self.__head = self.__head._next
+            self.__length -= 1
+            
+        elif pos == self._length -1:
+            self.__last = self.getNode(pos-1)
+            #restarId
+            self.__length -= 1
         else:
-            preview = self.getNode(pos - 1)
-            actually = self.getNode(pos)
-            element = preview._data
-            next = actually._next
-            actually = None
-            preview._next = next
-            self._length = self._length - 1
-            return element
+            node_preview = self.getNode(pos-1)
+            node_last = node_preview._next._next
+            node_preview._next = node_last
+            self.__length -= 1
+            
+        for i in range(pos, self._length):
+            self.getNode(i)._data._id = i+1
 
     """Obtiene el objeto nodo"""
     def getNode(self, pos):
