@@ -31,16 +31,15 @@ class QuickSort:
         if len(array)<=1:
             return array
         else:
-            pivote = getattr(array[0], attribute)
-            print('pivote:', pivote)
+            pivote = getattr(array[0], attribute)[0].lower()
             lower = []
             equal = []
             bigger = []
-            
             for i in range(0, len(array)):
-                if getattr(array[i], attribute) < pivote:
+                att = getattr(array[i], attribute)[0].lower()
+                if att < pivote:
                     lower.append(array[i])
-                elif getattr(array[i], attribute) == pivote:
+                elif att == pivote:
                     equal.append(array[i])
                 else:
                     bigger.append(array[i])

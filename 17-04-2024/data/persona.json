@@ -11,7 +11,7 @@
     {
         "id": 2,
         "nombre": "Christian",
-        "apellidos": "Robles",
+        "apellidos": "Mobles",
         "dni": "12345678",
         "direccion": "Calle 1",
         "telefono": "0993114884",
@@ -20,7 +20,7 @@
     {
         "id": 3,
         "nombre": "Santiago",
-        "apellidos": "Robles",
+        "apellidos": "Gobles",
         "dni": "12345678",
         "direccion": "Calle 1",
         "telefono": "0993114884",
@@ -29,7 +29,7 @@
     {
         "id": 4,
         "nombre": "Mishel",
-        "apellidos": "Rodas",
+        "apellidos": "Jodas",
         "dni": "151565441",
         "direccion": "116454483",
         "telefono": "993114884",
@@ -43,5 +43,14 @@
         "direccion": "Pinas",
         "telefono": "0994784825",
         "tipoIdentificacion": "VISA"
+    },
+    {
+        "id": 6,
+        "nombre": "Christian",
+        "apellidos": "Mobles",
+        "dni": "12345678",
+        "direccion": "Calle 1",
+        "telefono": "0993114884",
+        "tipoIdentificacion": "CEDULA"
     }
 ]

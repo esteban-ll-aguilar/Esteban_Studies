@@ -26,6 +26,7 @@ from controls.tda.linked.ordenation_methods.quickSort import QuickSort
 from controls.tda.linked.ordenation_methods.selection import Selection
 from controls.tda.linked.ordenation_methods.shell import Shell
 from controls.tda.linked.search_methods.binary_search import BinarySearch
+from controls.tda.linked.search_methods.sequiential_binary_search import SequentialBinarySearch
 
 import time
 
@@ -36,7 +37,7 @@ pdc = PersonaDaoControl()
 qs = QuickSort()
 sl = Selection()
 sll = Shell()
-
+SBS = SequentialBinarySearch()
 try:
     
     """ for i in range(10):
@@ -59,27 +60,28 @@ try:
 
     
     
-    """ pdc._list().print
+    pdc._list().print
     listaAux = pdc._list().sort_models("_apellidos", 1)
-    listaAux.print """
-
+    print("Lista ordenada")
+    pdc.lista.print
+    pcd = pdc.lista.toArray
+    
+    x = SBS.binary_search_sequential_models(pcd, "_apellidos", "Leon")
+    print(x)
+    pdc.__transform__()
+    
     """ listita = lista1.search_number_equals('c')
     print("Listita")
     listita.print """
-    list = []
+    """ list = []
     for i in range(10):
         list.append(random.randint(0, 10))
     
-    print(list)
+    print(list) """
     #print(qs.quick_sort_acendent(list))
     #print(sl.selection_sort_descendent(list))
     #print(sll.shell_sort_desendent(list))
-    list = qs.quick_sort(list)
-    print(list)
-
-    # bs =BinarySearch(list)
-    bs =BinarySearch(list)
-    print(bs.binary_search(5))
+    
     
     
     

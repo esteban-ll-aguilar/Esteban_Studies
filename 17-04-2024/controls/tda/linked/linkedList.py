@@ -4,6 +4,7 @@ from controls.exception.linkedListExeption import LinkedEmptyException
 from controls.exception.arrayPositionException import ArrayPositionException
 from controls.tda.linked.burbuja import Burbuja
 from controls.tda.linked.insersion import Insersion
+from controls.tda.linked.ordenation_methods.quickSort import QuickSort
 from numbers import Number
 
 class Linked_List(object):
@@ -173,7 +174,7 @@ class Linked_List(object):
         while node != None:
             data += str(node._data)+"    "            
             node = node._next
-        print("Lista de datos")
+        #print("Lista de datos")
         print(data)
         
     @property
@@ -203,15 +204,18 @@ class Linked_List(object):
             array = self.toArray
             if isinstance(array[0], Number) or isinstance(array[0], str):
                 #burbuja = Burbuja()
-                insersion = Insersion()
+                #insersion = Insersion()
+                quicksort = QuickSort()
                 if type == 1:
                  #   array = burbuja.sort_burbuja_number_acendent(array)
-                    array = insersion.sort_primitive_acendent(array)
+                #    array = insersion.sort_primitive_acendent(array)
+                    array = quicksort.quick_sort(array)
                 else:
                   #  array = burbuja.sort_burbuja_number_decendent(array)
-                    array = insersion.sort_primitive_desendent(array)
+                    #array = insersion.sort_primitive_desendent(array)
+                    array = quicksort.quick_sort(array, False)
             
-            self.toList(array)
+            return self.toList(array)
     
     def sort_models(self, attribute="_id",type = 1):
         if self.isEmpty:
@@ -220,15 +224,17 @@ class Linked_List(object):
             array = self.toArray
             if isinstance(array[0], object):
                 #burbuja = Burbuja()
-                insersion = Insersion()
+                #insersion = Insersion()
+                quicksort = QuickSort()
                 if type == 1:
                  #   array = burbuja.sort_burbuja_objects_acendent(array, attribute)
-                    array = insersion.sort_models_acendent(array, attribute)
+                    #array = insersion.sort_models_acendent(array, attribute)
+                    array = quicksort.quick_sort_models(array, attribute)
                 else:
                   #  array = burbuja.sort_burbuja_objects_decendent(array, attribute)
-                    array = insersion.sort_models_descendent(array, attribute)
-            self.toList(array)
-        return self
+                    #array = insersion.sort_models_descendent(array, attribute)
+                    array = quicksort.quick_sort_models(array, attribute, False)
+            return self.toList(array)
     
         
     def search_number_equals(self, data):
