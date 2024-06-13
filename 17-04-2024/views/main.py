@@ -60,7 +60,7 @@ try:
 
     
     
-    pdc._list().print
+    """ pdc._list().print
     listaAux = pdc._list().sort_models("_apellidos", 1)
     print("Lista ordenada")
     pdc.lista.print
@@ -68,7 +68,7 @@ try:
     
     x = SBS.binary_search_sequential_models(pcd, "_apellidos", "Leon")
     print(x)
-    pdc.__transform__()
+    pdc.__transform__( """
     
     """ listita = lista1.search_number_equals('c')
     print("Listita")
@@ -81,6 +81,10 @@ try:
     #print(qs.quick_sort_acendent(list))
     #print(sl.selection_sort_descendent(list))
     #print(sll.shell_sort_desendent(list))
+    list = pdc._lista.print
+    list = pdc._get(2)
+    print(list)
+
     
     
     

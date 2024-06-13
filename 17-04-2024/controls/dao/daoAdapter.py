@@ -42,6 +42,16 @@ class DaoAdapter(Generic[T]):
             aux.append(self.lista.get(i).serialize)
         return aux
 
+            
+    def _get(self, id):
+        list = self._list()
+        array = list.toArray
+        for i in range(0, len(array)):
+            if array[i]._id == id:
+                return array[i]
+        return None
+
+
     def _save(self, data: T) -> T:
         print("Guardando")
         self._list()
