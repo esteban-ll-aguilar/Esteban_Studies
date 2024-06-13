@@ -1,0 +1,45 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+
+                            <section class="custom-video booking-form text-center" >
+                                <div class="text-center mb-4 pb-lg-2">
+                                    <em class="text-white">Universidad Nacional de Loja</em>
+
+                                    <h2 class="text-white">Historial de Retenciones</h2>
+                                    
+                                    <em  class="text-white">Usuario: {{ persona.nombre }}</em></br>
+                                    <em  class="text-white" >{{ persona.tipoIdentificacion }}: {{ persona.dni }}</em><br>
+
+                                </div>
+
+                                <div class="booking-form-body table-responsive">
+                                    <table class="table  table-bordered text-white display">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <th>N* Factura</th>
+                                                <th>Base Imponible</th>
+                                                <th>% Retencion</th>
+                                                <th>Total Retenido</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in lista %}
+                                            <tr>
+                                                <td>{{ item.fechaEmicion }}</td>
+                                                <td>{{ item.facturaId }}</td>
+                                                <td>$ {{ item.baseImponible }}</td>
+                                                <td>{{ item.porcentajeRetencion }}%</td>
+                                                <td>$ {{ item.totalRetenido }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                            <a href="/cliente/detalle/{{ persona.id }}" class="btn btn-primary" >Volver</a>
+
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'template.html' %}
+
+<title>{% block title %}Retenciones{% endblock %}</title>
+        
+<style>{% block style %}{% endblock %}</style>
+{% block content %}
+<section class="custom-video booking-form text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="text-center mb-4">
+                    <em class="text-white">Universidad Nacional de Loja</em>
+                    <h2 class="text-white">¡Bienvenido de nuevo, {{ data._nombre }}!</h2>
+                    <p class="text-white">¡Es genial verte de nuevo! <br>¿En qué podemos ayudarte hoy?</p>
+                </div>
+            </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-white" id="tabla">
+                        <thead>
+                            <tr>
+                                <th>Emitir Factura</th>
+                                <th>Facturas Emitidas</th>
+                                <th>Historial Retenciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="booking-form-image-wrap">
+                                        <img src="{{ url_for('static', filename='images/img/factura.jpg')}}" class="booking-form-image img-fluid" style="height: 100px;width: 200px;">
+                                    </div>
+                                </td> 
+                                <td>
+                                    <div class="booking-form-image-wrap">
+                                        <img src="{{ url_for('static', filename='images/img/retencion.jpg')}}" class="booking-form-image img-fluid" style="height: 100px;width: 200px;">
+                                    </div>
+                                </td> 
+                                <td>
+                                    <div class="booking-form-image-wrap">
+                                        <img src="{{ url_for('static', filename='images/img/historial.png')}}" class="booking-form-image img-fluid" style="height: 100px;width: 200px;">
+                                    </div>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="factura/{{ data._id }}" class="btn custom-btn custom-border-btn">Ir</a>
+                                </td>
+                                <td>
+                                    <a href="lista_factura/{{ data._id }}" class="btn custom-btn custom-border-btn">Ir</a>
+                                </td>
+                                <td>
+                                    <a href="historial_retencion/{{ data._id }}" class="btn custom-btn custom-border-btn">Ir</a>
+                                </td>
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
