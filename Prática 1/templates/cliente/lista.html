@@ -5,7 +5,48 @@
     <div class="text-center mb-4 pb-lg-2">
         <em class="text-white">Universidad Nacional de Loja</em>
         <h2 class="text-white">Clientes</h2>
-        <a href="/" class="btn custom-btn custom-border-btn">Regresar</a>
+            <a href="/" class="btn custom-btn custom-border-btn">Regresar</a>
+            
+        <div class="custom-border table-responsive">
+        <table class="text-white aling-center " style="margin: 0 auto; padding: 10px 20px; font-size: 16px;">
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="filtro" id="filtro" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
+                            <option value="_nombre">Nombre</option>
+                            <option value="_correo">Correo</option>
+                            <option value="_direccion">Direccion</option>
+                        </select>         
+                    </td>   
+                    <td>
+                        <select name="filtro" id="filtro" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
+                            <option value="1">QuickSort</option>
+                            <option value="2">ShellSort</option>
+                            <option value="3">MergeSort</option>
+                        </select> 
+                    </td>
+                    <td>
+                        <select name="filtro" id="filtro" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
+                            <option value="1">Acendente</option>
+                            <option value="2">Decendente</option>
+                        </select> 
+                    </td>
+                    <td>
+                        <button class="custom-btn custom-border-btn" style="padding: 5px 10px; font-size: 16px;" id="boton_ordenar">Ordenar</button>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+        </div>
     </div>
 
     <div class="booking-form-body">
@@ -44,4 +85,30 @@
         </div>
     </div>
 </section>
+
+
+<script>
+    $(document).ready(function(){
+        $('#boton_ordenar').click(function(){
+            create();
+        });
+    });
+    function tabla(url){
+        $.ajax({
+            method: "GET",
+            url:url,
+            contentType: 'json',
+            success: function(data){
+                console.log(data)
+            }
+        });
+    }
+    function create(){
+        var aux = $('#boton_ordenar').prop('checked')
+        if (aux)
+            tabla('http://127.0.0.1:5000/clientes');
+    }
+
+    
+</script>
 {% endblock %}
