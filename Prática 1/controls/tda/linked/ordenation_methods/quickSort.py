@@ -49,12 +49,13 @@ class QuickSort:
         if len(array)<=1:
             return array
         else:
-            pivote = getattr(array[0], attribute)[0].lower()
+            pivote = getattr(array[0], attribute)
             lower = []
             equal = []
             bigger = []
             for i in range(0, len(array)):
-                att = getattr(array[i], attribute)[0].lower()
+                print(getattr(array[i], attribute))
+                att = getattr(array[i], attribute)
                 if att < pivote:
                     lower.append(array[i])
                 elif att == pivote:
@@ -66,20 +67,21 @@ class QuickSort:
             bigger = self.sort_models_acendent(bigger, attribute)
             
             array = lower + equal + bigger
+            return array
             
             
             
             
-    def sort_models_desendent(self, array, attribute):
+    def sort_models_descendent(self, array, attribute):
         if len(array)<=1:
             return array
         else:
-            pivote = getattr(array[0], attribute)[0].lower()
+            pivote = getattr(array[0], attribute)
             lower = []
             equal = []
             bigger = []
             for i in range(0, len(array)):
-                att = getattr(array[i], attribute)[0].lower()
+                att = getattr(array[i], attribute)
                 if att < pivote:
                     lower.append(array[i])
                 elif att == pivote:
@@ -87,8 +89,8 @@ class QuickSort:
                 else:
                     bigger.append(array[i])
                     
-            lower = self.sort_models_desendent(lower, attribute)
-            bigger = self.sort_models_desendent(bigger, attribute)
+            lower = self.sort_models_descendent(lower, attribute)
+            bigger = self.sort_models_descendent(bigger, attribute)
             
             array = bigger + equal + lower
             return array

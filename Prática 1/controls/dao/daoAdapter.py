@@ -26,6 +26,9 @@ class DaoAdapter(Generic[T]):
             f.close()
         return self.lista
     
+        
+    
+        return None
     
     def __transform__(self):
         aux = '['
@@ -44,6 +47,26 @@ class DaoAdapter(Generic[T]):
         for i in range(0, self.lista._length):
             aux.append(self.lista.get(i).serialize)
         return aux
+    
+    def to_dict_list(self):
+        array = []
+        lista = self.lista.toArray
+        for i in range(0, self.lista._length):
+            array.append(lista[i].serialize)
+        return array
+            
+        
+    
+    def _get(self, id):
+        list = self._list()
+        array = list.toArray
+        for i in range(0, len(array)):
+            if array[i]._id == id:
+                return array[i]
+    
+    
+    
+    
 
     def _save(self, data: T) -> T:
         self._list()

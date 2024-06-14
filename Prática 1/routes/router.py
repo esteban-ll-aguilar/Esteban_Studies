@@ -1,16 +1,19 @@
 from flask import Blueprint, jsonify, make_response, request, render_template, redirect, abort, flash
 from controls.retencionListDaoControl import RetencionListDaoControl
+from controls.retencionDaoControl import RetencionDaoControl
 from controls.personaDaoControl import PersonaDaoControl
 from controls.facturaDaoControl import FacturaDaoControl
 from datetime import datetime
 from flask_cors import CORS
+
+
 
 router = Blueprint('router', __name__)
 #get para presentar los datos
 #post para enviar los datos, modificar y iniciar sesion
 # monolito
 #RUTAS
-RETENCION = RetencionListDaoControl(True,25)
+RETENCION = RetencionDaoControl()
 
 @router.route('/')
 def home():
@@ -51,6 +54,14 @@ def generarRetencion(pos):
 def ver_clientes():
     pd = PersonaDaoControl()
     return render_template('cliente/lista.html', lista=pd.to_dict())
+
+@router.route('/clientes/<string:atrr>/<int:tipoOrden>/<int:isAcendent>')
+def clientes_ordenar(atrr,tipoOrden, isAcendent):
+    pd = PersonaDaoControl()
+    pd._lista.sort_models(atrr,tipoOrden, isAcendent)
+
+    return make_response(jsonify({'data': pd.to_dict_list(), 'code': 200, 'message': 'Ordenado'}))
+
 
 @router.route('/cliente/editar/<int:pos>')
 def ver_editar(pos):

@@ -219,7 +219,7 @@ class Linked_List(object):
             
             return self.toList(array)
     
-    def sort_models(self, attribute="_id", isacendent=True, typeOrder = 1):
+    def sort_models(self, attribute="_id", typeOrder = 1, isacendent=1):
         if self.isEmpty:
             raise LinkedEmptyException("List empty")
         else:
@@ -231,10 +231,11 @@ class Linked_List(object):
                     order = MergeSort()
                 else:
                     order = ShellSort()
-                if isacendent:
-                    order.sort_models_acendent(array, attribute)   
+                    
+                if isacendent == 1:
+                    array = order.sort_models_acendent(array, attribute) 
                 else:
-                    order.sort_models_descendent(array, attribute)
+                    array = order.sort_models_descendent(array, attribute)
             return self.toList(array)
     
         
@@ -265,3 +266,15 @@ class Linked_List(object):
                     out.append(node._data.serialize)
                 node = node._next
         return out
+
+    def __exist__(self, data):
+        node = self.__head
+        for i in range(0, self._length):
+            if hasattr(node._data, '_dni') and node._data._dni == data:
+                print('Ya existe un nodo con este dato (_dni)')
+                return True
+            elif hasattr(node._data, '_NComprobante') and node._data._NComprobante == data:
+                print('Ya existe un nodo con este dato (_NComprobante)')
+                return True
+        node = node._next
+        return False

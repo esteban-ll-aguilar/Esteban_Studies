@@ -48,8 +48,8 @@ class MergeSort:
                     izquierda.append(array[i])
                 else:
                     derecha.append(array[i])
-            izquierda = self.sort_acendent(izquierda, attribute)
-            derecha = self.sort_acendent(derecha, attribute)
+            izquierda = self.sort_models_acendent(izquierda, attribute)
+            derecha = self.sort_models_acendent(derecha, attribute)
             array = izquierda + derecha
             return array
         
@@ -66,8 +66,8 @@ class MergeSort:
                     izquierda.append(array[i])
                 else:
                     derecha.append(array[i])
-            izquierda = self.sort_acendent(izquierda, attribute)
-            derecha = self.sort_acendent(derecha, attribute)
+            izquierda = self.sort_models_descendent(izquierda, attribute)
+            derecha = self.sort_models_descendent(derecha, attribute)
             array = derecha + izquierda
             return array
         

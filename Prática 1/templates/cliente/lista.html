@@ -19,27 +19,24 @@
             <tbody>
                 <tr>
                     <td>
-                        <select name="filtro" id="filtro" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
+                        <select name="atributo" id="atributo" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
                             <option value="_nombre">Nombre</option>
                             <option value="_correo">Correo</option>
                             <option value="_direccion">Direccion</option>
                         </select>         
                     </td>   
                     <td>
-                        <select name="filtro" id="filtro" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
+                        <select name="metodoOrdenacion" id="metodoOrdenacion" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
                             <option value="1">QuickSort</option>
                             <option value="2">ShellSort</option>
                             <option value="3">MergeSort</option>
                         </select> 
                     </td>
                     <td>
-                        <select name="filtro" id="filtro" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
+                        <select name="Desd_Ascd" id="Desd_Ascd" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
                             <option value="1">Acendente</option>
                             <option value="2">Decendente</option>
                         </select> 
-                    </td>
-                    <td>
-                        <button class="custom-btn custom-border-btn" style="padding: 5px 10px; font-size: 16px;" id="boton_ordenar">Ordenar</button>
                     </td>
                 </tr>
                 
@@ -88,26 +85,44 @@
 
 
 <script>
-    $(document).ready(function(){
-        $('#boton_ordenar').click(function(){
-            create();
-        });
+    const atributo = document.getElementById('atributo');
+    const metodoOrdenacion = document.getElementById('metodoOrdenacion');
+    const Desd_Ascd = document.getElementById('Desd_Ascd');
+
+    $($('select')).change(function(){
+        console.log(atributo.value,metodoOrdenacion.value,Desd_Ascd.value)
+        create(atributo.value,metodoOrdenacion.value,Desd_Ascd.value);
     });
+    
+    function create(atributo,metodoOrdenacion,Desd_Ascd){
+        tabla('http://127.0.0.1:5000/clientes/'+atributo+'/'+metodoOrdenacion+'/'+Desd_Ascd+'');
+    }
     function tabla(url){
         $.ajax({
             method: "GET",
-            url:url,
+            url: url,
             contentType: 'json',
             success: function(data){
-                console.log(data)
+                if (data.code == 200){
+                    var html = '';
+                    $.each(data.data, function(i, item){
+                        html += '<tr>';
+                        html += '<td>'+item.dni+'</td>';
+                        html += '<td>'+item.nombre+'</td>';
+                        html += '<td>'+item.apellidos+'</td>';
+                        html += '<td>'+item.telefono+'</td>';
+                        html += '<td>'+item.correo+'</td>';
+                        html += '<td>'+item.direccion+'</td>';
+                        html += '<td><a href="cliente/editar/'+item.id+'" class="custom-btn custom-border-btn btn-sm" style="padding: 4px 8px; font-size: 12px;">Editar</a></td>';
+                        html += '<td><a href="cliente/detalle/'+item.id+'" class="custom-btn custom-border-btn btn-sm" style="padding: 4px 8px; font-size: 12px;">Ver</a></td>';
+                        html += '</tr>';
+                    });
+                    $('#tabla tbody').html(html);
+                }
             }
         });
     }
-    function create(){
-        var aux = $('#boton_ordenar').prop('checked')
-        if (aux)
-            tabla('http://127.0.0.1:5000/clientes');
-    }
+    
 
     
 </script>
