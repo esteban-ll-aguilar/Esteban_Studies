@@ -1,5 +1,5 @@
 class SequentialBinarySearch:
-    def binary_search_sequential(self,array, data):
+    def search(self,array, data):
         inicio = 0
         fin = len(array) - 1
         arr = []
@@ -24,7 +24,7 @@ class SequentialBinarySearch:
                 else:
                     inicio = medio + 1
                     
-    def binary_search_sequential_models(self,array, attribute, data):
+    def search_models(self,array, attribute, data):
         inicio = 0
         fin = len(array) - 1
         arr = []

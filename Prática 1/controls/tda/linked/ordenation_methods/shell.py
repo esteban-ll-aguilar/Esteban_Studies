@@ -6,7 +6,7 @@ class ShellSort:
             for i in range(gap, len(array)):
                 t = array[i]
                 j = i
-                while j >= gap and array[j-gap] > t:
+                while j >= gap and array[j-gap] < t:
                     array[j] = array[j-gap]
                     j -= gap
                 array[j] = t
@@ -20,7 +20,7 @@ class ShellSort:
             for i in range(gap, len(array)):
                 t = array[i]
                 j = i
-                while j >= gap and array[j-gap] < t:
+                while j >= gap and array[j-gap] > t:
                     array[j] = array[j-gap]
                     j -= gap
                 array[j] = t
@@ -34,7 +34,7 @@ class ShellSort:
             for i in range(gap, len(array)):
                 t = array[i]
                 j = i
-                while j >= gap and getattr(array[j-gap], attribute) > getattr(t, attribute):
+                while j >= gap and getattr(array[j-gap], attribute) < getattr(t, attribute):
                     array[j] = array[j-gap]
                     j -= gap
                 array[j] = t
@@ -42,13 +42,13 @@ class ShellSort:
         return array
     
     
-    def sort_models_desendent(self, array, attribute):
+    def sort_models_descendent(self, array, attribute):
         gap = len(array) // 2
         while gap > 0:
             for i in range(gap, len(array)):
                 t = array[i]
                 j = i
-                while j >= gap and getattr(array[j-gap], attribute) < getattr(t, attribute):
+                while j >= gap and getattr(array[j-gap], attribute) > getattr(t, attribute):
                     array[j] = array[j-gap]
                     j -= gap
                 array[j] = t

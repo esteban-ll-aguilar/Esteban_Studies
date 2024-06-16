@@ -13,7 +13,6 @@ router = Blueprint('router', __name__)
 #post para enviar los datos, modificar y iniciar sesion
 # monolito
 #RUTAS
-RETENCION = RetencionDaoControl()
 
 @router.route('/')
 def home():
@@ -28,22 +27,23 @@ def guardar_factura(pos):
 @router.route('/retencion/<int:pos>', methods=['POST'])
 def generarRetencion(pos):
     fdc = FacturaDaoControl()
+    retencion = RetencionDaoControl()
     fdc._factura = fdc._lista.get(pos-1)
     data = request.form
-    RETENCION._retencion._clienteId = data['dni']
-    RETENCION._retencion._facturaId = data['NComprobante']
-    RETENCION._retencion._baseImponible =float(data['subtotal'])
-    RETENCION._retencion._fechaEmicion = datetime.today().strftime("%Y-%m-%d %H:%M")
+    retencion._retencion._clienteId = data['dni']
+    retencion._retencion._facturaId = data['NComprobante']
+    retencion._retencion._baseImponible =float(data['subtotal'])
+    retencion._retencion._fechaEmicion = datetime.today().strftime("%Y-%m-%d %H:%M")
     print(data['tipoIdentificacion'])
     if data['tipoIdentificacion'] == 'RUC EDUCATIVO':
-        RETENCION._retencion._porcentajeRetencion = 0.08
+        retencion._retencion._porcentajeRetencion = 0.08
     elif data['tipoIdentificacion']  == 'RUC PROFESIONAL':
-        RETENCION._retencion._porcentajeRetencion = 0.10
+        retencion._retencion._porcentajeRetencion = 0.10
     
     
 
-    RETENCION._retencion._totalRetenido = float(data['subtotal']) * RETENCION._retencion._porcentajeRetencion
-    RETENCION.save
+    retencion._retencion._totalRetenido = float(data['subtotal']) * retencion._retencion._porcentajeRetencion
+    retencion.save
     
     fdc.delete(pos)
     #fdc.delete(pos)
@@ -62,13 +62,20 @@ def clientes_ordenar(atrr,tipoOrden, isAcendent):
 
     return make_response(jsonify({'data': pd.to_dict_list(), 'code': 200, 'message': 'Ordenado'}))
 
+@router.route('/clientes/search/<string:elemento>/<string:attr>/<int:isLineal>', methods=['GET'])
+def clientes_buscar(elemento,attr, isLineal):
+    print(elemento,attr, isLineal)
+    pd = PersonaDaoControl()
+    pd._lista.search_models_equals(elemento,attr, isLineal)
+    if pd.to_dict_list() == None or len(pd.to_dict_list()) == 0:
+        return make_response(jsonify({'data': pd.to_dict_list(), 'code': 404, 'message': 'No encontrado'}))
+    return make_response(jsonify({'data': pd.to_dict_list(), 'code': 200, 'message': 'Ordenado'}))
 
 @router.route('/cliente/editar/<int:pos>')
 def ver_editar(pos):
     pd = PersonaDaoControl()
     nene = pd._list().get(pos-1)
     return render_template('cliente/editar.html', data=nene)
-
 
 
 @router.route('/nuevo_cliente')
@@ -84,9 +91,9 @@ def generar_factura(pos):
         factura._factura._fecha = data['fecha']
         factura._factura._clienteId = data['dni']
         factura._factura._NComprobante = data['NComprobante']
-        factura._factura._subtotal = data['subtotal']
-        factura._factura._iva = data['iva']
-        factura._factura._total = data['total']
+        factura._factura._subtotal = float(data['subtotal'])
+        factura._factura._iva = float(data['iva'])
+        factura._factura._total = float(data['total'])
         factura._factura._clienteId = data['dni']
         factura.save
     return redirect(f'/cliente/detalle/lista_factura/{pos}', code=302)
@@ -98,17 +105,33 @@ def lista_factura(pos):
     factura = FacturaDaoControl()
     persona._persona = persona._lista.get(pos-1)
     lista = factura._lista._filter(persona._persona._dni)
-    print(lista)
-    if lista == None or len(lista) == 0 or lista == 'List is Empty':
+    list = factura.to_dict_list()
+    if list == None or len(list) == 0 or list == 'List is Empty':
         flash('No hay facturas registradas', 'info')
         return redirect(f'/cliente/detalle/{pos}', code=302 )
-    return render_template('facturacion/listaFactura.html', lista=lista, persona=persona._persona.serialize)
+    return render_template('facturacion/listaFactura.html', lista=factura.to_dict_list(), persona=persona._persona.serialize)
+
+
+@router.route('/cliente/detalle/lista_factura/<int:pos>/<string:atrr>/<int:tipoOrden>/<int:isAcendent>')
+def lista_factura_ordenar(pos,atrr,tipoOrden, isAcendent):
+        persona = PersonaDaoControl()
+        factura = FacturaDaoControl()
+        persona._persona = persona._lista.get(pos-1)
+        factura._lista._filter(persona._persona._dni)
+        factura._lista.sort_models(atrr,tipoOrden, isAcendent)
+        return make_response(jsonify({'data': factura.to_dict_list(), 'persona':persona._persona.serialize, 'code': 200, 'message': 'Ordenado'}))
+
+
+
+
+
 
 @router.route('/cliente/detalle/historial_retencion/<int:pos>')
 def lista_retencion(pos):
     persona = PersonaDaoControl()
+    retencion = RetencionDaoControl()
     persona._persona = persona._lista.get(pos-1)
-    lista = RETENCION._lista._stack._class._filter(persona._persona._dni)
+    lista = retencion._lista._filter(persona._persona._dni)
     if lista == None or len(lista) == 0:
         flash('No hay retenciones registradas', 'info')
         return redirect(f'/cliente/detalle/{pos}', code=302)

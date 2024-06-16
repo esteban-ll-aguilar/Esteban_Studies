@@ -1,5 +1,17 @@
 {% extends "template.html" %}
-
+{% block style %}
+    .separator-row td {
+        border-bottom: 2px solid #ff0000; /* Cambia #ff0000 por el color que prefieras */
+        padding: 0;
+        height: 2px; /* Ajusta el grosor de la línea */
+    }
+    .separator-col {
+        border-right: 2px solid #ff0000; /* Cambia #ff0000 por el color que prefieras */
+        padding: 0;
+        width: 2px; /* Ajusta el grosor de la línea */
+    }
+    
+{% endblock %}
 {% block content %}
 <section class="custom-video booking-form text-center">
     <div class="text-center mb-4 pb-lg-2">
@@ -7,43 +19,60 @@
         <h2 class="text-white">Clientes</h2>
             <a href="/" class="btn custom-btn custom-border-btn">Regresar</a>
             
-        <div class="custom-border table-responsive">
-        <table class="text-white aling-center " style="margin: 0 auto; padding: 10px 20px; font-size: 16px;">
-            <thead>
-                <tr>
-                    <th>DNI</th>
-                    <th>Nombre</th>
-                    <th>Direccion</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <select name="atributo" id="atributo" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
-                            <option value="_nombre">Nombre</option>
-                            <option value="_correo">Correo</option>
-                            <option value="_direccion">Direccion</option>
-                        </select>         
-                    </td>   
-                    <td>
-                        <select name="metodoOrdenacion" id="metodoOrdenacion" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
-                            <option value="1">QuickSort</option>
-                            <option value="2">ShellSort</option>
-                            <option value="3">MergeSort</option>
-                        </select> 
-                    </td>
-                    <td>
-                        <select name="Desd_Ascd" id="Desd_Ascd" class="custom-border-select" style="padding: 5px 10px; font-size: 16px;">
-                            <option value="1">Acendente</option>
-                            <option value="2">Decendente</option>
-                        </select> 
-                    </td>
-                </tr>
-                
-            </tbody>
-        </table>
-    </div>
-        </div>
+            <div class="custom-border">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="atributo" class="text-white"><strong>Ordenar Por:</strong></label>
+                            <select name="atributo" id="atributo" class="form-control custom-border-select">
+                                <option value="----">-----</option>
+                                <option value="_correo">Correo</option>
+                                <option value="_nombre">Nombre</option>
+                                <option value="_direccion">Dirección</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="metodoOrdenacion" class="text-white"><strong>Metodo de Ordenacion:</strong></label>
+                            <select name="metodoOrdenacion" id="metodoOrdenacion" class="form-control custom-border-select">
+                                <option value="1">QuickSort</option>
+                                <option value="2">MergeSort</option>
+                                <option value="3">ShellSort</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="orden" class="text-white"><strong>Orden:</strong></label>
+                            <select name="orden" id="orden" class="form-control custom-border-select">
+                                <option value="1">Ascendente</option>
+                                <option value="2">Descendente</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="criterioBusqueda" class="text-white"><strong>Buscar por:</strong></label>
+                            <select name="criterioBusqueda" id="criterioBusqueda" class="form-control custom-border-select">
+                                <option value="_nombre">Nombre</option>
+                                <option value="_dni">DNI</option>
+                                <option value="_direccion">Dirección</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="metodoBusqueda" class="text-white"><strong>Metodo de Busqueda:</strong></label>
+                            <select name="metodoBusqueda" id="metodoBusqueda" class="form-control custom-border-select">
+                                <option value="0">Binario</option>
+                                <option value="1">Lineal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="search" class="text-white"><strong>Buscar:</strong></label>
+                            <input type="text" class="form-control text-center form-bi-search-heart" id="search" name="search" placeholder="--------">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
     </div>
 
     <div class="booking-form-body">
@@ -85,17 +114,34 @@
 
 
 <script>
-    const atributo = document.getElementById('atributo');
-    const metodoOrdenacion = document.getElementById('metodoOrdenacion');
-    const Desd_Ascd = document.getElementById('Desd_Ascd');
-
-    $($('select')).change(function(){
-        console.log(atributo.value,metodoOrdenacion.value,Desd_Ascd.value)
-        create(atributo.value,metodoOrdenacion.value,Desd_Ascd.value);
-    });
     
-    function create(atributo,metodoOrdenacion,Desd_Ascd){
-        tabla('http://127.0.0.1:5000/clientes/'+atributo+'/'+metodoOrdenacion+'/'+Desd_Ascd+'');
+
+    if (atributo && metodoOrdenacion && orden){
+        [atributo, metodoOrdenacion, orden].forEach(element => {
+            element.addEventListener('change', () => {
+                const atributo = document.getElementById('atributo');
+                const metodoOrdenacion = document.getElementById('metodoOrdenacion');
+                const orden = document.getElementById('orden');
+                
+                ordenate(atributo.value, metodoOrdenacion.value, orden.value);
+            });
+        });
+    }
+
+    $('#search').keyup(function() {
+        search();
+    }); 
+
+    function search() {
+        const metodo = document.getElementById('metodoBusqueda').value;
+        const atrib = document.getElementById('criterioBusqueda').value;
+        const search = $('#search').val();
+        console.log(search, atrib, metodo);
+        tabla("http://127.0.0.1:5000//clientes/search/"+search+"/"+atrib+"/"+metodo+"");
+    }
+
+    function ordenate(atributo,metodoOrdenacion,orden){
+        tabla('http://127.0.0.1:5000/clientes/'+atributo+'/'+metodoOrdenacion+'/'+orden+'');
     }
     function tabla(url){
         $.ajax({
@@ -103,6 +149,7 @@
             url: url,
             contentType: 'json',
             success: function(data){
+                console.log(data);
                 if (data.code == 200){
                     var html = '';
                     $.each(data.data, function(i, item){

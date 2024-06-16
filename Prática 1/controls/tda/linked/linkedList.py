@@ -2,11 +2,11 @@ from controls.tda.linked.node import Node
 from controls.tdaArray import TDAArray
 from controls.exception.linkedListExeption import LinkedEmptyException
 from controls.exception.arrayPositionException import ArrayPositionException
-from controls.tda.linked.burbuja import Burbuja
-from controls.tda.linked.insersion import Insersion
 from controls.tda.linked.ordenation_methods.quickSort import QuickSort
 from controls.tda.linked.ordenation_methods.shell import ShellSort
 from controls.tda.linked.ordenation_methods.mergeSort import MergeSort
+from controls.tda.linked.search_methods.sequiential_binary_search import SequentialBinarySearch
+from controls.tda.linked.search_methods.binary_search import BinarySearch
 from numbers import Number
 
 class Linked_List(object):
@@ -195,27 +195,30 @@ class Linked_List(object):
     
     def toList(self, array):
         self.clear
-        for i in range(0, len(array)):
-            self.__addLast__(array[i])
+        if array == None or len(array) == 0:
+            return "Array is empty"
+        for i in array:
+            #print(i._fecha)
+            self.__addLast__(i)
         
             
-    def sort(self, type = 1):
+    def sort(self, typeOrder = 1, isacendent=1):
         if self.isEmpty:
             raise LinkedEmptyException("List empty")
         else:
             array = self.toArray
             if isinstance(array[0], Number) or isinstance(array[0], str):
-                #burbuja = Burbuja()
-                #insersion = Insersion()
-                quicksort = QuickSort()
-                if type == 1:
-                 #   array = burbuja.sort_burbuja_number_acendent(array)
-                #    array = insersion.sort_primitive_acendent(array)
-                    array = quicksort.sort_asendent(array)
+                if typeOrder == 1:
+                    order = QuickSort()
+                elif typeOrder == 2:
+                    order = MergeSort()
                 else:
-                  #  array = burbuja.sort_burbuja_number_decendent(array)
-                    #array = insersion.sort_primitive_desendent(array)
-                    array = quicksort.sort_descendent(array, False)
+                    order = ShellSort()
+                    
+                if isacendent == 1:
+                    array = order.sort_models_acendent(array) 
+                else:
+                    array = order.sort_models_descendent(array)
             
             return self.toList(array)
     
@@ -236,6 +239,7 @@ class Linked_List(object):
                     array = order.sort_models_acendent(array, attribute) 
                 else:
                     array = order.sort_models_descendent(array, attribute)
+                    
             return self.toList(array)
     
         
@@ -250,22 +254,35 @@ class Linked_List(object):
                     lista.add(array[i], lista._length)
 
         return lista
+    
+    def search_models_equals(self, data, attribute, islineal=1):
+        self.sort_models(attribute, 1, 2)
+        array = self.toArray
+        if islineal == 1:
+            order = SequentialBinarySearch()
+        else:
+            order = BinarySearch()
+        array = order.search_models(array, attribute, data)
+        return self.toList(array)
+            
+            
+        
+        
             
     
     def _filter(self, data):
-        out = []
         if self.isEmpty:
-            out = "List is Empty"
+            raise LinkedEmptyException("List empty")
         else:
-            node = self.__head
-            for i in range(0, self._length):
+            array = self.toArray
+            aux = []
+            for i in range(0, len(array)):
+                if hasattr(array[i], '_clienteId') and array[i]._clienteId == data:
+                    aux.append(array[i])
+                elif hasattr(array[i], '_NComprobante') and array[i]._NComprobante == data:
+                    aux.append(array[i])
                 
-                if hasattr(node._data, '_clienteId') and node._data._clienteId == data:
-                    out.append(node._data.serialize)
-                elif hasattr(node._data, '_NComprobante') and node._data._NComprobante == data:
-                    out.append(node._data.serialize)
-                node = node._next
-        return out
+            return self.toList(aux)
 
     def __exist__(self, data):
         node = self.__head

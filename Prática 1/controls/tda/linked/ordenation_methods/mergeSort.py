@@ -1,73 +1,91 @@
 class MergeSort:
-    def sort_acendent(self, array):
-        n = len(array)
-        mitad = n // 2
-        derecha = [] 
-        izquierda = []
-        if n <= 1:
+    def sort_asendent(self, array):
+        if len(array) <= 1:
             return array
-        else:
-            for i in range(0,n):
-                if i > mitad:
-                    izquierda.append(array[i])
-                else:
-                    derecha.append(array[i])
-            izquierda = self.sort_acendent(izquierda)
-            derecha = self.sort_acendent(derecha)
-            array = izquierda + derecha
-            return array
-        
+        else: 
+            return self.merge_sort(array, True)
+    
     def sort_descendent(self, array):
-        n = len(array)
-        mitad = n // 2
-        derecha = [] 
-        izquierda = []
-        if n <= 1:
+        if len(array) <= 1:
             return array
-        else:
-            for i in range(0,n):
-                if i < mitad:
-                    izquierda.append(array[i])
-                else:
-                    derecha.append(array[i])
-            izquierda = self.sort_acendent(izquierda)
-            derecha = self.sort_acendent(derecha)
-            array = derecha + izquierda
-            return array
-        
+        else: 
+            return self.merge_sort(array, False)
+    
+    
     def sort_models_acendent(self, array, attribute):
-        n = len(array)
-        mitad = n // 2
-        derecha = [] 
-        izquierda = []
-        if n <= 1:
+        if len(array) <= 1:
             return array
-        else:
-            for i in range(0,n):
-                if  getattr(array[i], attribute) > getattr(array[mitad], attribute):
-                    izquierda.append(array[i])
-                else:
-                    derecha.append(array[i])
-            izquierda = self.sort_models_acendent(izquierda, attribute)
-            derecha = self.sort_models_acendent(derecha, attribute)
-            array = izquierda + derecha
-            return array
-        
+        else: 
+            return self.merge_sort_models(array, attribute, True)
+            
     def sort_models_descendent(self, array, attribute):
-        n = len(array)
-        mitad = n // 2
-        derecha = [] 
-        izquierda = []
-        if n <= 1:
+        if len(array) <= 1:
             return array
-        else:
-            for i in range(0,n):
-                if  getattr(array[i], attribute) < getattr(array[mitad], attribute):
-                    izquierda.append(array[i])
-                else:
-                    derecha.append(array[i])
-            izquierda = self.sort_models_descendent(izquierda, attribute)
-            derecha = self.sort_models_descendent(derecha, attribute)
-            array = derecha + izquierda
-            return array
+        else: 
+            return self.merge_sort_models(array, attribute, False)
+    
+    
+    def merge_sort_models(self, array, attribute, isacendent=True):
+        if len(array) > 1:
+            mitad = len(array) // 2
+            izquierda = array[:mitad]
+            derecha = array[mitad:]
         
+            self.merge_sort_models(izquierda, attribute, isacendent)
+            self.merge_sort_models(derecha, attribute, isacendent)
+            
+            aux = []
+            
+            if isacendent:
+                while len(izquierda) > 0 and len(derecha) > 0:
+                    if getattr(izquierda[0], attribute) > getattr(derecha[0], attribute):
+                        aux.append(izquierda.pop(0))
+                    else:
+                        aux.append(derecha.pop(0))
+            else: 
+                while len(izquierda) > 0 and len(derecha) > 0:
+                    if getattr(izquierda[0], attribute) < getattr(derecha[0], attribute):
+                        aux.append(izquierda.pop(0))
+                    else:
+                        aux.append(derecha.pop(0))
+                        
+            while len(izquierda) > 0:
+                aux.append(izquierda.pop(0))
+            while len(derecha) > 0:
+                aux.append(derecha.pop(0))
+                
+            return aux
+        
+    def merge_sort(self, array, isacendent=True):  
+        if len(array) > 1:
+            mitad = len(array) // 2
+            izquierda = array[:mitad]
+            derecha = array[mitad:]
+        
+            self.merge_sort(izquierda, isacendent)
+            self.merge_sort(derecha, isacendent)
+            
+            aux = []
+            
+            if isacendent:
+                while len(izquierda) > 0 and len(derecha) > 0:
+                    if izquierda[0] < derecha[0]:
+                        aux.append(izquierda.pop(0))
+                    else:
+                        aux.append(derecha.pop(0))
+            else: 
+                while len(izquierda) > 0 and len(derecha) > 0:
+                    if izquierda[0] > derecha[0]:
+                        aux.append(izquierda.pop(0))
+                    else:
+                        aux.append(derecha.pop(0))
+                        
+            while len(izquierda) > 0:
+                aux.append(izquierda.pop(0))
+            while len(derecha) > 0:
+                aux.append(derecha.pop(0))
+                
+            return aux
+            
+            
+            

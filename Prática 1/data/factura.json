@@ -1,1 +1,20 @@
-[{"id": 1, "fecha": "2024-05-03", "NComprobante": "452542455555", "clienteId": "1787116882158", "subtotal": "487", "iva": "0.12", "total": "545.44"}]
+[
+    {
+        "id": 1,
+        "fecha": "2024-05-03",
+        "NComprobante": "452542455555",
+        "clienteId": "1787116882158",
+        "subtotal": 487,
+        "iva": 0.12,
+        "total": 545.44
+    },
+    {
+        "id": 2,
+        "fecha": "2024-06-05",
+        "NComprobante": "00000001-000-00550",
+        "clienteId": "1787116882158",
+        "subtotal": 555,
+        "iva": 0.12,
+        "total": 621.60
+    }
+]
