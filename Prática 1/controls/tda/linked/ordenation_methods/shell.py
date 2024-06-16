@@ -34,7 +34,7 @@ class ShellSort:
             for i in range(gap, len(array)):
                 t = array[i]
                 j = i
-                while j >= gap and getattr(array[j-gap], attribute) < getattr(t, attribute):
+                while j >= gap and getattr(array[j-gap], attribute) > getattr(t, attribute):
                     array[j] = array[j-gap]
                     j -= gap
                 array[j] = t
@@ -48,7 +48,7 @@ class ShellSort:
             for i in range(gap, len(array)):
                 t = array[i]
                 j = i
-                while j >= gap and getattr(array[j-gap], attribute) > getattr(t, attribute):
+                while j >= gap and getattr(array[j-gap], attribute) < getattr(t, attribute):
                     array[j] = array[j-gap]
                     j -= gap
                 array[j] = t

@@ -10,7 +10,7 @@ class QuickSort:
             bigger = []
             
             for i in range(0, len(array)):
-                if array[i] > pivote:
+                if array[i] < pivote:
                     lower.append(array[i])
                 elif array[i] == pivote:
                     equal.append(array[i])
@@ -32,7 +32,7 @@ class QuickSort:
             bigger = []
             
             for i in range(0, len(array)):
-                if array[i] < pivote:
+                if array[i] > pivote:
                     lower.append(array[i])
                 elif array[i] == pivote:
                     equal.append(array[i])
@@ -55,7 +55,7 @@ class QuickSort:
             bigger = []
             for i in range(0, len(array)):
                 att = getattr(array[i], attribute)
-                if att > pivote:
+                if att < pivote:
                     lower.append(array[i])
                 elif att == pivote:
                     equal.append(array[i])
@@ -81,7 +81,7 @@ class QuickSort:
             bigger = []
             for i in range(0, len(array)):
                 att = getattr(array[i], attribute)
-                if att < pivote:
+                if att > pivote:
                     lower.append(array[i])
                 elif att == pivote:
                     equal.append(array[i])

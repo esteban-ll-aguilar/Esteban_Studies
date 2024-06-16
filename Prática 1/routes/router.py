@@ -33,7 +33,7 @@ def generarRetencion(pos):
     retencion._retencion._clienteId = data['dni']
     retencion._retencion._facturaId = data['NComprobante']
     retencion._retencion._baseImponible =float(data['subtotal'])
-    retencion._retencion._fechaEmicion = datetime.today().strftime("%Y-%m-%d %H:%M")
+    retencion._retencion._fechaEmicion = datetime.today().strftime("%Y-%m-%d")
     print(data['tipoIdentificacion'])
     if data['tipoIdentificacion'] == 'RUC EDUCATIVO':
         retencion._retencion._porcentajeRetencion = 0.08
@@ -122,7 +122,14 @@ def lista_factura_ordenar(pos,atrr,tipoOrden, isAcendent):
         return make_response(jsonify({'data': factura.to_dict_list(), 'persona':persona._persona.serialize, 'code': 200, 'message': 'Ordenado'}))
 
 
-
+@router.route('/cliente/detalle/lista_factura/search/<int:pos>/<string:elemento>/<string:attr>/<int:isLineal>')
+def lista_factura_buscar(pos,elemento,attr, isLineal):
+    persona = PersonaDaoControl()
+    factura = FacturaDaoControl()
+    persona._persona = persona._lista.get(pos-1)
+    factura._lista._filter(persona._persona._dni)
+    factura._lista.search_models_equals(elemento,attr, isLineal)
+    return make_response(jsonify({'data': factura.to_dict_list(), 'persona':persona._persona.serialize, 'code': 200, 'message': 'Ordenado'}))
 
 
 
@@ -131,13 +138,46 @@ def lista_retencion(pos):
     persona = PersonaDaoControl()
     retencion = RetencionDaoControl()
     persona._persona = persona._lista.get(pos-1)
-    lista = retencion._lista._filter(persona._persona._dni)
-    if lista == None or len(lista) == 0:
+    retencion._lista._filter(persona._persona._dni)
+    if retencion.to_dict_list() == None or len(retencion.to_dict_list()) == 0 or retencion.to_dict_list() == 'List is Empty':
         flash('No hay retenciones registradas', 'info')
         return redirect(f'/cliente/detalle/{pos}', code=302)
     
-    
-    return render_template('retencion/historial_retencion.html', lista=lista, persona=persona._persona.serialize)
+    return render_template('retencion/historial_retencion.html', lista=retencion.to_dict_list(), persona=persona._persona.serialize)
+
+
+@router.route('/cliente/detalle/historial_retencion/<int:pos>/<string:atrr>/<int:tipoOrden>/<int:isAcendent>')
+def lista_retencion_ordenar(pos,atrr,tipoOrden, isAcendent):
+        persona = PersonaDaoControl()
+        retencion = RetencionDaoControl()
+        persona._persona = persona._lista.get(pos-1)
+        retencion._lista._filter(persona._persona._dni)
+        retencion._lista.sort_models(atrr,tipoOrden, isAcendent)
+        return make_response(jsonify({'data': retencion.to_dict_list(), 'persona':persona._persona.serialize, 'code': 200, 'message': 'Ordenado'}))
+
+
+@router.route('/cliente/detalle/historial_retencion/search/<int:pos>/<string:elemento>/<string:attr>/<int:isLineal>')
+def lista_retencion_buscar(pos,elemento,attr, isLineal):
+    persona = PersonaDaoControl()
+    retencion = RetencionDaoControl()
+    persona._persona = persona._lista.get(pos-1)
+    retencion._lista._filter(persona._persona._dni)
+    retencion._lista.search_models_equals(elemento,attr, isLineal)
+    return make_response(jsonify({'data': retencion.to_dict_list(), 'persona':persona._persona.serialize, 'code': 200, 'message': 'Ordenado'}))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @router.route('/nuevo_cliente/guardar', methods=['POST'])
