@@ -51,9 +51,9 @@
                         <div class="form-group">
                             <label for="criterioBusqueda" class="text-white"><strong>Buscar por:</strong></label>
                             <select name="criterioBusqueda" id="criterioBusqueda" class="form-control custom-border-select">
-                                <option value="_nombre">Nombre</option>
+                                <option value="_nombre">Nombres</option>
+                                <option value="_apellidos">Apellidos</option>
                                 <option value="_dni">DNI</option>
-                                <option value="_direccion">Dirección</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -124,6 +124,13 @@
                 const orden = document.getElementById('orden');
                 
                 ordenate(atributo.value, metodoOrdenacion.value, orden.value);
+            });
+        });
+    }
+    if (metodoBusqueda && criterioBusqueda){
+        [metodoBusqueda, criterioBusqueda].forEach(element => {
+            element.addEventListener('change', () => {
+                search();
             });
         });
     }

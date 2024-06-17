@@ -23,6 +23,7 @@ class SequentialBinarySearch:
                     fin = medio - 1
                 else:
                     inicio = medio + 1
+            
                     
     def search_models(self,array, attribute, data):
         inicio = 0
@@ -30,21 +31,21 @@ class SequentialBinarySearch:
         arr = []
         while inicio <= fin:
             medio = (inicio + fin) // 2
-            if getattr(array[medio], attribute).lower().startswith(data.lower()):
-                # Expandir hacia la izquierda
+            if getattr(array[medio], attribute).lower() in data.lower():
+                # Recorrer hacia la izquierda
                 aux = medio
-                while aux >= 0 and getattr(array[aux], attribute).lower().startswith(data.lower()):
+                while aux >= 0 and getattr(array[aux], attribute).lower() in data.lower():
                     arr.append(array[aux])
                     aux -= 1
                 
-                # Expandir hacia la derecha
+                # Recorrer hacia la derecha
                 aux = medio + 1
-                while aux < len(array) and getattr(array[aux], attribute).lower().startswith(data.lower()):
+                while aux < len(array) and getattr(array[aux], attribute).lower() in data.lower():
                     arr.append(array[aux])
                     aux += 1
                 return arr
             else:
-                if data[0].lower() < getattr(array[medio], attribute)[0].lower():
+                if data.lower() < getattr(array[medio], attribute).lower():
                     fin = medio - 1
                 else:
                     inicio = medio + 1

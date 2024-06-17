@@ -24,11 +24,11 @@ class BinarySearch:
         
         while inicio <= fin:
             medio = (inicio + fin) // 2
-            if getattr(array[medio], attribute) == data:
+            if getattr(array[medio], attribute).lower() in data.lower():
                 aux.append(array[medio])
                 return aux
             else:
-                if data < getattr(array[medio], attribute):
+                if data.lower() < getattr(array[medio], attribute).lower():
                     fin = medio - 1
                 else:
                     inicio = medio + 1

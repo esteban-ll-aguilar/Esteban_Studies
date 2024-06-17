@@ -1,11 +1,1 @@
-[
-    {
-        "id": 1,
-        "fecha": "2024-06-05",
-        "NComprobante": "00000001-000-00550",
-        "clienteId": "1787116882158",
-        "subtotal": 555,
-        "iva": 0.12,
-        "total": 621.6
-    }
-]
+[{"id": 1, "fecha": "2024-06-21", "NComprobante": "0000-000-123", "clienteId": "1787116882158", "subtotal": 1455.0, "iva": 0.14, "total": 1658.7},{"id": 2, "fecha": "2024-06-12", "NComprobante": "0000-000-13588", "clienteId": "1787116882158", "subtotal": 57.0, "iva": 0.14, "total": 64.98},{"id": 3, "fecha": "2024-05-28", "NComprobante": "0000-000-46987", "clienteId": "1787116882158", "subtotal": 89.0, "iva": 0.14, "total": 101.46},{"id": 4, "fecha": "2024-05-28", "NComprobante": "0000-000-6987", "clienteId": "1787116882158", "subtotal": 100.0, "iva": 0.14, "total": 114.0},{"id": 5, "fecha": "2024-06-27", "NComprobante": "0000-000-45745", "clienteId": "1787116882158", "subtotal": 1507.0, "iva": 0.12, "total": 1687.84},{"id": 6, "fecha": "2024-06-12", "NComprobante": "0000-000-64695", "clienteId": "176885897", "subtotal": 50.0, "iva": 0.12, "total": 56.0},{"id": 7, "fecha": "2024-06-06", "NComprobante": "0000-000-12646", "clienteId": "1787116882158", "subtotal": 150.0, "iva": 0.12, "total": 168.0},{"id": 8, "fecha": "2024-06-07", "NComprobante": "0000-000-1552", "clienteId": "1787116882158", "subtotal": 50.0, "iva": 0.12, "total": 56.0},{"id": 9, "fecha": "2024-06-07", "NComprobante": "0000-000-35311", "clienteId": "1787116882158", "subtotal": 210.0, "iva": 0.12, "total": 235.2},{"id": 10, "fecha": "2024-06-05", "NComprobante": "0000-000-12463", "clienteId": "1787116882158", "subtotal": 210.0, "iva": 0.12, "total": 235.2},{"id": 11, "fecha": "2024-07-03", "NComprobante": "0000-000-44568", "clienteId": "1787116882158", "subtotal": 210.0, "iva": 0.12, "total": 235.2},{"id": 12, "fecha": "2024-06-03", "NComprobante": "0000-000-14563", "clienteId": "1787116882158", "subtotal": 210.0, "iva": 0.12, "total": 235.2},{"id": 13, "fecha": "2024-05-29", "NComprobante": "0000-000-2478", "clienteId": "1787116882158", "subtotal": 210.0, "iva": 0.14, "total": 239.4},{"id": 14, "fecha": "2024-06-06", "NComprobante": "0000-000-46987", "clienteId": "1787116882158", "subtotal": 300.0, "iva": 0.14, "total": 342.0},{"id": 15, "fecha": "2024-05-28", "NComprobante": "0000-000-6891", "clienteId": "1787116882158", "subtotal": 300.0, "iva": 0.14, "total": 342.0}]

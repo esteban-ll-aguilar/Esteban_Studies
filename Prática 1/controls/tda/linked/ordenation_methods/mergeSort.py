@@ -34,58 +34,80 @@ class MergeSort:
             self.merge_sort_models(izquierda, attribute, isacendent)
             self.merge_sort_models(derecha, attribute, isacendent)
             
-            aux = []
+            i = j = k = 0
             
             if isacendent:
-                while len(izquierda) > 0 and len(derecha) > 0:
-                    if getattr(izquierda[0], attribute) > getattr(derecha[0], attribute):
-                        aux.append(izquierda.pop(0))
+                while i < len(izquierda) and j < len(derecha):
+                    if getattr(izquierda[i], attribute) >= getattr(derecha[j], attribute):
+                        array[k] = izquierda[i]
+                        i += 1
                     else:
-                        aux.append(derecha.pop(0))
-            else: 
-                while len(izquierda) > 0 and len(derecha) > 0:
-                    if getattr(izquierda[0], attribute) < getattr(derecha[0], attribute):
-                        aux.append(izquierda.pop(0))
+                        array[k] = derecha[j]
+                        j += 1
+                    k += 1
+            else:
+                while i < len(izquierda) and j < len(derecha):
+                    if getattr(izquierda[i], attribute) <= getattr(derecha[j], attribute):
+                        array[k] = izquierda[i]
+                        i += 1
                     else:
-                        aux.append(derecha.pop(0))
-                        
-            while len(izquierda) > 0:
-                aux.append(izquierda.pop(0))
-            while len(derecha) > 0:
-                aux.append(derecha.pop(0))
+                        array[k] = derecha[j]
+                        j += 1
+                    k += 1
+            
+            while i < len(izquierda):
+                array[k] = izquierda[i]
+                i += 1
+                k += 1
+            
+            while j < len(derecha):
+                array[k] = derecha[j]
+                j += 1
+                k += 1
                 
-            return aux
+        return array
         
     def merge_sort(self, array, isacendent=True):  
         if len(array) > 1:
             mitad = len(array) // 2
             izquierda = array[:mitad]
             derecha = array[mitad:]
-        
+
+            # Llamadas recursivas para dividir el array
             self.merge_sort(izquierda, isacendent)
             self.merge_sort(derecha, isacendent)
-            
-            aux = []
-            
+
+            i = j = k = 0
+
+            # Ordenar y fusionar las sublistas
             if isacendent:
-                while len(izquierda) > 0 and len(derecha) > 0:
-                    if izquierda[0] < derecha[0]:
-                        aux.append(izquierda.pop(0))
+                while i < len(izquierda) and j < len(derecha):
+                    if izquierda[i] <= derecha[j]:
+                        array[k] = izquierda[i]
+                        i += 1
                     else:
-                        aux.append(derecha.pop(0))
-            else: 
-                while len(izquierda) > 0 and len(derecha) > 0:
-                    if izquierda[0] > derecha[0]:
-                        aux.append(izquierda.pop(0))
+                        array[k] = derecha[j]
+                        j += 1
+                    k += 1
+            else:
+                while i < len(izquierda) and j < len(derecha):
+                    if izquierda[i] >= derecha[j]:
+                        array[k] = izquierda[i]
+                        i += 1
                     else:
-                        aux.append(derecha.pop(0))
-                        
-            while len(izquierda) > 0:
-                aux.append(izquierda.pop(0))
-            while len(derecha) > 0:
-                aux.append(derecha.pop(0))
-                
-            return aux
-            
-            
-            
+                        array[k] = derecha[j]
+                        j += 1
+                    k += 1
+
+            # Añadir los elementos restantes
+            while i < len(izquierda):
+                array[k] = izquierda[i]
+                i += 1
+                k += 1
+
+            while j < len(derecha):
+                array[k] = derecha[j]
+                j += 1
+                k += 1
+
+        return array  # Devolver el array ordenado

@@ -111,27 +111,26 @@ class Linked_List(object):
 
     
     def detele(self, pos):
-        pos = pos 
         if self.isEmpty:
             raise LinkedEmptyException("List is Empty")
         elif pos < 0 or pos >= self._length:
             raise ArrayPositionException("Position is out of range")
         elif pos == 0:
             self.__head = self.__head._next
-            self.__length -= 1
+            self._length -= 1
             
         elif pos == self._length -1:
             self.__last = self.getNode(pos-1)
             #restarId
-            self.__length -= 1
+            self._length -= 1
         else:
             node_preview = self.getNode(pos-1)
             node_last = node_preview._next._next
             node_preview._next = node_last
-            self.__length -= 1
+            self._length -= 1
             
         for i in range(pos, self._length):
-            self.getNode(i)._data._id = i+1
+            self.get(i)._id = i+1
 
     """Obtiene el objeto nodo"""
     def getNode(self, pos):
@@ -141,7 +140,7 @@ class Linked_List(object):
             raise ArrayPositionException("Index out range")
         elif pos == 0:
             return self.__head
-        elif pos == (self.__length - 1):
+        elif pos == (self._length - 1):
             return self.__last
         else:
             node = self.__head
@@ -263,6 +262,7 @@ class Linked_List(object):
         else:
             order = BinarySearch()
         array = order.search_models(array, attribute, data)
+        print (array)
         return self.toList(array)
             
             

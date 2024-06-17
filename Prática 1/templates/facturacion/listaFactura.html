@@ -118,6 +118,13 @@
         });
     }
 
+    if (metodoBusqueda && criterioBusqueda){
+        [metodoBusqueda, criterioBusqueda].forEach(element => {
+            element.addEventListener('change', () => {
+                search();
+            });
+        });
+    }
     
     $('#search').keyup(function() {
         search();

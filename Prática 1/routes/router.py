@@ -66,9 +66,8 @@ def clientes_ordenar(atrr,tipoOrden, isAcendent):
 def clientes_buscar(elemento,attr, isLineal):
     print(elemento,attr, isLineal)
     pd = PersonaDaoControl()
+    
     pd._lista.search_models_equals(elemento,attr, isLineal)
-    if pd.to_dict_list() == None or len(pd.to_dict_list()) == 0:
-        return make_response(jsonify({'data': pd.to_dict_list(), 'code': 404, 'message': 'No encontrado'}))
     return make_response(jsonify({'data': pd.to_dict_list(), 'code': 200, 'message': 'Ordenado'}))
 
 @router.route('/cliente/editar/<int:pos>')
@@ -212,7 +211,9 @@ def ver_detalle_cliente(pos):
 def modificar_persona(pos):
     pd = PersonaDaoControl()
     data = request.form
-    nene = pd._list().get(pos-1)
+    pos = pos - 1
+    nene = pd._list().get(pos)
+    print(nene)
    
 
     if not 'nombre' in data.keys() or not 'apellidos' in data.keys() or not 'telefono' in data.keys() or not 'dni' in data.keys() or not 'direccion' in data.keys():
