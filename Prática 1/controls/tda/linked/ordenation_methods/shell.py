@@ -14,7 +14,7 @@ class ShellSort:
         return array
     
     
-    def sort_desendent(self, array):
+    def sort_descendent(self, array):
         gap = len(array) // 2
         while gap > 0:
             for i in range(gap, len(array)):

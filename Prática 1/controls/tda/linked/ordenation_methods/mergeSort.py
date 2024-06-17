@@ -1,5 +1,5 @@
 class MergeSort:
-    def sort_asendent(self, array):
+    def sort_acendent(self, array):
         if len(array) <= 1:
             return array
         else: 
@@ -82,7 +82,7 @@ class MergeSort:
             # Ordenar y fusionar las sublistas
             if isacendent:
                 while i < len(izquierda) and j < len(derecha):
-                    if izquierda[i] <= derecha[j]:
+                    if izquierda[i] >= derecha[j]:
                         array[k] = izquierda[i]
                         i += 1
                     else:
@@ -91,7 +91,7 @@ class MergeSort:
                     k += 1
             else:
                 while i < len(izquierda) and j < len(derecha):
-                    if izquierda[i] >= derecha[j]:
+                    if izquierda[i] <= derecha[j]:
                         array[k] = izquierda[i]
                         i += 1
                     else:

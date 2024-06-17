@@ -1,6 +1,6 @@
 class QuickSort:
     
-    def sort_asendent(self, array):
+    def sort_acendent(self, array):
         if len(array)<=1:
             return array
         else:
@@ -17,8 +17,8 @@ class QuickSort:
                 else:
                     bigger.append(array[i])
                     
-            lower = self.sort_asendent(lower)
-            bigger = self.sort_asendent(bigger)
+            lower = self.sort_acendent(lower)
+            bigger = self.sort_acendent(bigger)
             array = lower + equal + bigger
             return array
         

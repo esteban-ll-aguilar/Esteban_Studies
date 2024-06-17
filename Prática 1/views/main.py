@@ -13,82 +13,67 @@ Dao adapter
 import sys
 from time import time
 sys.path.append('../')
-from controls.tdaArray import TDAArray
-from controls.tda.linked.linkedList import Linked_List
-from controls.personaDaoControl import PersonaDaoControl
-from controls.facturaDaoControl import FacturaDaoControl
-from controls.retencionDaoControl import RetencionDaoControl
-from controls.personaListControl import PersonaListControl
-from controls.facturaListControl    import FacturaListControl
-from controls.tda.stack.stack import Stack
-#import cProfile
 import os
 import psutil
+from random import randint
 
-pcd = PersonaDaoControl()
-fdc = FacturaDaoControl()
-rtldc = RetencionDaoControl()
-
-""" pcd = PersonaDaoControl()
-fdc = FacturaDaoControl()
-rtldc = RetencionListDaoControl(useList=True, size=25)
-pl = PersonaListControl() """
+from controls.tdaArray import TDAArray
+from controls.tda.linked.linkedList import Linked_List
+from controls.tda.linked.ordenation_methods.quickSort import QuickSort
+from controls.tda.linked.ordenation_methods.shell import ShellSort
+from controls.tda.linked.ordenation_methods.mergeSort import MergeSort
+from time import time
+Linked = Linked_List()
+quick = QuickSort()
+shell = ShellSort()
+merge = MergeSort()
 try:
-    pcd._lista
-    pcd._lista.sort_models("_nombre", 1, 1)
-    print(pcd.to_dict_list())
+    list10000numbres = []
+    for i in range(0,10000):
+        list10000numbres.append(randint(0,10000))
+    
+    inicio = time()
+    listquick = quick.sort_acendent(list10000numbres)
+    print("---------------------------------------------")
+    print("QuickSort with 10000 numbers: ", time()-inicio)
+    inicio = time()
+    listshell = shell.sort_descendent(list10000numbres)
+    print("ShellSort with 10000 numbers: ", time()-inicio)
+    inicio = time() 
+    listamerge = merge.sort_descendent(list10000numbres)
+    print("MergeSort with 10000 numbers: ", time()-inicio)
+    
+    list20000numbres = []
+    for i in range(0,20000):
+        list20000numbres.append(randint(0,20000))
+
+    inicio = time()
+    listquick = quick.sort_acendent(list20000numbres)
+    print("---------------------------------------------")
+    print("QuickSort with 20000 numbers: ", time()-inicio)
+    inicio = time()
+    listshell = shell.sort_descendent(list20000numbres)
+    print("ShellSort with 20000 numbers: ", time()-inicio)
+    inicio = time() 
+    listamerge = merge.sort_descendent(list20000numbres)
+    print("MergeSort with 20000 numbers: ", time()-inicio)
+    
+    
+    list25000numbres = []
+    for i in range(0,25000):
+        list25000numbres.append(randint(0,25000))
+
+    inicio = time()
+    listquick = quick.sort_acendent(list25000numbres)
+    print("---------------------------------------------")
+    print("QuickSort with 25000 numbers: ", time()-inicio)
+    inicio = time()
+    listshell = shell.sort_descendent(list25000numbres)
+    print("ShellSort with 25000 numbers: ", time()-inicio)
+    inicio = time() 
+    listamerge = merge.sort_descendent(list25000numbres)
+    print("MergeSort with 25000 numbers: ", time()-inicio)
+    
     
 except Exception as e:
     print(e)
-
-
-#Listas Enlazadas
-""" 
-lista = Linked_List()
-lista.__addLast__("Hola 1")
-lista.__addLast__("Hola 2")
-lista.__addLast__("Hola 3")
-lista.__addLast__("Hola 4")
-lista.__addLast__("Hola 5")
-
-
-lista.__actualizeData__("Hola 6", 3)
-print(lista._length)
-lista.__str__()
-print(lista)
- """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-""" array = TDAArray(5)
-array.save("Hola Cale")
-array.save("Hola")
-array.save("Hola 45698")
-
-print(array.check()) """
-
-
-
-
-""" c = Calculos()
-c._mru._distancia = 45.0
-c._mru._tiempo = 5.6
-c.calcular_velocidad()
-print(c._mru) """

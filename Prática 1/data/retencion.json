@@ -1,1 +1,146 @@
-[{"id": 2, "clienteId": "1787116882158", "facturaId": "0000-000-45762", "fechaEmicion": "2024-05-19", "baseImponible": 4875.0, "porcentajeRetencion": 0.08, "totalRetenido": 390.0},{"id": 1, "clienteId": "1787116882158", "facturaId": "0000-000-025485", "fechaEmicion": "2024-05-19", "baseImponible": 180.0, "porcentajeRetencion": 0.08, "totalRetenido": 14.4},{"id": 3, "clienteId": "1787116882158", "facturaId": "0000-000-03254", "fechaEmicion": "2024-06-15", "baseImponible": 487.0, "porcentajeRetencion": 0.08, "totalRetenido": 38.96},{"id": 4, "clienteId": "1787116882158", "facturaId": "0000-000-00550", "fechaEmicion": "2024-06-16", "baseImponible": 555.0, "porcentajeRetencion": 0.08, "totalRetenido": 44.4},{"id": 5, "clienteId": "1787116882158", "facturaId": "0000-000-15789", "fechaEmicion": "2024-06-16", "baseImponible": 156.0, "porcentajeRetencion": 0.08, "totalRetenido": 12.48},{"id": 6, "clienteId": "1787116882158", "facturaId": "0000-000-15789", "fechaEmicion": "2024-06-16", "baseImponible": 156.0, "porcentajeRetencion": 0.08, "totalRetenido": 12.48},{"id": 7, "clienteId": "1787116882158", "facturaId": "0000-000-46987", "fechaEmicion": "2024-06-16", "baseImponible": 89.0, "porcentajeRetencion": 0.08, "totalRetenido": 7.12},{"id": 8, "clienteId": "1787116882158", "facturaId": "0000-000-1952", "fechaEmicion": "2024-06-16", "baseImponible": 150.0, "porcentajeRetencion": 0.08, "totalRetenido": 12.0},{"id": 9, "clienteId": "1787116882158", "facturaId": "0000-000-16547", "fechaEmicion": "2024-06-16", "baseImponible": 100.0, "porcentajeRetencion": 0.08, "totalRetenido": 8.0},{"id": 10, "clienteId": "1787116882158", "facturaId": "0000-000-16547", "fechaEmicion": "2024-06-16", "baseImponible": 100.0, "porcentajeRetencion": 0.08, "totalRetenido": 8.0},{"id": 11, "clienteId": "1787116882158", "facturaId": "0000-000-15478", "fechaEmicion": "2024-06-16", "baseImponible": 1455.0, "porcentajeRetencion": 0.08, "totalRetenido": 116.4},{"id": 12, "clienteId": "1787116882158", "facturaId": "0000-000-15547", "fechaEmicion": "2024-06-16", "baseImponible": 100.0, "porcentajeRetencion": 0.08, "totalRetenido": 8.0},{"id": 13, "clienteId": "1787116882158", "facturaId": "0000-000-15547", "fechaEmicion": "2024-06-16", "baseImponible": 100.0, "porcentajeRetencion": 0.08, "totalRetenido": 8.0},{"id": 14, "clienteId": "1787116882158", "facturaId": "0000-000-1952", "fechaEmicion": "2024-06-16", "baseImponible": 150.0, "porcentajeRetencion": 0.08, "totalRetenido": 12.0},{"id": 15, "clienteId": "1787116882158", "facturaId": "0000-000-18663", "fechaEmicion": "2024-06-16", "baseImponible": 150.0, "porcentajeRetencion": 0.08, "totalRetenido": 12.0}]
+[
+    {
+        "id": 2,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-45762",
+        "fechaEmicion": "2024-05-19",
+        "baseImponible": 4875.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 390.0
+    },
+    {
+        "id": 1,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-025485",
+        "fechaEmicion": "2024-05-19",
+        "baseImponible": 180.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 14.4
+    },
+    {
+        "id": 3,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-03254",
+        "fechaEmicion": "2024-06-15",
+        "baseImponible": 487.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 38.96
+    },
+    {
+        "id": 4,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-00550",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 555.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 44.4
+    },
+    {
+        "id": 5,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-15789",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 156.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 12.48
+    },
+    {
+        "id": 6,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-15789",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 156.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 12.48
+    },
+    {
+        "id": 7,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-46987",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 89.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 7.12
+    },
+    {
+        "id": 8,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-1952",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 150.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 12.0
+    },
+    {
+        "id": 9,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-16547",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 100.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 8.0
+    },
+    {
+        "id": 10,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-16547",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 100.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 8.0
+    },
+    {
+        "id": 11,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-15478",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 1455.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 116.4
+    },
+    {
+        "id": 12,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-15547",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 100.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 8.0
+    },
+    {
+        "id": 13,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-15547",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 100.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 8.0
+    },
+    {
+        "id": 14,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-1952",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 150.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 12.0
+    },
+    {
+        "id": 15,
+        "clienteId": "1787116882158",
+        "facturaId": "0000-000-18663",
+        "fechaEmicion": "2024-06-16",
+        "baseImponible": 150.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 12.0
+    },
+    {
+        "id": 16,
+        "clienteId": "176885897",
+        "facturaId": "0000-000-64695",
+        "fechaEmicion": "2024-06-17",
+        "baseImponible": 50.0,
+        "porcentajeRetencion": 0.08,
+        "totalRetenido": 4.0
+    }
+]

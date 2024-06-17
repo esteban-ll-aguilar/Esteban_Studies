@@ -201,25 +201,23 @@ class Linked_List(object):
             self.__addLast__(i)
         
             
-    def sort(self, typeOrder = 1, isacendent=1):
+    def sort(self, array, typeOrder = 1, isacendent=1):
         if self.isEmpty:
             raise LinkedEmptyException("List empty")
         else:
-            array = self.toArray
-            if isinstance(array[0], Number) or isinstance(array[0], str):
-                if typeOrder == 1:
-                    order = QuickSort()
-                elif typeOrder == 2:
-                    order = MergeSort()
-                else:
-                    order = ShellSort()
-                    
-                if isacendent == 1:
-                    array = order.sort_models_acendent(array) 
-                else:
-                    array = order.sort_models_descendent(array)
+            if typeOrder == 1:
+                order = QuickSort()
+            elif typeOrder == 2:
+                order = MergeSort()
+            else:
+                order = ShellSort()
+                
+            if isacendent == 1:
+                array = order.sort_acendent(array) 
+            else:
+                array = order.sort_descendent(array)
             
-            return self.toList(array)
+        return array
     
     def sort_models(self, attribute="_id", typeOrder = 1, isacendent=1):
         if self.isEmpty:
