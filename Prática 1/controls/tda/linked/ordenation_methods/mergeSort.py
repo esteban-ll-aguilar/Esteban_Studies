@@ -30,12 +30,9 @@ class MergeSort:
             mitad = len(array) // 2
             izquierda = array[:mitad]
             derecha = array[mitad:]
-        
             self.merge_sort_models(izquierda, attribute, isacendent)
             self.merge_sort_models(derecha, attribute, isacendent)
-            
             i = j = k = 0
-            
             if isacendent:
                 while i < len(izquierda) and j < len(derecha):
                     if getattr(izquierda[i], attribute) >= getattr(derecha[j], attribute):
@@ -54,17 +51,14 @@ class MergeSort:
                         array[k] = derecha[j]
                         j += 1
                     k += 1
-            
             while i < len(izquierda):
                 array[k] = izquierda[i]
                 i += 1
                 k += 1
-            
             while j < len(derecha):
                 array[k] = derecha[j]
                 j += 1
                 k += 1
-                
         return array
         
     def merge_sort(self, array, isacendent=True):  

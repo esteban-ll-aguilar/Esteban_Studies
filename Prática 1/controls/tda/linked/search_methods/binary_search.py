@@ -1,3 +1,4 @@
+from numbers import Number
 class BinarySearch:
     
     def search(self, array, data):
@@ -22,13 +23,16 @@ class BinarySearch:
         fin = len(array) - 1
         aux = []
         
+        if data.replace('.', '', 1).isdigit() or data.isdigit():
+            data = float(data)
+        
         while inicio <= fin:
             medio = (inicio + fin) // 2
-            if getattr(array[medio], attribute).lower() in data.lower():
+            if getattr(array[medio], attribute) == data:
                 aux.append(array[medio])
                 return aux
             else:
-                if data.lower() < getattr(array[medio], attribute).lower():
+                if data < getattr(array[medio], attribute):
                     fin = medio - 1
                 else:
                     inicio = medio + 1

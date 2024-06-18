@@ -29,23 +29,25 @@ class SequentialBinarySearch:
         inicio = 0
         fin = len(array) - 1
         arr = []
+        if data.replace('.', '', 1).isdigit() or data.isdigit():
+            data = float(data)
         while inicio <= fin:
             medio = (inicio + fin) // 2
-            if getattr(array[medio], attribute).lower() in data.lower():
+            if getattr(array[medio], attribute) == data:
                 # Recorrer hacia la izquierda
                 aux = medio
-                while aux >= 0 and getattr(array[aux], attribute).lower() in data.lower():
+                while aux >= 0 and getattr(array[aux], attribute) == data:
                     arr.append(array[aux])
                     aux -= 1
                 
                 # Recorrer hacia la derecha
                 aux = medio + 1
-                while aux < len(array) and getattr(array[aux], attribute).lower() in data.lower():
+                while aux < len(array) and getattr(array[aux], attribute) == data:
                     arr.append(array[aux])
                     aux += 1
                 return arr
             else:
-                if data.lower() < getattr(array[medio], attribute).lower():
+                if data < getattr(array[medio], attribute):
                     fin = medio - 1
                 else:
                     inicio = medio + 1

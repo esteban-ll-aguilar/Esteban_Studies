@@ -59,14 +59,12 @@ def ver_clientes():
 def clientes_ordenar(atrr,tipoOrden, isAcendent):
     pd = PersonaDaoControl()
     pd._lista.sort_models(atrr,tipoOrden, isAcendent)
-
     return make_response(jsonify({'data': pd.to_dict_list(), 'code': 200, 'message': 'Ordenado'}))
 
 @router.route('/clientes/search/<string:elemento>/<string:attr>/<int:isLineal>', methods=['GET'])
 def clientes_buscar(elemento,attr, isLineal):
     print(elemento,attr, isLineal)
     pd = PersonaDaoControl()
-    
     pd._lista.search_models_equals(elemento,attr, isLineal)
     return make_response(jsonify({'data': pd.to_dict_list(), 'code': 200, 'message': 'Ordenado'}))
 

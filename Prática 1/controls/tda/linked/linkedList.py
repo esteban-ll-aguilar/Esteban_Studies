@@ -260,7 +260,6 @@ class Linked_List(object):
         else:
             order = BinarySearch()
         array = order.search_models(array, attribute, data)
-        print (array)
         return self.toList(array)
             
             
