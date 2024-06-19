@@ -6,16 +6,15 @@ class SequentialBinarySearch:
         while inicio <= fin:
             medio = (inicio + fin) // 2
             if array[medio] == data:
-            # Expandir hacia la izquierda
+                # Expandir hacia la izquierda
                 aux = medio
                 while aux >= 0 and array[aux] == data:
-                    arr.append(aux)
+                    arr.append(array[aux])
                     aux -= 1
-                
                 # Expandir hacia la derecha
                 aux = medio + 1
                 while aux < len(array) and array[aux] == data:
-                    arr.append(aux)
+                    arr.append(array[aux])
                     aux += 1
                 return arr
             else:
@@ -29,7 +28,7 @@ class SequentialBinarySearch:
         inicio = 0
         fin = len(array) - 1
         arr = []
-        if data.replace('.', '', 1).isdigit() or data.isdigit():
+        if (data.replace('.', '', 1).isdigit() or data.isdigit()) and  len(data) < 10:
             data = float(data)
         while inicio <= fin:
             medio = (inicio + fin) // 2

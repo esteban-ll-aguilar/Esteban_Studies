@@ -23,7 +23,7 @@ class BinarySearch:
         fin = len(array) - 1
         aux = []
         
-        if data.replace('.', '', 1).isdigit() or data.isdigit():
+        if (data.replace('.', '', 1).isdigit() or data.isdigit()) and  len(data) < 10:
             data = float(data)
         
         while inicio <= fin:
