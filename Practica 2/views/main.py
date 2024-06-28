@@ -11,11 +11,10 @@ Dao adapter
 '''
 
 import sys
-from time import time
 sys.path.append('../')
 import os
 import psutil
-from random import randint
+
 
 from controls.tdaArray import TDAArray
 from controls.tda.linked.linkedList import Linked_List
@@ -24,7 +23,7 @@ from controls.tda.linked.ordenation_methods.shell import ShellSort
 from controls.tda.linked.ordenation_methods.mergeSort import MergeSort
 from controls.tda.linked.search_methods.binary_search import BinarySearch
 from controls.tda.linked.search_methods.sequiential_binary_search import SequentialBinarySearch
-
+from random import randint
 from time import time
 Linked = Linked_List()
 quick = QuickSort()

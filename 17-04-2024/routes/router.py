@@ -28,6 +28,10 @@ def ver_editar(pos):
     return render_template('nene/editar.html', data=nene)
 
 
+@router.route('/mapa')
+def mapa():
+    return render_template('mapa/grafo.html')
+
 #LOGICAS
 # GUARDAR PERSONA POST
 @router.route('/personas/guardar', methods=['POST'])

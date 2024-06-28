@@ -27,104 +27,15 @@ from controls.tda.linked.ordenation_methods.selection import Selection
 from controls.tda.linked.ordenation_methods.shell import Shell
 from controls.tda.linked.search_methods.binary_search import BinarySearch
 from controls.tda.linked.search_methods.sequiential_binary_search import SequentialBinarySearch
-
+from controls.tda.graph.graphManaged import GraphManaged
+from controls.tda.graph.graphNoManager import GraphNoManager
 import time
-
-
-
-lista = Linked_List()
-pdc = PersonaDaoControl()
-qs = QuickSort()
-sl = Selection()
-sll = Shell()
-SBS = SequentialBinarySearch()
-try:
     
-    """ for i in range(10):
-        list.append(i) """
-        #lista.add(random.randint(-100, 100))  
-    """ lista.print
-    lista.sort(1)
-    lista.print
-    
-    lista1 = Linked_List()
-    lista1.add("Cale")
-    lista1.add("Esteban")
-    lista1.add("Alejandra")
-    lista1.add("Cristian")
-    lista1.add("Juan")
 
-    lista1.print
-    lista1.sort(0)
-    lista1.print """
-
-    
-    
-    """ pdc._list().print
-    listaAux = pdc._list().sort_models("_apellidos", 1)
-    print("Lista ordenada")
-    pdc.lista.print
-    pcd = pdc.lista.toArray
-    
-    x = SBS.binary_search_sequential_models(pcd, "_apellidos", "Leon")
-    print(x)
-    pdc.__transform__( """
-    
-    """ listita = lista1.search_number_equals('c')
-    print("Listita")
-    listita.print """
-    """ list = []
-    for i in range(10):
-        list.append(random.randint(0, 10))
-    
-    print(list) """
-    #print(qs.quick_sort_acendent(list))
-    #print(sl.selection_sort_descendent(list))
-    #print(sll.shell_sort_desendent(list))
-    list = pdc._lista.print
-    list = pdc._get(2)
-    print(list)
-
-    
-    
-    
-    
-    
-except Exception as e:
-    print(e)
+graph = GraphNoManager(5)
+graph.insert_edges_weigth(0, 1, 10)
+graph.insert_edges_weigth(0, 2, 20)
+graph.insert_edges_weigth(1, 3, 20)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-""" array = TDAArray(5)
-array.save("Hola Cale")
-array.save("Hola")
-array.save("Hola 45698")
-
-print(array.check()) """
-
-
-
-
-""" c = Calculos()
-c._mru._distancia = 45.0
-c._mru._tiempo = 5.6
-c.calcular_velocidad()
-print(c._mru) """
+print(graph.paint_graph())
