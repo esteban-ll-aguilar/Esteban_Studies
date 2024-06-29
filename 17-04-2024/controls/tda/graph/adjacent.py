@@ -3,7 +3,15 @@ class Adjacent:
     def __init__(self):
         self.__weigth = nan
         self.__destination = nan
+        self.__label = nan
 
+    @property
+    def _label(self):
+        return self.__label
+
+    @_label.setter
+    def _label(self, value):
+        self.__label = value
     @property
     def _weigth(self):
         return self.__weigth
@@ -21,6 +29,7 @@ class Adjacent:
         self.__destination = value
         
         
-    
+    def __str__(self) -> str:
+        return "Destination: " + str(self.__destination) + " Weigth: " + str(self.__weigth) + " Label: " + str(self.__label)
 
         

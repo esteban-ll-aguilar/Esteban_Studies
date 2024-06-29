@@ -12,7 +12,8 @@ class GraphManaged(Graph):
         
         for i in range(0,num_vert):
             self.__listAdjacent.append(Linked_List())
-            
+
+
     @property
     def num_vertex(self):
         return self.__numVer
@@ -67,17 +68,22 @@ class GraphManaged(Graph):
             raise ArrayPositionException("Delimites out")
     
     def insert_edges_weigth_models(self, obj1, obj2, weigth):
-        if obj1._id <= self.num_vertex and obj2._id <= self.num_vertex:
-            if not self.exist_edges(obj1._id, obj2._id):
+        v1 = obj1._id -1
+        v2 = obj2._id -1
+        if v1 <= self.num_vertex and v2 <= self.num_vertex:
+            if not self.exist_edges(v1, v2):
                 self.__numEdg += 1
                 adj = Adjacent()
-                adj._destination = obj2._id
+                adj._label = obj2
+                adj._destination = v2
                 adj._weigth = weigth
-                self.__listAdjacent[obj1._id].add(adj, self.__listAdjacent[obj1._id]._length)
+                self.__listAdjacent[v1].add(adj, self.__listAdjacent[v1]._length)
+        else:
+            raise ArrayPositionException("Delimites out")
         
-    
-    
-    
+        
+        
+        
     def add_vertex(self):
         self.__numVer += 1
         self.__listAdjacent.append(Linked_List())
@@ -88,5 +94,6 @@ class GraphManaged(Graph):
         
     def adjacent(self, v1):
         return self.__listAdjacent[v1]
+    
             
     
