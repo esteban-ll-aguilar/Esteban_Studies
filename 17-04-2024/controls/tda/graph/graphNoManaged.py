@@ -5,8 +5,8 @@ from math import nan
 
 
 
-class GraphNoManager(GraphManaged):
-    def __init__(self, num_vert) -> None:
+class GraphNoManaged(GraphManaged):
+    def __init__(self, num_vert):
         super().__init__(num_vert)
         
         
