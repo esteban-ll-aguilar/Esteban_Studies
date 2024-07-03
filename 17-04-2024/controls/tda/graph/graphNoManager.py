@@ -5,12 +5,11 @@ from math import nan
 
 
 
-class GraphNoManaged(GraphManaged):
-    def __init__(self, num_vert):
+class GraphNoManager(GraphManaged):
+    def __init__(self, num_vert) -> None:
         super().__init__(num_vert)
         
-    
-    
+        
     def insert_edges_weigth(self, v1, v2, weigth):
         if v1 <= self.num_vertex and v2 <= self.num_vertex:
             if not self.exist_edges(v1, v2):

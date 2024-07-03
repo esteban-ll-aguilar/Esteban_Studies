@@ -22,8 +22,6 @@ class GraphManaged(Graph):
     
     def setNumEdges(self, number):
         self.__numEdg = number
-        
-    
     
     def exist_edges(self, v1, v2):
         band = False
@@ -65,23 +63,6 @@ class GraphManaged(Graph):
                 self.__listAdjacent[v1].add(adj, self.__listAdjacent[v1]._length)
         else:
             raise ArrayPositionException("Delimites out")
-    
-    def insert_edges_weigth_models(self, obj1, obj2, weigth):
-        if obj1._id <= self.num_vertex and obj2._id <= self.num_vertex:
-            if not self.exist_edges(obj1._id, obj2._id):
-                self.__numEdg += 1
-                adj = Adjacent()
-                adj._destination = obj2._id
-                adj._weigth = weigth
-                self.__listAdjacent[obj1._id].add(adj, self.__listAdjacent[obj1._id]._length)
-        
-    
-    
-    
-    def add_vertex(self):
-        self.__numVer += 1
-        self.__listAdjacent.append(Linked_List())
-        
         
     def insert_edges(self, v1, v2):
         self.insert_edges_weigth(v1, v2, nan)
