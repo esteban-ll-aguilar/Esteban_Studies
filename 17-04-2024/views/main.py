@@ -28,10 +28,11 @@ from controls.tda.linked.search_methods.binary_search import BinarySearch
 from controls.tda.linked.search_methods.sequiential_binary_search import SequentialBinarySearch
 from controls.tda.graph.graphManaged import GraphManaged
 from controls.tda.graph.graphNoManaged import GraphNoManaged
-from controls.tda.graph.graphLabeledManaged import GraphLabeled
+from controls.tda.graph.graphLabeledManaged import GraphLabeledManaged
+from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
 import time
 
-graph = GraphLabeled(5)
+graph = GraphLabeledNoManaged(5)
 
 pdc = PersonaDaoControl()
 pdc._persona._nombre = "Esteban"

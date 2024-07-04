@@ -3,7 +3,7 @@ from controls.exception.arrayPositionException import ArrayPositionException
 from controls.tda.graph.adjacent import Adjacent
 from math import nan
 
-class GraphLabeled(GraphManaged):
+class GraphLabeledManaged(GraphManaged):
     def __init__(self, num_vert):
         super().__init__(num_vert)
         self.__labels = []
