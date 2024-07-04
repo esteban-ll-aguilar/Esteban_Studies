@@ -25,10 +25,10 @@ class Graph:
     
     def adjacent(v1):
         raise NotImplementedError("Please implement this method")
-    def setLabel(self, vertex, label):
+    """ def setLabel(self, vertex, label):
         raise NotImplementedError("Please implement this method")
     def getLabel(self, vertex):
-        raise NotImplementedError("Please implement this method")
+        raise NotImplementedError("Please implement this method") """
     
     def __str__(self) -> str:
         out = ""
