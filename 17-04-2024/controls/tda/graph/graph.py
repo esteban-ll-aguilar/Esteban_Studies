@@ -1,9 +1,9 @@
 import sys
 import os 
-
+from math import nan
 class Graph:
     def __init__(self):
-        self.__URL = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(os.path.abspath(__file__)))))) + '/static/d3/grafo.js'
+        self.__URL = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(os.path.abspath(__file__)))))) + '/static/'
     @property
     def num_vertex(self):
         raise NotImplementedError("Please implement this method")
@@ -26,9 +26,9 @@ class Graph:
     def adjacent(v1):
         raise NotImplementedError("Please implement this method")
     """ def setLabel(self, vertex, label):
-        raise NotImplementedError("Please implement this method")
+        raise NotImplementedError("Please implement this method")"""
     def getLabel(self, vertex):
-        raise NotImplementedError("Please implement this method") """
+        raise NotImplementedError("Please implement this method")
     
     def __str__(self) -> str:
         out = ""
@@ -43,8 +43,8 @@ class Graph:
         return out
     
     @property
-    def paint_graph(self):
-        url = self.__URL
+    def paint_graph(self, file='d3/grafo.js'):
+        url = self.__URL + file
         print(url)
         js = 'var nodes = new vis.DataSet(['
         for i in range(0, self.num_vertex):
@@ -66,8 +66,8 @@ class Graph:
         a.close()
         
     @property
-    def paint_graph_labeled(self):
-        url = self.__URL
+    def paint_graph_labeled(self, file='d3/grafo.js'):
+        url = self.__URL + file
         js = 'var nodes = new vis.DataSet(['
         for i in range(0, self.num_vertex):
             js+= '\n{id:'+str(i+1)+', label: "'+str(self.getLabel(i))+'"},'
@@ -87,7 +87,23 @@ class Graph:
         a.write(js)
         a.close()
         
-    
+    def paint_map_labeled(self, file='d3/mapa.js'):
+        url = self.__URL + file
+        """ var marker = L.marker([45565, -0.09]).addTo(map);
+        marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup(); """
+        js = ''
+        for i in range(0, self.num_vertex):
+            obj = self.getLabel(i)
+            print(obj)
+            if obj is nan:
+                js+= f'var {obj} = L.marker([0,0]).addTo(map);\n'
+            else:
+                js+= f'var {(obj._nombre).replace(" ","")} = L.marker(['+str(obj._latitud)+','+str(obj._longitud )+']).addTo(map);\n'
+                js+= f'{(obj._nombre).replace(" ","")}.bindPopup("<b>{obj._nombre}</b><br>{obj._direccion}").openPopup();\n'
+            
+        a = open(url , 'w')
+        a.write(js)
+        a.close()
         
     @property
     def print_graph(self):

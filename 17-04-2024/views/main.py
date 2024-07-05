@@ -32,7 +32,7 @@ from controls.tda.graph.graphLabeledManaged import GraphLabeledManaged
 from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
 import time
 
-graph = GraphLabeledNoManaged(5)
+graph = GraphLabeledManaged(5)
 
 pdc = PersonaDaoControl()
 pdc._persona._nombre = "Esteban"
@@ -43,7 +43,8 @@ graph.labelVertex(0, pdc._persona)
 pdc._persona = None
 pdc._persona._nombre = "Esteban"
 pdc._persona._apellidos = "Garcia"
-graph.labelVertex(0, pdc._persona)
+graph.labelVertex(2, pdc._persona)
 
 
 print(graph.getVertex(pdc._persona))
+graph.paint_map_labeled()
