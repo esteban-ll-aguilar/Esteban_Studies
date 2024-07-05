@@ -7,7 +7,6 @@ router = Blueprint('router', __name__)
 #get para presentar los datos
 #post para enviar los datos, modificar y iniciar sesion
 # monolito
-GRAPH = GraphLabeledManaged(5)
 
 @router.route('/')
 def home():
@@ -90,8 +89,9 @@ def negocio_guardar():
     negocio._negocio._longitud = data['longitud']
     negocio._negocio._latitud = data['latitud']
     
-    GRAPH.labelVertex(negocio._negocio._id-1, negocio._negocio)
-    GRAPH.paint_map_labeled()
+    graph = GraphLabeledManaged(5)
+    graph.labelVertex(negocio._negocio._id-1, negocio._negocio)
+    graph.paint_map_labeled()
     negocio.save
     
     return redirect('/negocio', code=302)

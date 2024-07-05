@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
         crossorigin=""/>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-search/dist/leaflet-search.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
         <!-- CSS FILES -->                
         <link rel="preconnect" href="https://fonts.googleapis.com">
         
@@ -27,7 +29,8 @@
         <link href="{{ url_for('static', filename='css/tooplate-barista.css')}}" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <style>
-            #map { height: 180px; }
+            #map { height: 180px; 
+                }
         </style>
 <!--
 
@@ -206,13 +209,19 @@ Bootstrap 5 HTML CSS Template
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin="">
         </script>
+        <script src="https://unpkg.com/leaflet-search/dist/leaflet-search.min.js"></script>
+        <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
         <script>
-            var map = L.map('map').setView([0, 0], 0);
+            var map = L.map('map').setView([-3.995, -79.204], 5);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+            }).addTo(map);
         </script>
         <script>
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
             }).addTo(map);
+
 
         </script>
         {% block scripts %}{% endblock %}

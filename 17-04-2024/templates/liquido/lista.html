@@ -7,7 +7,7 @@
                                 <div class="text-center mb-4 pb-lg-2">
                                     <em class="text-white">Universidad Nacional de Loja</em>
 
-                                    <h2 class="text-white">Lista de Nenes</h2>
+                                    <h2 class="text-white">Lista de Negocios</h2>
                                     <a href="negocio/formulario" class="btn custom-btn custom-border-btn">Formulario</a>
                                 </div>
                                 <div id="map"></div>
@@ -18,7 +18,9 @@
                                             <tr>
                                                 <th>Nombre</th>
                                                 <th>Direccion</th>
-                                                <th>Acciones</th>
+                                                <th>Horario</th>
+                                                <th>Longitud</th>
+                                                <th>Latitud</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -26,6 +28,9 @@
                                             <tr>
                                                 <td>{{ item.nombre }}</td>
                                                 <td>{{ item.direccion }}</td>
+                                                <td>{{ item.horario }}</td>
+                                                <td>{{ item.longitud }}</td>
+                                                <td>{{ item.latitud }}</td>
                                                 <!--<td>
                                                     <a href="negocio/editar/{{ item.id }}" class="btn custom-btn custom-border-btn ">Editar</a>
                                                 </td>-->
