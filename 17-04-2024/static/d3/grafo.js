@@ -1,9 +1,7 @@
 var nodes = new vis.DataSet([
-{id:1, label: "0 El Dragon"},
+{id:1, label: "3 El Esteban"},
 {id:2, label: "nan"},
-{id:3, label: "nan"},
-{id:4, label: "nan"},
-{id:5, label: "nan"}]);
+{id:3, label: "nan"}]);
 
  var edges = new vis.DataSet([]);
 var container = document.getElementById("mynetwork"); 

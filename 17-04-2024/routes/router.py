@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, make_response, request, render_template, redirect, abort
 from controls.personaDaoControl import PersonaDaoControl
 from controls.liquido.negocioDaoControl import NegocioDaoControl
-from controls.tda.graph.graphLabeledManaged import GraphLabeledManaged
+from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
+from controls.liquido.negocioGrafo import NegocioGrafo
 from flask_cors import CORS
 router = Blueprint('router', __name__)
 #get para presentar los datos
@@ -38,6 +39,20 @@ def ver_editar(pos):
 def mapa():
     return render_template('mapa/grafo.html')
 
+@router.route('/negocio/grafo_negocio')
+def grafo_negocio():
+    ng = NegocioGrafo()
+    ng.create_graph()
+    return render_template('mapa/grafo.html' )
+
+
+@router.route('/negocio/grafo_ver_admin')
+def grafo_ver_admin():
+    pd = NegocioDaoControl()
+    list = pd._lista
+    if not list.isEmpty:
+        list.sort_models('_nombre',2)    
+    return render_template('liquido/grafo.html', lista=pd.to_dict_lista())
 #LOGICAS
 # GUARDAR PERSONA POST
 @router.route('/personas/guardar', methods=['POST'])
@@ -61,9 +76,12 @@ def guardar_persona():
 
 #NEGOCIO
 @router.route('/negocio')
-def ver_liquido():
+def lista_negocios():
     pd = NegocioDaoControl()
-    return render_template('liquido/lista.html', lista=pd.to_dict())
+    list = pd._lista
+    if not list.isEmpty:
+        list.sort_models('_nombre')
+    return render_template('liquido/lista.html', lista=pd.to_dict_lista())
 
 @router.route('/negocio/editar/<pos>')
 def ver_negocio_editar(pos):
@@ -75,6 +93,15 @@ def ver_negocio_editar(pos):
 @router.route('/negocio/formulario')
 def ver_negocio_guardar():
     return render_template('liquido/guardar.html')
+
+@router.route('/negocio/grafo_negocio/agregar_adyacencia', methods=['POST'])
+def agregar_adyacencia():
+    data = request.form
+    print(data)
+    ng = NegocioGrafo()
+    ng.create_graph()
+    ng._grafo.addEdge(int(data['origen']), int(data['destino']))
+    return redirect('/negocio/grafo_negocio', code=302)
 
 @router.route('/negocio/guardar', methods=['POST'])
 def negocio_guardar():
@@ -88,11 +115,8 @@ def negocio_guardar():
     negocio._negocio._horario = data['horario']
     negocio._negocio._longitud = data['longitud']
     negocio._negocio._latitud = data['latitud']
-    
-    graph = GraphLabeledManaged(5)
-    graph.labelVertex(negocio._negocio._id-1, negocio._negocio)
-    graph.paint_map_labeled()
     negocio.save
+    
     
     return redirect('/negocio', code=302)
 

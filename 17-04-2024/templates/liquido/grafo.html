@@ -1,0 +1,84 @@
+{% extends "templateL.html" %}
+
+{% block content %}
+
+
+                            <form class="custom-form booking-form text-center"  action="#" method="post" role="form">
+                                <div class="text-center mb-4 pb-lg-2">
+                                    <em class="text-white">Universidad Nacional de Loja</em>
+
+                                    <h2 class="text-white">Lista de Negocios</h2>
+                                    <a href="/negocio" class="btn custom-btn custom-border-btn">Regresar</a>
+                                    <a href="/negocio/grafo_negocio" class="btn custom-btn custom-border-btn">Negocio Grafo</a>
+                                </div>
+                                <!--<div id="map"></div>-->
+                                <div class="booking-form-body">
+                                        <div class="card bg-black">
+                                            <div class="card-header">
+                                                <h5 class="text-white">Agregar Adyacencias</h5>
+                                                <form class="custom-form booking-form" method="post" action="/negocio/grafo_negocio/agregar_adyacencia" role="form">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-12">
+                                                                <span class="text-white">Origen</span>
+                                                                <select class="form-control" id="origen" name="origen">
+                                                                    {% for item in lista %}
+                                                                        <option value="{{ item.id }}">{{ item.nombre }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-lg-6 col-12">
+                                                                <span class="text-white">Destino</span>
+                                                                <select class="form-control" id="origen" name="origen">
+                                                                    {% for item in lista %}
+                                                                        <option value="{{ item.id }}">{{ item.nombre }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" id="guardar" class="btn custom-btn custom-border-btn">Agregar</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <table class="table  table-bordered text-white" id="tabla">
+                                        <thead>
+                                            <tr>
+                                                <th>-------</th>
+                                                {% for item in lista %}
+                                                    <th>{{ item.nombre }}</th>
+                                                {% endfor %}
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in lista %}
+                                            <tr>
+                                                <td>{{ item.nombre }}</td>
+                                                <!--<td>
+                                                    <a href="negocio/editar/{{ item.id }}" class="btn custom-btn custom-border-btn ">Editar</a>
+                                                </td>-->
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+
+
+
+                            
+{% endblock %}
+
+{% block scripts %}
+<script>
+    /*var marker = L.marker([45565, -0.09]).addTo(map);
+    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+    var marker2 = L.marker([51.5, -0.09]).addTo(map);
+    marker2.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();*/
+    
+</script>
+<script src="{{ url_for('static', filename='d3/mapa.js') }}"></script>
+{% endblock %}

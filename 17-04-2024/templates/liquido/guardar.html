@@ -21,19 +21,20 @@
                                         <div class="col-lg-6 col-12">
                                             <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
                                         </div>
-                                        <div class="col-lg-6 col-12">
-                                            <input type="text" name="direccion" class="form-control" placeholder="Direccion" required>
-                                        </div>
+                                        
 
                                         <div class="col-lg-6 col-12">
                                             <input type="text" name="horario" class="form-control" placeholder="Horario" required maxlength="10">
                                         </div>
                                         <div class="col-lg-6 col-12">
-                                            <input type="text" name="longitud" id="longitud" class="form-control" placeholder="Longitud" required>
+                                            <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion" required readonly>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <input type="text" name="longitud" id="longitud" class="form-control" placeholder="Longitud" required readonly>
                                         </div>
 
                                         <div class="col-lg-6 col-12">
-                                            <input type="text" name="latitud" id="latitud" class="form-control" placeholder="Latitud" required>
+                                            <input type="text" name="latitud" id="latitud" class="form-control" placeholder="Latitud" required readonly>
                                         </div>
                                         <div id="map"></div>
                                         
@@ -56,6 +57,7 @@
             </div>
 
 {% endblock %}
+
 {% block scripts %}
 <script>
     //hacer un marker dinamico que el usuario pueda poner un pontero, mostrar la latitud y longitud en el Formulario
@@ -64,40 +66,35 @@
     }).addTo(map);
 
     function updateLatLng(lat, lng) {
-        document.getElementById('latitud').value = lat;
-        document.getElementById('longitud').value = lng;
+        document.getElementById('latitud').value = lat.toFixed(6);
+        document.getElementById('longitud').value = lng.toFixed(6);
     }
+    
+    function updateDireccion(lat, lng) {
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('direccion').value = data.display_name;
+            })
+            .catch(error => {
+                console.error('Error fetching address:', error);
+                document.getElementById('direccion').value = 'Dirección no disponible';
+            });
+    }
+
     updateLatLng(-3.995, -79.204);
      // Escuchar el evento 'dragend' para actualizar la latitud y longitud en el formulario
      marker.on('dragend', function (e) {
         var position = marker.getLatLng();
         updateLatLng(position.lat, position.lng);
+        updateDireccion(position.lat, position.lng);
     });
 
 
     // Actualizar los campos del formulario con la posición inicial
     updateLatLng(-3.995, -79.204);
-    // Escuchar el evento 'dragend' para actualizar la latitud y longitud en el formulario
-    marker.on('dragend', function (e) {
-        var position = marker.getLatLng();
-        updateLatLng(position.lat, position.lng);
-    });
-    // Agregar el control de búsqueda
-    var searchControl = new L.Control.Search({
-    url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
-        jsonpParam: 'json_callback',
-        propertyName: 'display_name',
-        propertyLoc: ['lat', 'lon'],
-        marker: false,
-        moveToLocation: function(latlng, title, map) {
-            // Mueve el mapa y el marcador a la ubicación buscada
-            map.setView(latlng, 13); // Puedes ajustar el nivel de zoom aquí
-            marker.setLatLng(latlng);
-            updateLatLng(latlng.lat, latlng.lng);
-        }
-    });
-    // Añadir el control de búsqueda al mapa
-    map.addControl(searchControl);
+    
+    
 </script
 {% endblock %}
 

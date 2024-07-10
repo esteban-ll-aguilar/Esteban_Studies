@@ -30,6 +30,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <style>
             #map { height: 180px; 
+                border-radius: 30px;
                 }
         </style>
 <!--
@@ -221,8 +222,25 @@ Bootstrap 5 HTML CSS Template
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
             }).addTo(map);
+            
+            // Agregar el control de búsqueda
+    var searchControl = new L.Control.Search({
+        url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
+            jsonpParam: 'json_callback',
+            propertyName: 'display_name',
+            propertyLoc: ['lat', 'lon'],
+            marker: false,
+            moveToLocation: function(latlng, title, map) {
+                // Mueve el mapa y el marcador a la ubicación buscada
+                map.setView(latlng, 13); // Puedes ajustar el nivel de zoom aquí
+                marker.setLatLng(latlng);
+                updateLatLng(latlng.lat, latlng.lng);
+            }
+        });
+        // Añadir el control de búsqueda al mapa
+        map.addControl(searchControl);
 
-
+        
         </script>
         {% block scripts %}{% endblock %}
     </body>

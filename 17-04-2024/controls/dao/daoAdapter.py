@@ -41,6 +41,12 @@ class DaoAdapter(Generic[T]):
         for i in range(0, self.lista._length):
             aux.append(self.lista.get(i).serialize)
         return aux
+    
+    def to_dict_lista(self):
+        aux = []
+        for i in range(0, self.lista._length):
+            aux.append(self.lista.get(i).serialize)
+        return aux
 
             
     def _get(self, id):
