@@ -31,10 +31,11 @@ from controls.tda.graph.graphNoManaged import GraphNoManaged
 from controls.tda.graph.graphLabeledManaged import GraphLabeledManaged
 from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
 from controls.liquido.negocioGrafo import NegocioGrafo
+from controls.tda.tree.treeNumber import TreeNumber
 import time
 
 
-negocio = NegocioGrafo()
+""" negocio = NegocioGrafo()
 negocio.create_graph()
 graph = negocio.get_graph
 graph.insert_edges_weigth_E('1 El Dragon', '2 hola', 2)
@@ -42,4 +43,14 @@ graph.insert_edges_weigth_E('1 El Dragon', '2 hola', 5)
 graph.paint_graph_labeled
 graph.print_graph_labeled
 negocio.save_graph
-#graph.save_graph_labeled('grafo.json')
+ """#graph.save_graph_labeled('grafo.json')
+aux = "100,7,130,50,80,110,150,45,60,75,85,105,115,145,155,23"
+nodeData =  aux.split(",")
+tree = TreeNumber()
+
+for dat in nodeData:
+    tree.insert(int(dat))
+
+print(tree.getNroNodes)
+print(tree.getLevels)
+print(tree.getHeigth)
