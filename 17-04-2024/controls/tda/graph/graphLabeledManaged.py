@@ -8,6 +8,7 @@ class GraphLabeledManaged(GraphManaged):
         super().__init__(num_vert)
         self.__labels = []
         self.__labelsVertex = {}
+        
         for i in range(0, num_vert):
             self.__labels.append(nan)
             
@@ -32,10 +33,12 @@ class GraphLabeledManaged(GraphManaged):
     def labelVertex(self, vertex, label):
         self.__labels[vertex] = label
         self.__labelsVertex[str(label)] = vertex
-        print(self.__labelsVertex)
+        #print(self.__labels)
+        #print(self.__labelsVertex)
         
     def getLabel(self, vertex):
         return self.__labels[vertex]
+    
     
     def exist_edges_E(self, label1, label2):
         v = self.getVertex(label1)

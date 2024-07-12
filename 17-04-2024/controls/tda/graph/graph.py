@@ -3,7 +3,7 @@ import os
 from math import nan
 class Graph:
     def __init__(self):
-        self.__URL = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(os.path.abspath(__file__)))))) + '/static/'
+        self.__URL = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(os.path.abspath(__file__))))))
     @property
     def num_vertex(self):
         raise NotImplementedError("Please implement this method")
@@ -30,6 +30,9 @@ class Graph:
     def getLabel(self, vertex):
         raise NotImplementedError("Please implement this method")
     
+    def getVertex(self, label):
+        raise NotImplementedError("Please implement this method")
+    
     def __str__(self) -> str:
         out = ""
         for i in range(0, self.num_vertex):
@@ -44,7 +47,7 @@ class Graph:
     
     @property
     def paint_graph(self, file='d3/grafo.js'):
-        url = self.__URL + file
+        url = self.__URL +'/static/'+ file
         print(url)
         js = 'var nodes = new vis.DataSet(['
         for i in range(0, self.num_vertex):
@@ -67,10 +70,10 @@ class Graph:
         
     @property
     def paint_graph_labeled(self, file='d3/grafo.js'):
-        url = self.__URL + file
+        url = self.__URL +'/static/'+ file
         js = 'var nodes = new vis.DataSet(['
         for i in range(0, self.num_vertex):
-            js+= '\n{id:'+str(i+1)+', label: "'+str(self.getLabel(i))+'"},'
+            js+= '\n{id:'+str(i)+', label: "'+str(self.getLabel(i))+'"},'
         js = js[:-1]
         js += ']);\n'
         
@@ -80,27 +83,9 @@ class Graph:
             if not adjs.isEmpty:
                 for j in range(0, adjs._length):
                     adj = adjs.get(j)
-                    js += '{\nfrom: '+str(i+1)+', to: '+str(adj._destination)+', label: "'+str(adj._weigth)+'"},'
+                    js += '{\nfrom: '+str(i)+', to: '+str(adj._destination)+', label: "'+str(adj._weigth)+'"},'
         js += ']);\n'
         js += 'var container = document.getElementById("mynetwork"); \n var data = { nodes: nodes, edges: edges, }; \n var options = {}; \nvar network = new vis.Network(container, data, options);'
-        a = open(url , 'w')
-        a.write(js)
-        a.close()
-        
-    def paint_map_labeled(self, file='d3/mapa.js'):
-        url = self.__URL + file
-        """ var marker = L.marker([45565, -0.09]).addTo(map);
-        marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup(); """
-        js = ''
-        for i in range(0, self.num_vertex):
-            obj = self.getLabel(i)
-            print(obj)
-            if obj is nan:
-                js+= f'var {obj} = L.marker([0,0]).addTo(map);\n'
-            else:
-                js+= f'var {(obj._nombre).replace(" ","")} = L.marker(['+str(obj._latitud)+','+str(obj._longitud )+']).addTo(map);\n'
-                js+= f'{(obj._nombre).replace(" ","")}.bindPopup("<b>{obj._nombre}</b><br>{obj._direccion}").openPopup();\n'
-            
         a = open(url , 'w')
         a.write(js)
         a.close()
@@ -119,5 +104,36 @@ class Graph:
                 for j in range(0, adjs._length):
                     adj = adjs.get(j)
                     out += "ady V" + str(adj._destination+1) + " weigth " + str(adj._weigth) + " -> \n"
-            
         print(out)
+
+    def __transform__(self):
+        json = "["
+        for i in range(0, self.num_vertex):
+            adjs = self.adjacent(i)
+            json += '\n\t{\n\t\t"labelId":' + f"{str(self.getVertex(self.getLabel(i)))},"
+            json += '\n\t\t"label": "' + str(self.getLabel(i)) + '",'
+            if not adjs.isEmpty:
+                json += '\n\t\t"destinations": ['
+                for j in range(0, adjs._length):
+                    adj = adjs.get(j)
+                    json += '\n\t\t\t{\n\t\t\t\t"from":'+str(i)+', \n\t\t\t\t"to":'+str(adj._destination)+'\n\t\t\t},'
+                json = json[:-1]
+                json += '\n\t\t]'
+                json += '\n\t},'
+            else:
+                json += '\n\t\t"destinations": []\n'
+                json = json[:-1]
+                json +='\n\t},'
+            adjs = self.adjacent(i)
+        json = json[:-1]
+        json += "\n]"
+        
+        return json
+    
+    def save_graph_labeled(self, file='grafo.json'):
+        url = self.__URL +'/data/'+file
+        a = open(url , 'w')
+        a.write(self.__transform__())
+        a.close()
+        
+        

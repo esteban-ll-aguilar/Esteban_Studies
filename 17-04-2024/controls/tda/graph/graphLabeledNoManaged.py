@@ -21,3 +21,18 @@ class GraphLabeledNoManaged(GraphLabeledManaged):
             self.insert_edges_weigth(v2, v, weigth) 
         else:
             raise ArrayPositionException("No existen los vertices")
+        
+    def insert_edges_E(self, label1, label2):
+        self.insert_edges_weigth_E(label1, label2, nan)
+        
+    def labelVertex(self, vertex, label):
+        return super().labelVertex(vertex, label)
+    
+    def getVertex(self, label):
+        return super().getVertex(label)
+    
+    def getLabel(self, vertex):
+        return super().getLabel(vertex)
+    
+    
+    

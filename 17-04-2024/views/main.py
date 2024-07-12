@@ -30,21 +30,16 @@ from controls.tda.graph.graphManaged import GraphManaged
 from controls.tda.graph.graphNoManaged import GraphNoManaged
 from controls.tda.graph.graphLabeledManaged import GraphLabeledManaged
 from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
+from controls.liquido.negocioGrafo import NegocioGrafo
 import time
 
-graph = GraphLabeledManaged(5)
 
-pdc = PersonaDaoControl()
-pdc._persona._nombre = "Esteban"
-pdc._persona._apellidos = "Garcia"
-graph.labelVertex(0, pdc._persona)
-
-
-pdc._persona = None
-pdc._persona._nombre = "Esteban"
-pdc._persona._apellidos = "Garcia"
-graph.labelVertex(2, pdc._persona)
-
-
-print(graph.getVertex(pdc._persona))
-graph.paint_map_labeled()
+negocio = NegocioGrafo()
+negocio.create_graph()
+graph = negocio.get_graph
+graph.insert_edges_weigth_E('1 El Dragon', '2 hola', 2)
+graph.insert_edges_weigth_E('1 El Dragon', '2 hola', 5)
+graph.paint_graph_labeled
+graph.print_graph_labeled
+negocio.save_graph
+#graph.save_graph_labeled('grafo.json')
