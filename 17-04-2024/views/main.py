@@ -35,16 +35,24 @@ from controls.tda.tree.treeNumber import TreeNumber
 import time
 
 
-""" negocio = NegocioGrafo()
-negocio.create_graph()
+negocio = NegocioGrafo()
+#negocio.create_graph()
 graph = negocio.get_graph
-graph.insert_edges_weigth_E('1 El Dragon', '2 hola', 2)
-graph.insert_edges_weigth_E('1 El Dragon', '2 hola', 5)
-graph.paint_graph_labeled
+print(negocio.fileExists)
+
+graph.insert_edges_weigth(0, 1, 2)
+graph.insert_edges_weigth(0, 2, 5)
+
+""" graph.insert_edges_weigth_E('1 El Dragon', '2 hola', 5)
+graph.insert_edges_weigth_E('1 El Dragon', '3 El Esteban', 7)
+graph.insert_edges_weigth_E('2 hola', '3 El Esteban', 9)
+graph.insert_edges_weigth_E('2 hola', '1 El Dragon', 11) """
+
 graph.print_graph_labeled
+graph.paint_graph_labeled
 negocio.save_graph
- """#graph.save_graph_labeled('grafo.json')
-aux = "100,7,130,50,80,110,150,45,60,75,85,105,115,145,155,23"
+
+""" aux = "100,7,130,50,80,110,150,45,60,75,85,105,115,145,155,23"
 nodeData =  aux.split(",")
 tree = TreeNumber()
 
@@ -53,4 +61,4 @@ for dat in nodeData:
 
 print(tree.getNroNodes)
 print(tree.getLevels)
-print(tree.getHeigth)
+print(tree.getHeigth) """

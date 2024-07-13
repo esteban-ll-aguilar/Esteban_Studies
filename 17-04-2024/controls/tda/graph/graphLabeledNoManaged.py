@@ -34,5 +34,9 @@ class GraphLabeledNoManaged(GraphLabeledManaged):
     def getLabel(self, vertex):
         return super().getLabel(vertex)
     
+    def recontruct_graph(self, file='grafo.json', atype: object = None):
+        return super().recontruct_graph(file=file, atype=GraphLabeledNoManaged)
+    
+    
     
     

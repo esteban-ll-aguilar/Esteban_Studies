@@ -72,7 +72,9 @@ class GraphLabeledManaged(GraphManaged):
         raise ArrayPositionException("No se encontro el vertice")
     
     
-    
+    def recontruct_graph(self, file='grafo.json', atype: object=None):
+        return super().recontruct_graph(file=file, atype=GraphLabeledManaged)
+        
     
     
 #python -m pydoct -w Esteban_Studies/17-04-2024/controls/tda/graph/graphLabeled.py

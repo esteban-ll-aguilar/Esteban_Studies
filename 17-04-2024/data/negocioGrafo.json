@@ -1,0 +1,35 @@
+[
+	{
+		"labelId":0,
+		"label": "1 El Dragon",
+		"destinations": [
+			{
+				"from":0, 
+				"to":1
+			},
+			{
+				"from":0, 
+				"to":2
+			}
+		]
+	},
+	{
+		"labelId":1,
+		"label": "2 hola",
+		"destinations": [
+			{
+				"from":1, 
+				"to":2
+			},
+			{
+				"from":1, 
+				"to":0
+			}
+		]
+	},
+	{
+		"labelId":2,
+		"label": "3 El Esteban",
+		"destinations": []
+	}
+]

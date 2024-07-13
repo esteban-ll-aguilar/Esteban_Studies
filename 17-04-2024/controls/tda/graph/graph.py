@@ -1,5 +1,5 @@
 import sys
-import os 
+import os , json
 from math import nan
 class Graph:
     def __init__(self):
@@ -32,6 +32,11 @@ class Graph:
     
     def getVertex(self, label):
         raise NotImplementedError("Please implement this method")
+    
+    def fileExists(self, file):
+        url = self.__URL +'/data/'+file
+        return os.path.exists(url)
+    
     
     def __str__(self) -> str:
         out = ""
@@ -106,6 +111,9 @@ class Graph:
                     out += "ady V" + str(adj._destination+1) + " weigth " + str(adj._weigth) + " -> \n"
         print(out)
 
+
+    
+
     def __transform__(self):
         json = "["
         for i in range(0, self.num_vertex):
@@ -116,7 +124,7 @@ class Graph:
                 json += '\n\t\t"destinations": ['
                 for j in range(0, adjs._length):
                     adj = adjs.get(j)
-                    json += '\n\t\t\t{\n\t\t\t\t"from":'+str(i)+', \n\t\t\t\t"to":'+str(adj._destination)+'\n\t\t\t},'
+                    json += '\n\t\t\t{\n\t\t\t\t"from":'+f"{str(self.getVertex(self.getLabel(i)))}"+', \n\t\t\t\t"to":'+str(adj._destination)+'\n\t\t\t},'
                 json = json[:-1]
                 json += '\n\t\t]'
                 json += '\n\t},'
@@ -135,5 +143,27 @@ class Graph:
         a = open(url , 'w')
         a.write(self.__transform__())
         a.close()
+        
+    def recontruct_graph(self, file='grafo.json', atype: object = None):
+        url = self.__URL +'/data/'+file
+        a = open(url , 'r')
+        data = json.load(a)
+        a.close()
+        newGraph = atype(len(data))
+        for item in data:
+            print(item)
+            newGraph.labelVertex(item['labelId'], item['label'])
+        
+        for item in data:
+            destination = item['destinations']
+            print(destination)
+            if destination != []:
+                for dest in item['destinations']:
+                    newGraph.insert_edges(dest['from'], dest['to'])
+        return newGraph
+        
+        
+    
+        
         
         

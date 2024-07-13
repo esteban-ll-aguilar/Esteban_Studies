@@ -42,7 +42,7 @@ def mapa():
 @router.route('/negocio/grafo_negocio')
 def grafo_negocio():
     ng = NegocioGrafo()
-    ng.create_graph()
+    ng.get_graph
     return render_template('mapa/grafo.html' )
 
 
@@ -99,8 +99,7 @@ def agregar_adyacencia():
     data = request.form
     print(data)
     ng = NegocioGrafo()
-    ng.create_graph()
-    ng._grafo.addEdge(int(data['origen']), int(data['destino']))
+    ng.get_graph
     return redirect('/negocio/grafo_negocio', code=302)
 
 @router.route('/negocio/guardar', methods=['POST'])

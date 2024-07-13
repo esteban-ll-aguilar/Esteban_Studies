@@ -4,8 +4,10 @@ var nodes = new vis.DataSet([
 {id:2, label: "3 El Esteban"}]);
 
  var edges = new vis.DataSet([{
-from: 0, to: 1, label: "2"},{
-from: 1, to: 0, label: "2"},]);
+from: 0, to: 1, label: "nan"},{
+from: 0, to: 2, label: "nan"},{
+from: 1, to: 2, label: "nan"},{
+from: 1, to: 0, label: "nan"},]);
 var container = document.getElementById("mynetwork"); 
  var data = { nodes: nodes, edges: edges, }; 
  var options = {}; 
