@@ -167,7 +167,6 @@ class Graph:
         
         for item in data:
             destination = item['destinations']
-            print(destination)
             if destination != []:
                 for dest in item['destinations']:
                     distacia = calculate_weigth_geograpics(modelos[dest['from']], modelos[dest['to']])
@@ -175,6 +174,7 @@ class Graph:
         return newGraph
     
     def obtain_weigths(self, graph:object =None, file='grafo.json'):
+        print(graph)
         out = []
         for i in range(0, graph.num_vertex):
             info = {}
@@ -190,7 +190,6 @@ class Graph:
                         'weigth': adj._weigth
                     })
                 out.append(info)
-        print(out)
         return out
             
         
@@ -211,7 +210,6 @@ def calculate_weigth_geograpics(model1: object = None, model2: object = None):
     dlat = lat2 - lat1
     
     distancia = geopy.distance.distance((lat1, lon1), (lat2, lon2)).km
-    print("Distancia calculada con geopy: " + str(distancia))
     return round(distancia,2)
             
         
