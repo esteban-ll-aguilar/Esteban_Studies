@@ -66,6 +66,10 @@
 			{
 				"from":4, 
 				"to":2
+			},
+			{
+				"from":4, 
+				"to":6
 			}
 		]
 	},
@@ -80,6 +84,16 @@
 			{
 				"from":5, 
 				"to":2
+			}
+		]
+	},
+	{
+		"labelId":6,
+		"label": "7 Solene",
+		"destinations": [
+			{
+				"from":6, 
+				"to":4
 			}
 		]
 	}

@@ -93,7 +93,7 @@ def grafo_ver_admin():
     negociograph.get_graph
     list = negocio._lista
     if not list.isEmpty:
-        list.sort_models('_nombre',2)    
+        list.sort_models('_nombre')    
     return render_template('liquido/grafo.html', negocios=negocio.to_dict_lista(), grafonegocio=negociograph.obtainWeigths)
     #return jsonify(negocio.to_dict_lista())
 

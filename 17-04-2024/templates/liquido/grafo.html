@@ -53,7 +53,7 @@
                 <!--[{'labelId': 1, 'destinations': [{'from': 1, 'to': 4, 'weigth': 200.72}]-->
                 {% for item in negocios %}
                     <tr class="text-white">
-                        <td>{{ item.nombre }}</td>
+                        <td><b>{{ item.nombre }}</b></td>
                         {% for negociografo in grafonegocio %}
                             {% if negociografo.labelId == item.id %}
                                 {% for negocio in negocios %}
