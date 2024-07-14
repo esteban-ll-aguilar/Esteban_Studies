@@ -1,5 +1,7 @@
 from controls.tda.graph.graphNoManaged import GraphNoManaged
 import numpy as np
+#algoritmo obtenido del ejemplo en c#
+#https://elemarjr.com/clube-de-estudos/artigos/algoritmo-de-dijkstra-entendendo-o-caminho-minimo-em-grafos-ponderados/
 class DijktraAlgorithm:
     def __init__(self, graph: object = None, start: int = 0, end: int = 0):
         self.__graph = graph

@@ -41,7 +41,7 @@ negocio = NegocioGrafo()
 graph = negocio.get_graph
 graph.print_graph_labeled
 
-""" dijktra = DijktraAlgorithm(graph,start=4, end=1)
+""" dijktra = DijktraAlgorithm(graph,start=1, end=2)
 dijktra.dijktra """
 
 #En clase 
