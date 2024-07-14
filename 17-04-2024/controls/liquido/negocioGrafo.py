@@ -1,4 +1,5 @@
 from controls.tda.graph.graphLabeledNoManaged import GraphLabeledManaged
+from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
 from controls.liquido.negocioDaoControl import NegocioDaoControl
 import os, sys
 class NegocioGrafo:
@@ -28,20 +29,6 @@ class NegocioGrafo:
         self.__grafo.paint_graph_labeled
         return self.__grafo
         
-        
-        if self.__grafo is None:
-            if self.fileExists:
-                self.__grafo = GraphLabeledManaged(self.__ndao._lista._length)
-                self.__grafo.paint_graph_labeled
-                return self.__grafo
-            return self.__grafo
-    
-    @property
-    def fileExists(self):
-        url  = r'C:\Users\esteb\OneDrive\Escritorio\Estudios_Esteban\3-Ciclo\Estructura de Datos\Esteban_Studies\17-04-2024\data'
-        url += '/'+self.__name
-        #self.__grafo.fileExists(file=self.__name)
-        return os.path.exists(url)
     @property
     def save_graph(self):
         self.__grafo.save_graph_labeled(file=self.__name)

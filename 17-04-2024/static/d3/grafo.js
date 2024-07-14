@@ -7,14 +7,11 @@ var nodes = new vis.DataSet([
 {id:5, label: "6 Mishel"}]);
 
  var edges = new vis.DataSet([{
-from: 0, to: 1, label: "204.02"},{
-from: 0, to: 2, label: "160.23"},{
-from: 1, to: 2, label: "46.49"},{
-from: 1, to: 0, label: "204.02"},{
-from: 1, to: 4, label: "13.43"},{
-from: 2, to: 3, label: "46.13"},{
-from: 3, to: 4, label: "13.33"},{
-from: 5, to: 2, label: "70.09"},]);
+from: 2, to: 5, label: "70.09"},{
+from: 2, to: 0, label: "160.23"},{
+from: 3, to: 5, label: "55.22"},{
+from: 5, to: 2, label: "70.09"},{
+from: 5, to: 3, label: "55.22"},]);
 var container = document.getElementById("mynetwork"); 
  var data = { nodes: nodes, edges: edges, }; 
  var options = {}; 
