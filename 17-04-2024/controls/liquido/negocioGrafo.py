@@ -12,7 +12,7 @@ class NegocioGrafo:
     def create_graph(self):
         list = self.__ndao._lista
         if list._length > 0:
-            self.__grafo = GraphLabeledManaged(list._length)
+            self.__grafo = GraphLabeledNoManaged(list._length)
             array = list.toArray
             for i in range(0, len(array)):
                 self.__grafo.labelVertex(i, array[i])
