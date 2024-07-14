@@ -55,5 +55,15 @@
 		"labelId":4,
 		"label": "5 LOLITA",
 		"destinations": []
+	},
+	{
+		"labelId":5,
+		"label": "6 Mishel",
+		"destinations": [
+			{
+				"from":5, 
+				"to":2
+			}
+		]
 	}
 ]
