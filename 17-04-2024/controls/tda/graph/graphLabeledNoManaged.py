@@ -36,9 +36,7 @@ class GraphLabeledNoManaged(GraphLabeledManaged, GraphNoManaged):
     def getLabel(self, vertex):
         return super().getLabel(vertex)
     
-    def recontruct_graph_labeled_with_lat_long(self, file='grafo.json', atype: object = None, model: object=None):
-        return super().recontruct_graph_labeled_with_lat_long(file=file, atype=atype, model=model)
-    
+        
     
     
     

@@ -5,6 +5,10 @@
 		"destinations": [
 			{
 				"from":0, 
+				"to":3
+			},
+			{
+				"from":0, 
 				"to":2
 			}
 		]
@@ -12,7 +16,16 @@
 	{
 		"labelId":1,
 		"label": "2 hola",
-		"destinations": []
+		"destinations": [
+			{
+				"from":1, 
+				"to":5
+			},
+			{
+				"from":1, 
+				"to":3
+			}
+		]
 	},
 	{
 		"labelId":2,
@@ -24,11 +37,11 @@
 			},
 			{
 				"from":2, 
-				"to":5
+				"to":4
 			},
 			{
 				"from":2, 
-				"to":3
+				"to":5
 			}
 		]
 	},
@@ -38,18 +51,23 @@
 		"destinations": [
 			{
 				"from":3, 
-				"to":2
+				"to":0
 			},
 			{
 				"from":3, 
-				"to":5
+				"to":1
 			}
 		]
 	},
 	{
 		"labelId":4,
 		"label": "5 LOLITA",
-		"destinations": []
+		"destinations": [
+			{
+				"from":4, 
+				"to":2
+			}
+		]
 	},
 	{
 		"labelId":5,
@@ -57,11 +75,11 @@
 		"destinations": [
 			{
 				"from":5, 
-				"to":2
+				"to":1
 			},
 			{
 				"from":5, 
-				"to":3
+				"to":2
 			}
 		]
 	}

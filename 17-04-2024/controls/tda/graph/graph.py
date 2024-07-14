@@ -38,6 +38,7 @@ class Graph:
     def fileExists(self, file):
         url = self.__URL +'/data/'+file
         return os.path.exists(url)
+        
     
     
     def __str__(self) -> str:
@@ -172,6 +173,28 @@ class Graph:
                     distacia = calculate_weigth_geograpics(modelos[dest['from']], modelos[dest['to']])
                     newGraph.insert_edges_weigth(dest['from'], dest['to'], distacia)
         return newGraph
+    
+    def obtain_weigths(self, graph:object =None, file='grafo.json'):
+        out = []
+        for i in range(0, graph.num_vertex):
+            info = {}
+            adjs = graph.adjacent(i)
+            if not adjs.isEmpty:
+                info['labelId'] = graph.getVertex(graph.getLabel(i))+1
+                info['destinations'] = []
+                for j in range(0, adjs._length):
+                    adj = adjs.get(j)
+                    info['destinations'].append({
+                        'from': graph.getVertex(graph.getLabel(i))+1,
+                        'to': adj._destination+1,
+                        'weigth': adj._weigth
+                    })
+                out.append(info)
+        print(out)
+        return out
+            
+        
+
     
 
 

@@ -89,14 +89,13 @@ def grafo_negocio():
 @router.route('/negocio/grafo_ver_admin')
 def grafo_ver_admin():
     negocio = NegocioDaoControl()
-    #negociograph = NegocioGrafo()   
+    negociograph = NegocioGrafo()  
+    negociograph.get_graph
     list = negocio._lista
-    #negociograph = negociograph.get_graph
-    #print(negociograph)
-    
+    print(negocio.to_dict_lista())
     if not list.isEmpty:
         list.sort_models('_nombre',2)    
-    return render_template('liquido/grafo.html', lista=negocio.to_dict_lista())
+    return render_template('liquido/grafo.html', negocios=negocio.to_dict_lista(), grafonegocio=negociograph.obtainWeigths)
     #return jsonify(negocio.to_dict_lista())
 
 @router.route('/negocio/grafo_negocio/agregar_adyacencia', methods=['POST'])
