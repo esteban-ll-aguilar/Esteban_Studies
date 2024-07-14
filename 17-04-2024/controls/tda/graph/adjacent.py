@@ -20,6 +20,9 @@ class Adjacent:
     def _destination(self, value):
         self.__destination = value
         
+    """ def __str__(self) -> str:
+        return "Destination: " + str(self.__destination) + " Weigth: " + str(self.__weigth)
+         """
         
     
 

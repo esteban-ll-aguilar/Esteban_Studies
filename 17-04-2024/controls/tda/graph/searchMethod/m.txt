@@ -1,0 +1,17 @@
+""" def dijktra(self):
+        while len(self.__lisPriority) > 0:
+            dist, vertex = self.__lisPriority.pop(0)
+            if self.__distance[vertex] == 0:
+                self.__distance[vertex] = dist
+                listAdj = self.__graph.get_list_adjacent()
+                for i in range(0, len(listAdj)):
+                    linkenlist = listAdj[i]
+                    for j in range(0, linkenlist._length):
+                        adj = linkenlist.get(j)
+                        if self.__distance[adj._destination] == 0:
+                            self.__lisPriority.append((dist + adj._weigth, adj._destination))
+                self.__lisPriority.sort()
+        print(self.__distance) """
+        
+    
+    

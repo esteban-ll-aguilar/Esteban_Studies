@@ -1,25 +1,10 @@
 [
 	{
-		"labelId":0,
-		"label": "1 El Dragon",
-		"destinations": [
-			{
-				"from":0, 
-				"to":3
-			},
-			{
-				"from":0, 
-				"to":2
-			}
-		]
-	},
-	{
 		"labelId":1,
-		"label": "2 hola",
 		"destinations": [
 			{
 				"from":1, 
-				"to":5
+				"to":4
 			},
 			{
 				"from":1, 
@@ -29,70 +14,112 @@
 	},
 	{
 		"labelId":2,
-		"label": "3 El Esteban",
 		"destinations": [
 			{
 				"from":2, 
-				"to":0
+				"to":6
 			},
 			{
 				"from":2, 
 				"to":4
-			},
-			{
-				"from":2, 
-				"to":5
 			}
 		]
 	},
 	{
 		"labelId":3,
-		"label": "4 El solito",
 		"destinations": [
-			{
-				"from":3, 
-				"to":0
-			},
 			{
 				"from":3, 
 				"to":1
-			}
-		]
-	},
-	{
-		"labelId":4,
-		"label": "5 LOLITA",
-		"destinations": [
-			{
-				"from":4, 
-				"to":2
 			},
 			{
-				"from":4, 
+				"from":3, 
+				"to":5
+			},
+			{
+				"from":3, 
 				"to":6
 			}
 		]
 	},
 	{
-		"labelId":5,
-		"label": "6 Mishel",
+		"labelId":4,
 		"destinations": [
 			{
-				"from":5, 
+				"from":4, 
 				"to":1
 			},
 			{
-				"from":5, 
+				"from":4, 
 				"to":2
+			},
+			{
+				"from":4, 
+				"to":7
+			},
+			{
+				"from":4, 
+				"to":9
+			}
+		]
+	},
+	{
+		"labelId":5,
+		"destinations": [
+			{
+				"from":5, 
+				"to":3
+			},
+			{
+				"from":5, 
+				"to":7
 			}
 		]
 	},
 	{
 		"labelId":6,
-		"label": "7 Solene",
 		"destinations": [
 			{
 				"from":6, 
+				"to":2
+			},
+			{
+				"from":6, 
+				"to":3
+			},
+			{
+				"from":6, 
+				"to":8
+			}
+		]
+	},
+	{
+		"labelId":7,
+		"destinations": [
+			{
+				"from":7, 
+				"to":4
+			},
+			{
+				"from":7, 
+				"to":5
+			}
+		]
+	},
+	{
+		"labelId":8,
+		"destinations": [
+			{
+				"from":8, 
+				"to":6
+			}
+		]
+	},
+	{
+		"labelId":9,
+		"destinations": [
+			{
+				"from":9, 
 				"to":4
 			}
 		]

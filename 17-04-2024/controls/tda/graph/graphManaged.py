@@ -69,6 +69,9 @@ class GraphManaged(Graph):
         
     def adjacent(self, v1):
         return self.__listAdjacent[v1]
+    
+    def get_list_adjacent(self):
+        return self.__listAdjacent
 
     def addVertex(self):
         self.__numVer += 1

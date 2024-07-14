@@ -121,13 +121,13 @@ class Graph:
         json = "["
         for i in range(0, self.num_vertex):
             adjs = self.adjacent(i)
-            json += '\n\t{\n\t\t"labelId":' + f"{str(self.getVertex(self.getLabel(i)))},"
-            json += '\n\t\t"label": "' + str(self.getLabel(i)) + '",'
+            json += '\n\t{\n\t\t"labelId":' + f"{str(self.getVertex(self.getLabel(i))+1)},"
+            #json += '\n\t\t"label": "' + str(self.getLabel(i)) + '",'
             if not adjs.isEmpty:
                 json += '\n\t\t"destinations": ['
                 for j in range(0, adjs._length):
                     adj = adjs.get(j)
-                    json += '\n\t\t\t{\n\t\t\t\t"from":'+f"{str(self.getVertex(self.getLabel(i)))}"+', \n\t\t\t\t"to":'+str(adj._destination)+'\n\t\t\t},'
+                    json += '\n\t\t\t{\n\t\t\t\t"from":'+f"{str(self.getVertex(self.getLabel(i))+1)}"+', \n\t\t\t\t"to":'+str(adj._destination+1)+'\n\t\t\t},'
                 json = json[:-1]
                 json += '\n\t\t]'
                 json += '\n\t},'
@@ -161,16 +161,16 @@ class Graph:
     
         modelos = []      
         for item in data:
-            model = newModel.get(item['labelId'])
-            newGraph.labelVertex(item['labelId'],model)
+            model = newModel.get(item['labelId']-1)
+            newGraph.labelVertex(item['labelId']-1,model)
             modelos.append(model)
         
         for item in data:
             destination = item['destinations']
             if destination != []:
                 for dest in item['destinations']:
-                    distacia = calculate_weigth_geograpics(modelos[dest['from']], modelos[dest['to']])
-                    newGraph.insert_edges_weigth(dest['from'], dest['to'], distacia)
+                    distacia = calculate_weigth_geograpics(modelos[dest['from']-1], modelos[dest['to']-1])
+                    newGraph.insert_edges_weigth(dest['from']-1, dest['to']-1, distacia)
         return newGraph
     
     def obtain_weigths(self, graph:object =None, file='grafo.json'):

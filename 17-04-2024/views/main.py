@@ -32,30 +32,23 @@ from controls.tda.graph.graphLabeledManaged import GraphLabeledManaged
 from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
 from controls.liquido.negocioGrafo import NegocioGrafo
 from controls.tda.tree.treeNumber import TreeNumber
+from controls.tda.graph.searchMethod.dijktraAlgorithm import DijktraAlgorithm
 import time
 
 
 negocio = NegocioGrafo()
 #negocio.create_graph()
 graph = negocio.get_graph
-print(negocio.fileExists)
-
-graph.insert_edges_weigth(0, 1, 2)
-graph.insert_edges_weigth(0, 2, 5)
-
-""" graph.insert_edges_weigth_E('1 El Dragon', '2 hola', 5)
-graph.insert_edges_weigth_E('1 El Dragon', '3 El Esteban', 7)
-graph.insert_edges_weigth_E('2 hola', '3 El Esteban', 9)
-graph.insert_edges_weigth_E('2 hola', '1 El Dragon', 11) """
-
 graph.print_graph_labeled
-graph.paint_graph_labeled
-negocio.save_graph
 
+""" dijktra = DijktraAlgorithm(graph,start=4, end=1)
+dijktra.dijktra """
+
+#En clase 
 """ aux = "100,7,130,50,80,110,150,45,60,75,85,105,115,145,155,23"
 nodeData =  aux.split(",")
 tree = TreeNumber()
-
+#247
 for dat in nodeData:
     tree.insert(int(dat))
 
