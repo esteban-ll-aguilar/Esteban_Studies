@@ -1,6 +1,8 @@
 import sys
 import os , json
-from math import nan
+import geopy.distance
+from math import sin, cos, sqrt, atan2, radians, asin
+
 class Graph:
     def __init__(self):
         self.__URL = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(os.path.abspath(__file__))))))
@@ -114,7 +116,7 @@ class Graph:
 
     
 
-    def __transform__(self):
+    def __transform_graphLabeled__(self):
         json = "["
         for i in range(0, self.num_vertex):
             adjs = self.adjacent(i)
@@ -141,29 +143,52 @@ class Graph:
     def save_graph_labeled(self, file='grafo.json'):
         url = self.__URL +'/data/'+file
         a = open(url , 'w')
-        a.write(self.__transform__())
+        a.write(self.__transform_graphLabeled__())
         a.close()
         
-    def recontruct_graph(self, file='grafo.json', atype: object = None):
+    
+    
+    def recontruct_graph_labeled_with_lat_long(self, file='grafo.json', atype: object = None, model: object=None):
+        #al decir model nos referimos al modelo de daoControl del modelo base
+        #con a type nos referimos al modelos de los grafos
         url = self.__URL +'/data/'+file
         a = open(url , 'r')
         data = json.load(a)
         a.close()
-        newGraph = atype(len(data))
+        newGraph = atype
+        newModel = model()._lista
+    
+        modelos = []      
         for item in data:
-            print(item)
-            newGraph.labelVertex(item['labelId'], item['label'])
+            model = newModel.get(item['labelId'])
+            newGraph.labelVertex(item['labelId'],model)
+            modelos.append(model)
         
         for item in data:
             destination = item['destinations']
             print(destination)
             if destination != []:
                 for dest in item['destinations']:
-                    newGraph.insert_edges(dest['from'], dest['to'])
+                    distacia = calculate_weigth_geograpics(modelos[dest['from']], modelos[dest['to']])
+                    newGraph.insert_edges_weigth(dest['from'], dest['to'], distacia)
         return newGraph
-        
-        
     
+
+
         
-        
+def calculate_weigth_geograpics(model1: object = None, model2: object = None):
+    #model1 es el  modelo base
+    #model2 es el modelo base
+    R = 6371.01
+    lat1 = model1._latitud
+    lon1 = model1._longitud
+    lat2 = model2._latitud
+    lon2 = model2._longitud
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    
+    distancia = geopy.distance.distance((lat1, lon1), (lat2, lon2)).km
+    print("Distancia calculada con geopy: " + str(distancia))
+    return round(distancia,2)
+            
         

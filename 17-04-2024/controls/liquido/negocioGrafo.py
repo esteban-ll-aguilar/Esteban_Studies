@@ -16,24 +16,25 @@ class NegocioGrafo:
             for i in range(0, len(array)):
                 self.__grafo.labelVertex(i, array[i])
             self.__grafo.print_graph_labeled
-            self.__grafo.save_graph_labeled(file=self.__name)
+            
         else:
             Exception("Lista vacia")                
     
     @property
     def get_graph(self):
+        self.create_graph()
+        self.__grafo = self.__grafo.recontruct_graph_labeled_with_lat_long(file=self.__name,atype=self.__grafo, model=NegocioDaoControl)
+        self.__grafo.save_graph_labeled(file=self.__name)
+        self.__grafo.paint_graph_labeled
+        return self.__grafo
+        
+        
         if self.__grafo is None:
             if self.fileExists:
                 self.__grafo = GraphLabeledManaged(self.__ndao._lista._length)
-                self.__grafo = self.__grafo.recontruct_graph(file=self.__name)
                 self.__grafo.paint_graph_labeled
                 return self.__grafo
-            self.create_graph()
             return self.__grafo
-        else:
-            None
-        
-        
     
     @property
     def fileExists(self):

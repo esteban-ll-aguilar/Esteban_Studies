@@ -33,26 +33,6 @@ def ver_editar(pos):
     nene = pd._list().get(int(pos)-1)
     print(nene)
     return render_template('nene/editar.html', data=nene)
-
-
-@router.route('/mapa')
-def mapa():
-    return render_template('mapa/grafo.html')
-
-@router.route('/negocio/grafo_negocio')
-def grafo_negocio():
-    ng = NegocioGrafo()
-    ng.get_graph
-    return render_template('mapa/grafo.html' )
-
-
-@router.route('/negocio/grafo_ver_admin')
-def grafo_ver_admin():
-    pd = NegocioDaoControl()
-    list = pd._lista
-    if not list.isEmpty:
-        list.sort_models('_nombre',2)    
-    return render_template('liquido/grafo.html', lista=pd.to_dict_lista())
 #LOGICAS
 # GUARDAR PERSONA POST
 @router.route('/personas/guardar', methods=['POST'])
@@ -94,13 +74,39 @@ def ver_negocio_editar(pos):
 def ver_negocio_guardar():
     return render_template('liquido/guardar.html')
 
+
+@router.route('/mapa')
+def mapa():
+    return render_template('mapa/grafo.html')
+
+@router.route('/negocio/grafo_negocio')
+def grafo_negocio():
+    ng = NegocioGrafo()
+    ng.get_graph
+    return render_template('mapa/grafo.html' )
+
+
+@router.route('/negocio/grafo_ver_admin')
+def grafo_ver_admin():
+    negocio = NegocioDaoControl()
+    #negociograph = NegocioGrafo()   
+    list = negocio._lista
+    #negociograph = negociograph.get_graph
+    #print(negociograph)
+    
+    if not list.isEmpty:
+        list.sort_models('_nombre',2)    
+    return render_template('liquido/grafo.html', lista=negocio.to_dict_lista())
+    #return jsonify(negocio.to_dict_lista())
+
 @router.route('/negocio/grafo_negocio/agregar_adyacencia', methods=['POST'])
 def agregar_adyacencia():
     data = request.form
     print(data)
     ng = NegocioGrafo()
-    ng.get_graph
-    return redirect('/negocio/grafo_negocio', code=302)
+    ng.get_graph.insert_edges(int(data['origen'])-1, int(data['destino'])-1)
+    ng.save_graph
+    return redirect('/negocio/grafo_ver_admin', code=302)
 
 @router.route('/negocio/guardar', methods=['POST'])
 def negocio_guardar():
@@ -112,8 +118,8 @@ def negocio_guardar():
     negocio._negocio._nombre = data['nombre']
     negocio._negocio._direccion = data['direccion']
     negocio._negocio._horario = data['horario']
-    negocio._negocio._longitud = data['longitud']
-    negocio._negocio._latitud = data['latitud']
+    negocio._negocio._longitud = float(data['longitud'])
+    negocio._negocio._latitud = float(data['latitud'])
     negocio.save
     
     

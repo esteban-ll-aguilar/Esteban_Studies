@@ -4,8 +4,8 @@ class Negocio():
         self.__nombre = ""
         self.__direccion = "s/n"
         self.__horario= "s/n"
-        self.__longitud = '0.0'
-        self.__latitud = '0.0'
+        self.__longitud = 0.0
+        self.__latitud = 0.0
 
     @property
     def _id(self):

@@ -24,12 +24,36 @@
 			{
 				"from":1, 
 				"to":0
+			},
+			{
+				"from":1, 
+				"to":4
 			}
 		]
 	},
 	{
 		"labelId":2,
 		"label": "3 El Esteban",
+		"destinations": [
+			{
+				"from":2, 
+				"to":3
+			}
+		]
+	},
+	{
+		"labelId":3,
+		"label": "4 El solito",
+		"destinations": [
+			{
+				"from":3, 
+				"to":4
+			}
+		]
+	},
+	{
+		"labelId":4,
+		"label": "5 LOLITA",
 		"destinations": []
 	}
 ]
