@@ -32,17 +32,30 @@ from controls.tda.graph.graphLabeledManaged import GraphLabeledManaged
 from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
 from controls.liquido.negocioGrafo import NegocioGrafo
 from controls.tda.tree.treeNumber import TreeNumber
-from controls.tda.graph.searchMethod.dijktraAlgorithm import DijktraAlgorithm
-import time
+from controls.tda.graph.searchMethod.dijkstraAlgorithm import DijkstraAlgorithm
+from controls.tda.graph.searchMethod.floydWarshallAlgorithm import FloydWarshallAlgorithm
+from time import time
 
 
 negocio = NegocioGrafo()
 #negocio.create_graph()
 graph = negocio.get_graph
 graph.print_graph_labeled
+inicio = time()
+print("----------------- Algoritmo de Dijkstra -----------------")
+dijktra = DijkstraAlgorithm(graph,start=8, end=5)
+dijktra.dijkstra
+print("Tiempo de ejecucion Dijkstra: ", time()-inicio)
+inicio = time()
+print("----------------- Algoritmo de Floyd Warshall -----------------")
+floy = FloydWarshallAlgorithm(graph, start=8,end=5)
+floy.floydWarshall
+print("Tiempo de ejecucion Floyd Warshall: ", time()-inicio)
 
-""" dijktra = DijktraAlgorithm(graph,start=1, end=2)
-dijktra.dijktra """
+
+
+
+
 
 #En clase 
 """ aux = "100,7,130,50,80,110,150,45,60,75,85,105,115,145,155,23"
