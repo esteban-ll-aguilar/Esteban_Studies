@@ -37,6 +37,7 @@ class GraphLabeledNoManaged(GraphLabeledManaged, GraphNoManaged):
         return super().getLabel(vertex)
     
         
-    
+    def newGraph(self, num_vertex):
+        return GraphLabeledNoManaged(num_vertex)
     
     

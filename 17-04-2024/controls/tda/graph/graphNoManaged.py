@@ -31,6 +31,10 @@ class GraphNoManaged(GraphManaged):
         else:
             raise ArrayPositionException("Delimites out")
         
+    
+    def newGraph(self, num_vertex):
+        return GraphNoManaged(num_vertex)
+        
         
     
     

@@ -3,6 +3,8 @@ from controls.personaDaoControl import PersonaDaoControl
 from controls.liquido.negocioDaoControl import NegocioDaoControl
 from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
 from controls.liquido.negocioGrafo import NegocioGrafo
+from controls.tda.graph.searchMethod.dijkstraAlgorithm import DijkstraAlgorithm
+from controls.tda.graph.searchMethod.floydWarshallAlgorithm import FloydWarshallAlgorithm
 from flask_cors import CORS
 router = Blueprint('router', __name__)
 #get para presentar los datos
@@ -81,9 +83,23 @@ def mapa():
 
 @router.route('/negocio/grafo_negocio')
 def grafo_negocio():
+    negocio = NegocioDaoControl()
+    list = negocio._lista
+    if not list.isEmpty:
+        list.sort_models('_nombre') 
+        
     ng = NegocioGrafo()
     ng.get_graph
-    return render_template('mapa/grafo.html' )
+    return render_template('liquido/grafo.html' , negocios=negocio.to_dict_lista())
+
+#BUSCAR CAMINO
+@router.route('/negocio/buscar-camino-corto', methods=['POST'])
+def buscar_camino_corto():
+    negociograph = NegocioGrafo()
+    data = request.form
+    search = DijkstraAlgorithm(negociograph.get_graph, int(data['origen']), int(data['destino']))
+    search.dijkstra
+    return redirect('/negocio/grafo_negocio', code=302)
 
 
 @router.route('/negocio/grafo_ver_admin')
@@ -94,7 +110,7 @@ def grafo_ver_admin():
     list = negocio._lista
     if not list.isEmpty:
         list.sort_models('_nombre')    
-    return render_template('liquido/grafo.html', negocios=negocio.to_dict_lista(), grafonegocio=negociograph.obtainWeigths)
+    return render_template('liquido/adyacencias.html', negocios=negocio.to_dict_lista(), grafonegocio=negociograph.obtainWeigths)
     #return jsonify(negocio.to_dict_lista())
 
 @router.route('/negocio/grafo_negocio/agregar_adyacencia', methods=['POST'])

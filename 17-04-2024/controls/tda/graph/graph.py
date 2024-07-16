@@ -27,13 +27,17 @@ class Graph:
     
     def adjacent(v1):
         raise NotImplementedError("Please implement this method")
-    """ def setLabel(self, vertex, label):
-        raise NotImplementedError("Please implement this method")"""
     def getLabel(self, vertex):
         raise NotImplementedError("Please implement this method")
     
     def getVertex(self, label):
         raise NotImplementedError("Please implement this method")
+    def newGraph(self, num_vertex):
+        raise NotImplementedError("Please implement this method")
+    
+    def paint_search_graph(self,nameComponent='mynetworkSearch', file="grafoSearch.js"):
+        self.paint_graph_labeled(file=file, nameComponent=nameComponent, mostrarCamino=True)
+        
     
     def fileExists(self, file):
         url = self.__URL +'/data/'+file
@@ -76,12 +80,22 @@ class Graph:
         a.write(js)
         a.close()
         
-    @property
-    def paint_graph_labeled(self, file='d3/grafo.js'):
-        url = self.__URL +'/static/'+ file
+    def paint_graph_labeled(self, file='grafo.js', nameComponent="mynetwork" ,mostrarCamino = False):
+        url = self.__URL +'/static/d3/'+ file
+        camino = ""
+        weigths = []
+        if self.num_vertex == 0:
+            js = 'var advertencia = document.getElementById("advertencia");\n'
+            js+= 'advertencia.innerHTML = "No hay datos en los caminos para poder llegar al destino";'
+            a = open(url , 'w')
+            a.write(js)
+            a.close()
+            return
+        
         js = 'var nodes = new vis.DataSet(['
         for i in range(0, self.num_vertex):
             js+= '\n{id:'+str(i)+', label: "'+str(self.getLabel(i))+'"},'
+            camino += ' '+str(self.getLabel(i))+' => '
         js = js[:-1]
         js += ']);\n'
         
@@ -91,9 +105,14 @@ class Graph:
             if not adjs.isEmpty:
                 for j in range(0, adjs._length):
                     adj = adjs.get(j)
-                    js += '{\nfrom: '+str(i)+', to: '+str(adj._destination)+', label: "'+str(adj._weigth)+'"},'
+                    if adj._weigth != None and adj._destination != None:
+                        weigths.append(adj._weigth) if adj._weigth not in weigths else weigths
+                        js += '{\nfrom: '+str(i)+', to: '+str(adj._destination)+', label: "'+str(adj._weigth)+'"},'
         js += ']);\n'
-        js += 'var container = document.getElementById("mynetwork"); \n var data = { nodes: nodes, edges: edges, }; \n var options = {}; \nvar network = new vis.Network(container, data, options);'
+        js += 'var container = document.getElementById("'+nameComponent+'"); \n var data = { nodes: nodes, edges: edges, }; \n var options = {}; \nvar network = new vis.Network(container, data, options);'
+        if mostrarCamino:
+            js += 'var camino = document.getElementById("camino");\n camino.innerHTML = "'+camino[:-3]+'";'
+            js += 'var weigths = document.getElementById("weigths");\n weigths.innerHTML = "'+str(sum(weigths))+'";'
         a = open(url , 'w')
         a.write(js)
         a.close()

@@ -26,7 +26,7 @@ class NegocioGrafo:
         if self.__grafo.fileExists(self.__name):
             self.__grafo = self.__grafo.recontruct_graph_labeled_with_lat_long(file=self.__name,atype=self.__grafo, model=NegocioDaoControl)
         self.__grafo.save_graph_labeled(file=self.__name)
-        self.__grafo.paint_graph_labeled
+        self.__grafo.paint_graph_labeled()
         return self.__grafo
     
     

@@ -1,0 +1,118 @@
+{% extends "templateL.html" %}
+
+{% block content %}
+<section class="custom-form booking-form text-center">
+    <div class="text-center mb-4 pb-lg-2">
+        <em class="text-white">Universidad Nacional de Loja</em>
+        <h2 class="text-white">Lista de Negocios</h2>
+        <a href="/negocio" class="btn custom-btn custom-border-btn">Regresar</a>
+        <a href="/negocio/grafo_negocio" target="_blank" class="btn custom-btn custom-border-btn">Negocio Grafo</a>
+    </div>
+    <div class="booking-form-body table-responsive">
+        <div class="card bg-black">
+            <div class="card-header">
+                <h5 class="text-white">Agregar Adyacencias</h5>
+                <form class="custom-form booking-form" method="post" action="/negocio/grafo_negocio/agregar_adyacencia" role="form">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <span class="text-white">Origen</span>
+                                <select class="form-control" id="origen" name="origen">
+                                    {% for item in negocios %}
+                                        <option value="{{ item.id }}">{{ item.nombre }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <span class="text-white">Destino</span>
+                                <select class="form-control" id="destino" name="destino">
+                                    {% for item in negocios %}
+                                        <option value="{{ item.id }}">{{ item.nombre }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" id="guardar" class="btn custom-btn custom-border-btn">Agregar</button>
+                </form>
+            </div>
+        </div>
+        <table class="table table-bordered text-white table-responsive" id="tabla">
+            <thead>
+                <tr>
+                    <th>-------</th>
+                    {% for item in negocios %}
+                        <th>{{ item.nombre }}</th>
+                        
+                        
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                
+                <!--[{'labelId': 1, 'destinations': [{'from': 1, 'to': 4, 'weigth': 200.72}]-->
+                {% for item in negocios %}
+                    <tr class="text-white">
+                        <td><b>{{ item.nombre }}</b></td>
+                        {% for negociografo in grafonegocio %}
+                            {% if negociografo.labelId == item.id %}
+                                {% for negocio in negocios %}
+                                    <td>
+                                        {% for destino in negociografo.destinations %}
+                                            {% if destino.to == negocio.id %}
+                                                {{ destino.weigth }}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if item.id == negocio.id %}
+                                                ---
+                                        {% endif %}
+                                    </td>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Evitar que el origen y destino sean iguales
+    $(document).ready(function() {
+        function disableMatchingOptions(sourceId, targetId) {
+            var sourceVal = $(sourceId).val();
+            $(targetId + ' option').each(function() {
+                if ($(this).val() == sourceVal) {
+                    $(this).attr('disabled', true);
+                } else {
+                    $(this).attr('disabled', false);
+                }
+            });
+        }
+
+        $('#origen').change(function() {
+            disableMatchingOptions('#origen', '#destino');
+        });
+
+        $('#destino').change(function() {
+            disableMatchingOptions('#destino', '#origen');
+        });
+
+        // Inicializar las opciones correctamente al cargar la página
+        disableMatchingOptions('#origen', '#destino');
+        disableMatchingOptions('#destino', '#origen');
+    });
+    //evitar que el for se envie si los valores son iguales
+    $('#guardar').click(function() {
+        var destino = $('#destino').val();
+        if (destino == null) {
+            alert('Origen y destino no pueden ser iguales');
+            return false;
+        }
+    });
+</script>
+<script src="{{ url_for('static', filename='d3/mapa.js') }}"></script>
+{% endblock %}

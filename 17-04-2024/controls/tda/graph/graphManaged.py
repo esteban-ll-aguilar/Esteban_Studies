@@ -76,5 +76,9 @@ class GraphManaged(Graph):
     def addVertex(self):
         self.__numVer += 1
         self.__listAdjacent.append(Linked_List())
+        
+        
+    def newGraph(self, num_vertex):
+        return GraphManaged(num_vertex)
             
     

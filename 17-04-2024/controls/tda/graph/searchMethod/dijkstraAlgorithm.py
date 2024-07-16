@@ -10,7 +10,7 @@ class DijkstraAlgorithm:
         self.__visited = [False] * self.__graph.num_vertex
         self.__distance = [np.inf] * self.__graph.num_vertex
         self.__parent = [-1] * self.__graph.num_vertex
-        
+        self.__camino = []
         
     def __minDistance(self):
         min = np.inf
@@ -32,6 +32,7 @@ class DijkstraAlgorithm:
                     self.__distance[v] = self.__distance[u] + self.__graph.weigth_edges(u, v)
                     self.__parent[v] = u
         self.__printPath__()
+        self._paint_search_graph
         return self.__distance[self.__end]
     
     
@@ -43,8 +44,32 @@ class DijkstraAlgorithm:
             camino.append(crawl+1)
             crawl = self.__parent[crawl]
         camino.append(self.__start+1)
+        self.__camino = camino[::-1]
+        if self.__distance[self.__end] == np.inf:
+            self.__camino = None
+            return "No existe camino"
+        print("CAMINO: ", camino[::-1])
         camino = " -> ".join(map(str, camino[::-1]))
         return camino
+    @property
+    def _paint_search_graph(self):
+        camino = self.__camino
+        if camino == None:
+            newGraph = self.__graph.newGraph(0)   
+            newGraph.paint_search_graph()
+            return
+        newGraph = self.__graph.newGraph(len(camino))   
+        for i in range(0, len(camino)):
+            newGraph.labelVertex(i, self.__graph.getLabel(camino[i]-1))
+        for i in range(0, len(camino)):
+            for j in range(0, len(camino)):
+                if i != j:
+                    newGraph.insert_edges_weigth(i, j, self.__graph.weigth_edges(camino[i]-1, camino[j]-1))
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        newGraph.print_graph_labeled
+        newGraph.paint_search_graph()
+        return newGraph
+        
     
     def __printPath__(self):
         print("Camino minimo entre: " + str(self.__start+1) + " y " + str(self.__end+1))
