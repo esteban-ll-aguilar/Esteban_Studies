@@ -6,17 +6,17 @@ var nodes = new vis.DataSet([
 {id:4, label: "BlueWave Solutions"},
 {id:5, label: "Artisanal Creations"},
 {id:6, label: "Urban Oasis"},
-{id:7, label: "Mumuso"},
+{id:7, label: "TechSolutions"},
 {id:8, label: "GreenLeaf Organics"},
-{id:9, label: "Cartesiana"},
-{id:10, label: "Exaple Cutye"},
-{id:11, label: "Otra Rondita"},
-{id:12, label: "Otra Rolita"},
-{id:13, label: "Platica"},
-{id:14, label: "EstebanQuito"},
-{id:15, label: "holita"},
-{id:16, label: "Mauricito"},
-{id:17, label: "La Tomaye"}]);
+{id:9, label: "Gourmet Night"},
+{id:10, label: "Urban Style Boutique"},
+{id:11, label: "Fitness Haven"},
+{id:12, label: "Green Thumb Garden Center"},
+{id:13, label: "Creative Minds Studio"},
+{id:14, label: "Global Travel Agency"},
+{id:15, label: "Sparkle & Shine Cleaning"},
+{id:16, label: "SmartHome Innovations"},
+{id:17, label: "EcoLiving Supplies"}]);
 
  var edges = new vis.DataSet([{
 from: 0, to: 3, label: "200.72"},{
@@ -79,10 +79,10 @@ from: 13, to: 5, label: "63.38"},{
 from: 13, to: 14, label: "34.07"},{
 from: 14, to: 13, label: "34.07"},{
 from: 14, to: 15, label: "6.47"},{
-from: 14, to: 17, label: "30.31"},{
 from: 15, to: 14, label: "6.47"},{
+from: 15, to: 17, label: "35.34"},{
 from: 16, to: 0, label: "203.46"},{
-from: 17, to: 14, label: "30.31"},]);
+from: 17, to: 15, label: "35.34"},]);
 var container = document.getElementById("mynetwork"); 
  var data = { nodes: nodes, edges: edges, }; 
  var options = {}; 
