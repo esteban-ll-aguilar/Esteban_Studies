@@ -1,20 +1,22 @@
 var nodes = new vis.DataSet([
-{id:0, label: "1 EcoVerde"},
-{id:1, label: "2 TechNexus"},
-{id:2, label: "3 Gourmet Delights"},
-{id:3, label: "4 Casa Bella"},
-{id:4, label: "5 BlueWave Solutions"},
-{id:5, label: "6 Artisanal Creations"},
-{id:6, label: "7 Urban Oasis"},
-{id:7, label: "8 Mumuso"},
-{id:8, label: "9 GreenLeaf Organics"},
-{id:9, label: "10 Cartesiana"},
-{id:10, label: "11 Exaple Cutye"},
-{id:11, label: "12 Otra Rondita"},
-{id:12, label: "13 Otra Rolita"},
-{id:13, label: "14 Platica"},
-{id:14, label: "15 EstebanQuito"},
-{id:15, label: "16 holita"}]);
+{id:0, label: "EcoVerde"},
+{id:1, label: "TechNexus"},
+{id:2, label: "Gourmet Delights"},
+{id:3, label: "Casa Bella"},
+{id:4, label: "BlueWave Solutions"},
+{id:5, label: "Artisanal Creations"},
+{id:6, label: "Urban Oasis"},
+{id:7, label: "Mumuso"},
+{id:8, label: "GreenLeaf Organics"},
+{id:9, label: "Cartesiana"},
+{id:10, label: "Exaple Cutye"},
+{id:11, label: "Otra Rondita"},
+{id:12, label: "Otra Rolita"},
+{id:13, label: "Platica"},
+{id:14, label: "EstebanQuito"},
+{id:15, label: "holita"},
+{id:16, label: "Mauricito"},
+{id:17, label: "La Tomaye"}]);
 
  var edges = new vis.DataSet([{
 from: 0, to: 3, label: "200.72"},{
@@ -22,6 +24,7 @@ from: 0, to: 2, label: "160.23"},{
 from: 0, to: 7, label: "202.99"},{
 from: 0, to: 5, label: "181.21"},{
 from: 0, to: 10, label: "132.72"},{
+from: 0, to: 16, label: "203.46"},{
 from: 1, to: 5, label: "63.38"},{
 from: 1, to: 3, label: "8.19"},{
 from: 1, to: 2, label: "46.49"},{
@@ -76,7 +79,10 @@ from: 13, to: 5, label: "63.38"},{
 from: 13, to: 14, label: "34.07"},{
 from: 14, to: 13, label: "34.07"},{
 from: 14, to: 15, label: "6.47"},{
-from: 15, to: 14, label: "6.47"},]);
+from: 14, to: 17, label: "30.31"},{
+from: 15, to: 14, label: "6.47"},{
+from: 16, to: 0, label: "203.46"},{
+from: 17, to: 14, label: "30.31"},]);
 var container = document.getElementById("mynetwork"); 
  var data = { nodes: nodes, edges: edges, }; 
  var options = {}; 

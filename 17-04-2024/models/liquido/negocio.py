@@ -56,7 +56,7 @@ class Negocio():
         self.__latitud = value
 
     def __str__(self):
-        return f'{self.__id} {self.__nombre}'
+        return f'{self.__nombre}'
     
     @property   
     def serialize(self):

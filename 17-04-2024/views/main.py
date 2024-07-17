@@ -43,12 +43,12 @@ graph = negocio.get_graph
 graph.print_graph_labeled
 inicio = time()
 print("----------------- Algoritmo de Dijkstra -----------------")
-dijktra = DijkstraAlgorithm(graph,start=8, end=5)
+dijktra = DijkstraAlgorithm(graph,start=1, end=10)
 dijktra.dijkstra
 print("Tiempo de ejecucion Dijkstra: ", time()-inicio)
 inicio = time()
 print("----------------- Algoritmo de Floyd Warshall -----------------")
-floy = FloydWarshallAlgorithm(graph, start=8,end=5)
+floy = FloydWarshallAlgorithm(graph, start=1,end=10)
 floy.floydWarshall
 print("Tiempo de ejecucion Floyd Warshall: ", time()-inicio)
 
