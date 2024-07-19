@@ -55,10 +55,6 @@ class TreeNumber():
         self.__height = self.__calcHeight(self.__root)
         for i in range (0, self.__height):
             self.__levels.add(Linked_List())
-            
-        
-        
-        
         
     def insert(self, data):
         if self.__root == None:
@@ -92,6 +88,52 @@ class TreeNumber():
                         self.levels()
                         return True
     
-                
+    def show_tree(self):
+        self.__order = Linked_List()
+        self.__pre_order(self.__root)
+        return self.__order
+
+    # def show_tree(self):
+    #     out = ""
+    #     for i in range(0, self.__height):
+    #         for j in range(0, self.__levels.get(i)._length):
+    #             if self.__levels.get(i).get(j) != None:
+    #                 out += str(self.__levels.get(i).get(j)._data) + " "
+    #             else:
+    #                 out += "None "
+    #         out += "\n"
+    #     return out
+    
+    def __pre_order(self, tree):
+        if tree != None:
+            self.__order.add(tree._data, self.__order._length)
+            self.__pre_order(tree._left)
+            self.__pre_order(tree._right)
                         
-        
+    def pre_orders(self):
+        self.__order = Linked_List()
+        self.__pre_order(self.__root)
+        return self.__order
+    
+
+    def __pos_order(self, tree):
+        if tree != None:
+            self.__pos_order(tree._left)
+            self.__pos_order(tree._right)
+            self.__order.add(tree._data, self.__order._length)
+                        
+    def pos_orders(self):
+        self.__order = Linked_List()
+        self.__pos_order(self.__root)
+        return self.__order
+    
+    def __in_order(self, tree):
+        if tree != None:
+            self.__in_order(tree._left)
+            self.__order.add(tree._data, self.__order._length)
+            self.__in_order(tree._right)
+                        
+    def in_orders(self):
+        self.__order = Linked_List()
+        self.__in_order(self.__root)
+        return self.__order

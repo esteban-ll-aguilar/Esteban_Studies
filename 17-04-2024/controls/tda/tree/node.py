@@ -1,3 +1,4 @@
+
 class Node():
     def __init__(self, data):
         self.__data = data
@@ -37,6 +38,10 @@ class Node():
     @_left.setter
     def _left(self, value):
         self.__left = value
+        
+        
+    def __str__(self) -> str:
+        return str(self.__data)
 
     
 
