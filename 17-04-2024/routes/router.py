@@ -97,8 +97,8 @@ def grafo_negocio():
 def buscar_camino_corto():
     negociograph = NegocioGrafo()
     data = request.form
-    search = DijkstraAlgorithm(negociograph.get_graph, int(data['origen']), int(data['destino']))
-    search.dijkstra
+    search = FloydWarshallAlgorithm(negociograph.get_graph, int(data['origen']), int(data['destino']))
+    search.floydWarshall
     return redirect('/negocio/grafo_negocio', code=302)
 
 

@@ -31,30 +31,20 @@ class FloydWarshallAlgorithm:
                 for j in range(0, self.__graph.num_vertex):
                     if self.__matrix[i][k] + self.__matrix[k][j] < self.__matrix[i][j]:
                         self.__matrix[i][j] = self.__matrix[i][k] + self.__matrix[k][j]
-                        self.__matrixParent[i][j] = k
         self.__printPath__()
         self._paint_search_graph
         return self.__matrix
         
-    @property
-    def __reconstruct_camino_mas_corto(self):
+    def __reconstruct_camino_mas_corto(self, distance:float):
         camino = []
-        start = self.__start
-        end = self.__end
-        
-        if self.__matrix[start][end] == np.inf:
-            return camino
-        camino.append(start+1)
-        while self.__matrixParent[start][end] != -1:
-            start = int(self.__matrixParent[start][end])
-            camino.append(start+1)
-        camino.append(self.__end+1)
-        self.__camino = camino
-        if self.__matrix[self.__start][self.__end] == np.inf:
-            self.__camino = None
-            return "No existe camino"
-        camino = " -> ".join(map(str, camino))
-        return camino
+        crawl = self.__end
+        for i in range(0, self.__graph.num_vertex):
+            for j in range(0, self.__graph.num_vertex):
+                if self.__matrix[i][j] == np.inf:
+                    print("INF")
+                else:
+                    print(self.__matrix[i][j])
+                print(" ")
     
     @property
     def _paint_search_graph(self):
@@ -76,9 +66,10 @@ class FloydWarshallAlgorithm:
         return newGraph
             
     def __printPath__(self):
+        distancia = self.__matrix[self.__start][self.__end]
         print("Camino minimo entre: " + str(self.__start+1) + " y " + str(self.__end+1))
-        print("Distancia: " + str(self.__matrix[self.__start][self.__end]))
-        print("Camino: ", self.__reconstruct_camino_mas_corto)
+        print("Distancia: " + str(distancia))
+        print("Camino: ", self.__reconstruct_camino_mas_corto(distancia))
         print("Vertex \t\t Distance")
         for i in range(0, self.__graph.num_vertex):
             print(str(i+1) + " \t\t " + str(self.__matrix[self.__start][i]))

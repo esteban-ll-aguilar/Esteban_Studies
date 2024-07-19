@@ -51,6 +51,7 @@ class DijkstraAlgorithm:
         print("CAMINO: ", camino[::-1])
         camino = " -> ".join(map(str, camino[::-1]))
         return camino
+    
     @property
     def _paint_search_graph(self):
         camino = self.__camino

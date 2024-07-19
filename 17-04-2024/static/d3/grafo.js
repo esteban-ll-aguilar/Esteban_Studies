@@ -28,6 +28,7 @@ from: 0, to: 16, label: "203.46"},{
 from: 1, to: 5, label: "63.38"},{
 from: 1, to: 3, label: "8.19"},{
 from: 1, to: 2, label: "46.49"},{
+from: 1, to: 9, label: "4.08"},{
 from: 2, to: 0, label: "160.23"},{
 from: 2, to: 1, label: "46.49"},{
 from: 2, to: 4, label: "33.4"},{
@@ -65,6 +66,7 @@ from: 8, to: 5, label: "63.25"},{
 from: 8, to: 7, label: "1.02"},{
 from: 8, to: 9, label: "4.01"},{
 from: 8, to: 11, label: "7.42"},{
+from: 9, to: 1, label: "4.08"},{
 from: 9, to: 4, label: "10.05"},{
 from: 9, to: 7, label: "3.0"},{
 from: 9, to: 8, label: "4.01"},{
