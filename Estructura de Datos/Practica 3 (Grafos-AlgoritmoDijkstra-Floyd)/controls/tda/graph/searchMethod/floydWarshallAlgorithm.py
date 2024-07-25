@@ -1,7 +1,7 @@
 import numpy as np
 
 class FloydWarshallAlgorithm:
-    def __init__(self, graph=None, start=0, end=0):
+    def __init__(self, graph: object = None,  start: int = 0, end: int = 0):
         self.__graph = graph
         self.__start = start - 1 if start > 0 else 0
         self.__end = end - 1 if end > 0 else 0

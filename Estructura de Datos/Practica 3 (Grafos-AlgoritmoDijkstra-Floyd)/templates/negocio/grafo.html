@@ -61,9 +61,9 @@
   <!-- Formulario de búsqueda de camino corto -->
   <section class="form-container">
     <h1>Busqueda de Grafo</h1>
-    <form action="/negocio/buscar-camino-corto" method="POST" class="mt-3">
+    <form action="/negocio/buscar-camino-corto" method="POST" class="mt-3  mx-auto">
 
-      <div class="col-lg-6 col-12">
+      <div class="col-lg-6 col-12  mx-auto">
         <label for="origen">Origen:</label>
         <select class="form-control" id="origen" name="origen">
           {% for item in negocios %}
@@ -71,7 +71,7 @@
           {% endfor %}
         </select>
       </div>
-      <div class="col-lg-6 col-12">
+      <div class="col-lg-6 col-12  mx-auto">
         <label for="destino">Destino:</label>
         <select class="form-control" id="destino" name="destino">
           {% for item in negocios %}
@@ -79,7 +79,7 @@
           {% endfor %}
         </select>
       </div>
-      <div class="col-lg-6 col-12">
+      <div class="col-lg-6 col-12  mx-auto">
         <span class="text-black">Algoritmo de Busqueda</span>
         <select class="form-control" id="algoritmo" name="algoritmo">
             <option value="0">Algoritmo de Dijkstra</option>

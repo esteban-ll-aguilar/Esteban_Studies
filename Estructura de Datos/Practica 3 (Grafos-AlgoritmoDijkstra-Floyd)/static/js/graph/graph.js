@@ -10,7 +10,8 @@ var nodes = new vis.DataSet([
 {id:8, label: "Restaurante El Sabor"},
 {id:9, label: "La Parrilla Grill"},
 {id:10, label: "Buffet Buen Sabor"},
-{id:11, label: "Rosa Chocolate"}]);
+{id:11, label: "Rosa Chocolate"},
+{id:12, label: "Sazon Mamita"}]);
 
  var edges = new vis.DataSet([{
 from: 0, to: 1, label: "26.8"},{
