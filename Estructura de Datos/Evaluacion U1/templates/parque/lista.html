@@ -1,0 +1,87 @@
+{% extends "template.html" %}
+{% block style %}
+/* Estilos para la tabla */
+.table-container {
+    overflow-x: auto;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table th,
+.custom-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.custom-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+{% endblock %}
+
+{% block content %}
+<section class="custom-video booking-form text-center">
+    <div class="text-center mb-4 pb-lg-2">
+        <em class="text-center-em">Universidad Nacional de Loja</em>
+        <h2 class="text-white" style='text-align: center;'>Parques Registrados</h2>
+        <a href="/" class="a_regresar custom-btn custom-border-btn">Regresar</a>
+    </div>
+
+    <div class="col-lg-7 col-12 p-0">
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style='text-align: center;'>Nombre</th>
+                        <th style='text-align: center;'>Dirección</th>
+                        <th colspan='2' style='text-align: center;'>Ubicación GPS</th>
+                        <th style='text-align: center;'>Detalle</th>
+                        <th style='text-align: center;'>Editar</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th style='text-align: center;'>Longitud</th>
+                        <th style='text-align: center;'>Latitud</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for i in parque %}
+                    <tr>
+                        <td>{{ i.nombre }}</td>
+                        <td>{{ i.direccion }}</td>
+                        <td>{{ i.latitud }}</td>
+                        <td>{{ i.longitud }}</td>
+                        <td>{{ i.detalle }}</td>
+                        <td style='text-align: center;'>
+                            <a href="editar_parque/{{ i.id }}" class="a_regresar custom-border-btn btn-sm" style='padding: 4px 8px; font-size: 12px;'>Editar</a>
+
+                            <a href="eliminar_parque/{{ i.id }}" class="a_regresar custom-border-btn btn-sm" style='padding: 4px 8px; font-size: 12px; background-color: red;'>Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </br>   
+            
+        </div>
+    </div>
+</section>
+{% endblock %}

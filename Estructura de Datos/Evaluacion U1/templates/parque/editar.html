@@ -1,0 +1,133 @@
+
+<!--
+
+            <div>
+                <div class="booking-form-wrap">
+                    <div class="clo">
+                        <div >
+                            <form class="custom-form " method="post" action="/editar_parque/guardar" role="form">
+                                <div class="text-center">
+                                    <em class="text-white">Universidad Nacional de Loja</em>
+
+                                    <h2 class="text-white">Editar Iinformacion del Parque</h2>
+                                    
+                                    <a href="/" class="btn custom-btn custom-border-btn">Regresar</a>
+                                </div>
+
+                                <div class="booking-form-body">
+                                    <input type="hidden" name="id" id="id" class="form-control" placeholder="id" required value="{{ data._id }}">
+                                    <div class="row">
+                                        <div >
+                                            <p><b>Nombre:</b></p>
+                                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre"  required  value="{{ data._nombre }}">
+                                        </div>
+                                        <div>
+                                            <p><b>Direccion:</b></p>
+                                            <input type="text" name="direccion" id="apellidos" class="form-control" placeholder="Direccion" required  value="{{ data._direccion }}">
+                                        </div>
+
+                                        <div>
+                                            <p><b>Ubicacion GPS:</b></p>
+                                        </div>
+
+    
+
+                                        <div>
+                                            <p><b>Detalles:</b></p>
+                                        </div>
+
+                                        
+                                        <div class="col-lg-6 col-12">
+                                            <input type="text" name="tipoIdentificacion" id="tipoIdentificacion" class="form-control" placeholder="Tipo de Identificacion" required>
+                                        </div> 
+                                        <button type="submit" id="guardar" class="btn custom-btn custom-border-btn">Guardar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+-->
+
+
+
+
+{% extends "template.html" %}
+{% block style %}
+/* Estilos para el formulario */
+.booking-form {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.booking-form label {
+    font-weight: bold;
+}
+
+.booking-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.booking-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.booking-form button[type="submit"]:hover {
+    background-color: #09417D;
+}
+
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-7 col-12 p-0">
+        <form class="custom-form booking-form" method="post" action="/editar_parque/guardar" role="form">
+            <div class="text-center mb-4 pb-lg-2">
+                <em class="text-center-em" >Universidad Nacional de Loja</em>
+                <h2 class="text-white" style='text-align: center;'>Edicion de Parque</h2>
+                <p class="text-white"><b>Importante:</b><br>
+                    Todos los campos son obligatorios. Gracias
+                </p>
+                <a href="/" class="a_regresar custom-btn custom-border-btn">Regresar</a></button>
+            </div>
+
+            <div class="booking-form-body">
+                <div class="row">
+                    <input type="hidden" name="id" id="id" class="form-control" placeholder="id" required value="{{ data._id }}">
+                    <div class="col-lg-6 col-12">
+                        <label for="nombre"><b>Nombre:</b></label>
+                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre"  required  value="{{ data._nombre }}">
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <label for="direccion"><b>Dirección:</b></label>
+                        <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Dirección" required value="{{ data._direccion }}">
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <label for="ubicacion"><b>Ubicación GPS:</b></label>
+                        <input type="text" id="latitud" name="latitud" class="form-control" placeholder="Latitud" required value="{{ data._latitud }}">
+                        <input type="text" id="longitud" name="longitud" class="form-control" placeholder="Longitud" required value="{{ data._longitud }}">
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <label for="detalle"><b>Detalles:</b></label>
+                        <input type="text" name="detalle" id="direccion" class="form-control" placeholder="Detalle" required value="{{ data._detalle }}">
+                    </div>
+                </div>
+                <button type="submit" id="guardar" class="btn custom-btn custom-border-btn">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

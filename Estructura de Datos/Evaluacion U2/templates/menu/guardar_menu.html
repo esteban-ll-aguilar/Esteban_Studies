@@ -1,0 +1,68 @@
+{% extends "template.html" %}
+
+{% block title %}Retenciones{% endblock %}
+
+{% block style %}
+body {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+{% endblock %}
+
+{% block content %}
+<form class="custom-video booking-form text-center" action="/restaurantes/crearmenu/guardar/{{ data }}" method="post" role="form">
+    <div class="text-center mb-4 pb-lg-2">
+        <em class="text-white">Universidad Nacional de Loja</em>
+        <h2 class="text-white">Generar Factura</h2>
+    </div>
+    <div class="booking-form-body container col">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="text-white-50">
+                    <p class="text-white">Contacto</p>
+                </div>
+                <div>
+                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre"    required >
+                    <input type="text" name="precio" id="precio" class="form-control"  placeholder="Precio" required >
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary">Guardar Menu</button>
+
+    </div>
+</form>
+
+
+
+{% endblock %}
+{% block script %}
+
+    <script>
+        // Function to update total based on subtotal and VAT
+        function actualizarTotal() {
+            let subtotal = parseFloat(document.getElementById('subtotal').value) || 0;
+            let iva = parseFloat(document.getElementById('iva').value) || 0;
+            
+            let total = subtotal * (1 + iva);
+            document.getElementById('total').value = total.toFixed(2); // Fixing to 2 decimal places
+        }
+    </script>
+
+{% endblock %}

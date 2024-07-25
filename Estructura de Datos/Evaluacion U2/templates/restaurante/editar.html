@@ -1,0 +1,47 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+
+            <div class="col-lg-10 col-12 mx-auto">
+                <div class="booking-form-wrap">
+                    <div class="row">
+                        <div class="col-lg-7 col-12 p-0">
+                            <form class="custom-form booking-form" method="post" action="/restaurantes/modificar/{{data._id}}" role="form">
+                                <div class="text-center mb-4 pb-lg-2">
+                                    <em class="text-white">Universidad Nacional de Loja</em>
+
+                                    <h2 class="text-white">Editar Info Persona</h2>
+                                    
+                                    <a href="/restaurantes" class="btn custom-btn custom-border-btn">Regresar</a>
+                                </div>
+
+                                <div class="booking-form-body">
+                                    <inpit type="hidden" name="id" value="{{data._id}}">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12">
+                                            <input type="text" name="nombre" class="form-control" placeholder="nombre" value="{{data._nombre}}" required>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <input type="text" name="codigoDePermiso" class="form-control" value="{{data._codigoDePermiso}}"  placeholder="Codigo de Permiso" required maxlength='13' minlength='13'>
+                                        </div>
+
+                                        <div class="col-lg-6 col-12">
+                                            <input type="text" class="form-control" name="estrellas"  value="{{data._estrellas}}" placeholder="Estrellas" required maxlength="1">
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                        </div>
+                                    <button type="submit" id="guardar" class="btn btn-primary a_regresar text-center">Guardar</button>
+
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+{% endblock %}
+
+

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grafo Visualización</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Inconsolata", sans-serif;
+      padding: 20px;
+    }
+    #mynetworkSearch, #mynetwork {
+      width: 100%;
+      max-width: 600px;
+      height: 400px;
+      border: 1px solid lightgray;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .graph-container {
+      max-width: 600px;
+      margin: 20px auto;
+      border: 1px solid lightgray;
+    }
+
+    .form-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .info-container {
+      margin-top: 20px;
+    }
+
+    .btn-custom {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h1>Grafo Negocios</h1>
+    <div id="mynetwork" class="graph-container"></div>
+    <script src="/static/js/graph/vis.js"></script>
+    <script src="/static/js/graph/graph.js"></script>
+  </section>
+
+  <section class="form-container">
+    <a href="/negocio/formulario" class="btn btn-info btn-custom">Formulario</a>
+    <a href="/negocio/grafo_ver_admin" class="btn btn-warning btn-custom">Agregar Camino</a>
+  </section>
+  
+  <!-- hacer una linea vertical que separe los section -->
+  <hr class="separator-row mt-5">
+  <!-- Formulario de búsqueda de camino corto -->
+  <section class="form-container">
+    <h1>Busqueda de Grafo</h1>
+    <form action="/negocio/buscar-camino-corto" method="POST" class="mt-3">
+
+      <div class="col-lg-6 col-12">
+        <label for="origen">Origen:</label>
+        <select class="form-control" id="origen" name="origen">
+          {% for item in negocios %}
+            <option value="{{ item.id }}">{{ item.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-lg-6 col-12">
+        <label for="destino">Destino:</label>
+        <select class="form-control" id="destino" name="destino">
+          {% for item in negocios %}
+            <option value="{{ item.id }}">{{ item.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-lg-6 col-12">
+        <span class="text-black">Algoritmo de Busqueda</span>
+        <select class="form-control" id="algoritmo" name="algoritmo">
+            <option value="0">Algoritmo de Dijkstra</option>
+            <option value="1">Algoritmo de Floyd Warshall</option>
+        </select>
+    </div>
+      <button type="submit" class="btn btn-primary btn-custom">Buscar Camino</button>
+    </form>
+    <div class="info-container">
+      <p>El mejor camino que usted debe recorrer es:</p>
+      <div class="alert alert-info" id="advertencia"></div>
+      <div class="alert alert-success" id="camino"></div>
+      <div class="alert alert-info" id="weigths"></div>
+    </div>
+  </section>
+
+  <section>
+    <h1>Visualización de Búsqueda</h1>
+    <div id="mynetworkSearch" class="graph-container"></div>
+    <script src="/static/js/graph/graphSearch.js"></script>
+  </section>
+
+  <script>
+    // Mostrar div solo si tienen datos
+    if (document.getElementById('advertencia').innerHTML == '') {
+      document.getElementById('advertencia').style.display = 'none';
+    }
+    if (document.getElementById('camino').innerHTML == '') {
+      document.getElementById('camino').style.display = 'none';
+    }
+    if (document.getElementById('weigths').innerHTML == '') {
+      document.getElementById('weigths').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Template</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-search/dist/leaflet-search.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <style>
+    body, html {
+      height: 100%;
+      font-family: "Inconsolata", sans-serif;
+    }
+
+    .text-center-em {
+      display: block;
+      text-align: center;
+    }
+
+    .a_regresar {
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+      padding: 10px 20px;
+      font-size: 18px;
+      line-height: 1.3333333;
+      border-radius: 6px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .a_regresar:hover {
+      color: #fff;
+      background-color: #0056b3;
+      border-color: #004f9a;
+    }
+
+    .bgimg {
+      background-position: center;
+      background-size: cover;
+      background-image: url("https://www.equipajeymanta.com/wp-content/uploads/2018/03/dca_fi.jpg");
+      min-height: 50%;
+      filter: blur(0.5px);
+    }
+
+    .menu {
+      display: none;
+    }
+
+    /* Estilo para el mapa */
+    #map {
+      height: 300px; /* Ajusta la altura del mapa según sea necesario */
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Links (sit on top) -->
+<div class="fixed-top">
+  <div class="row no-gutters bg-dark text-white py-2">
+    <div class="col-6">
+      <!--<a href="lista_parque" class="btn btn-dark btn-block">Ver Parques</a>-->
+    </div>
+    <div class="col-6">
+      <!--<a href="lista_parque" class="btn btn-dark btn-block">Ver Parques</a>-->
+    </div>
+  </div>
+</div>
+
+<!-- Header with image -->
+<header class="bgimg d-flex flex-column justify-content-between align-items-center text-white" id="home" style="height: 100vh; position: relative;">
+  <div class="d-none d-sm-block p-3">
+    <!-- Espacio para contenido adicional si lo necesitas -->
+  </div>
+  
+  <!-- Contenedor para el fondo borroso -->
+  <div class="blur-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://www.equipajeymanta.com/wp-content/uploads/2018/03/dca_fi.jpg'); background-size: cover; filter: blur(10px); z-index: -1;"></div>
+  
+  <div class="d-flex justify-content-center align-items-center flex-grow-1">
+    <span class="display-1">{% block text_img %}Bienvenido{% endblock %}</span>
+  </div>
+  
+  <div class="p-3">
+    <span>15 Adr street, 2024</span>
+  </div>
+</header>
+
+
+<!-- Add a background color and large text to the whole page -->
+<div class="bg-light text-dark p-5">
+
+<!-- About Container -->
+<div class="container" id="about">
+  <div class="content">
+    {% block content %}
+    <div style="margin-top: 50px;">
+      <p>Este es un sistema de registro de restaurants.</p>
+      <p class="text-center"> Los botones se encuentran en la parte superior de la página.</p>
+      <p>Para registrar un parque, haga clic en el botón "Registrar un Parque".</p>
+      <p>Para visualizar los parques registrados, haga clic en el botón "Ver Parques".</p>
+    </div>
+    <a href="/restaurantes" class="btn btn-primary a_regresar">Ver Restaurantes</a>
+    <a href="/nuevo_restaurant" class="btn btn-primary a_regresar">Registrar Restaurante</a>
+    {% endblock %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class='text-center alert alert-info'>
+        {% for message in messages %}
+          <li class='text-light'>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+</div>
+
+<!-- Mapa 
+<div class="container">
+  <div id="map"></div>
+</div>-->
+
+<!-- End page content -->
+</div>
+
+<!-- Scripts al final para mejorar el rendimiento de carga -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-search/dist/leaflet-search.min.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script>
+  var map = L.map('map').setView([-3.995, -79.204], 5);
+
+// Agregar marcador interactivo
+var marker = L.marker([-3.995, -79.204], { draggable: true }).addTo(map);
+
+// Función para actualizar las coordenadas del marcador
+function updateMarkerPosition(latlng) {
+  marker.setLatLng(latlng);
+  // Aquí podrías llamar a alguna función que maneje las coordenadas actualizadas
+  updateLatLng(latlng.lat, latlng.lng);
+}
+
+// Evento click en el mapa
+map.on('click', function(e) {
+  updateMarkerPosition(e.latlng);
+  updateDireccion(e.latlng.lat, e.latlng.lng);
+});
+
+// Evento dragend en el marcador
+marker.on('dragend', function(e) {
+  updateMarkerPosition(marker.getLatLng());
+  updateDireccion(marker.getLatLng().lat, marker.getLatLng().lng);
+  updateLatLng(marker.getLatLng().lat, marker.getLatLng().lng);
+});
+
+// Capa de OpenStreetMap como base del mapa
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Control de búsqueda
+var searchControl = new L.Control.Search({
+  url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
+  jsonpParam: 'json_callback',
+  propertyName: 'display_name',
+  propertyLoc: ['lat', 'lon'],
+  marker: false,
+  moveToLocation: function(latlng, title, map) {
+    map.setView(latlng, 13); // Ajusta el zoom aquí si es necesario
+    updateMarkerPosition(latlng);
+    updateDireccion(latlng.lat, latlng.lng);
+  }
+});
+
+// Añadir control de búsqueda al mapa
+map.addControl(searchControl);
+
+// Función para actualizar las coordenadas en el formulario
+function updateLatLng(lat, lng) {
+  document.getElementById('latitud').value = lat;
+  document.getElementById('longitud').value = lng;
+}
+
+// Función para actualizar la dirección en el formulario
+function updateDireccion(lat, lng) {
+  fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
+      .then(response => response.json())
+      .then(data => {
+          document.getElementById('direccion').value = data.display_name;
+      })
+      .catch(error => {
+          console.error('Error fetching address:', error);
+          document.getElementById('direccion').value = 'Dirección no disponible';
+      });
+}
+</script>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

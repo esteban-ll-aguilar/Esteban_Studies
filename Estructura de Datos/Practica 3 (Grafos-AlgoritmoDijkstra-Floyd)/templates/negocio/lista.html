@@ -1,0 +1,54 @@
+{% extends "template.html" %}
+{% block style %}
+    .separator-row td {
+        border-bottom: 2px solid #ff0000; /* Cambia #ff0000 por el color que prefieras */
+        padding: 0;
+        height: 2px; /* Ajusta el grosor de la línea */
+    }
+    .separator-col {
+        border-right: 2px solid #ff0000; /* Cambia #ff0000 por el color que prefieras */
+        padding: 0;
+        width: 2px; /* Ajusta el grosor de la línea */
+    }
+    
+{% endblock %}
+{% block text_img %}Restaurantes{% endblock %}
+{% block content %}
+<section class="custom-video booking-form text-center">
+    <div class="text-center mb-4 pb-lg-2">
+        <em class="text-black">Universidad Nacional de Loja</em>
+
+        <h2 class="text-bg-black">Lista de Negocios</h2>
+        <a href="negocio/formulario" class="btn custom-btn custom-border-btn btn-info">Formulario</a>
+        <a href="negocio/grafo_negocio" class="btn custom-btn custom-border-btn btn-success">Negocio Grafo</a>
+        <a href="negocio/grafo_ver_admin" class="btn custom-btn custom-border-btn  btn-warning">Matriz de Adyacencia</a>
+    </div>
+    <!--<div id="map"></div>-->
+    <div class="booking-form-body table-responsive-lg">
+        <table class="table  table-bordered text-black" id="tabla">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Horario</th>
+                    <th>Longitud</th>
+                    <th>Latitud</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in lista %}
+                <tr>
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.direccion }}</td>
+                    <td>{{ item.horario }}</td>
+                    <td>{{ item.longitud }}</td>
+                    <td>{{ item.latitud }}</td>
+                    <!--<td>
+                        <a href="negocio/editar/{{ item.id }}" class="btn custom-btn custom-border-btn ">Editar</a>
+                    </td>-->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

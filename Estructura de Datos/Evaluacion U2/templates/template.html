@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bootstrap Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-2.0.7/datatables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style>
+body, html {
+  height: 100%;
+  font-family: "Inconsolata", sans-serif;
+}
+.text-center-em {
+  display: block;
+  text-align: center;
+}
+
+.a_regresar {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.a_regresar:hover {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #004f9a;
+}
+
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("https://www.equipajeymanta.com/wp-content/uploads/2018/03/dca_fi.jpg");
+  min-height: 50%;
+}
+
+.menu {
+  display: none;
+}
+
+{% block style %}{% endblock %}
+</style>
+</head>
+<body>
+
+<!-- Links (sit on top) -->
+<div class="fixed-top">
+  <div class="row no-gutters bg-dark text-white py-2">
+    <div class="col-6">
+      <!--<a href="lista_parque" class="btn btn-dark btn-block">Ver Parques</a>-->
+    </div>
+    <div class="col-6">
+      <!--<a href="lista_parque" class="btn btn-dark btn-block">Ver Parques</a>-->
+    </div>
+  </div>
+</div>
+
+<!-- Header with image -->
+<header class="bgimg d-flex flex-column justify-content-between align-items-center text-white" id="home" style="height: 100vh;">
+  <div class="d-none d-sm-block p-3">
+  </div>
+  <div class="d-flex justify-content-center align-items-center flex-grow-1">
+    <span class="display-1">{% block text_img %}Bienvenido{% endblock %}</span>
+  </div>
+  <div class="p-3">
+    <span>15 Adr street, 2024</span>
+  </div>
+</header>
+
+<!-- Add a background color and large text to the whole page -->
+<div class="bg-light text-dark p-5">
+
+<!-- About Container -->
+<div class="container" id="about">
+  <div class="content">
+    {% block content %}
+    <div style="margin-top: 50px;">
+      <p>Este es un sistema de registro de restaurants.</p>
+      <p class="text-center"> Los botones se encuentran en la parte superior de la página.</p>
+      <p>Para registrar un parque, haga clic en el botón "Registrar un Parque".</p>
+      <p>Para visualizar los parques registrados, haga clic en el botón "Ver Parques".</p>
+    </div>
+    <a href="/restaurantes" class="btn btn-primary a_regresar">Ver Restautantes</a>
+    <a href="/nuevo_restaurant" class="btn btn-primary a_regresar">Resgistar Restaurant</a>
+    {% endblock %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class='text-center alert alert-info'>
+        {% for message in messages %}
+          <li class='text-light'>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+</div>
+
+<!-- End page content -->
+</div>
+
+<!-- Footer -->
+
+
+
+{% block script %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends "template.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 mb-4 mb-lg-0">
+            <form class="custom-form booking-form" method="post" action="/negocio/guardar" role="form">
+                <div class="text-center mb-4">
+                    <em class="text-black">Universidad Nacional de Loja</em>
+                    <h2 class="text-black mb-4">Formulario para Guardar Restaurantes</h2>
+                    <a href="/" class="btn custom-btn custom-border-btn btn-info">Regresar</a>
+                </div>
+
+                <div class="booking-form-body">
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="horario" class="form-control" placeholder="Horario" required>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Dirección" required readonly>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="longitud" id="longitud" class="form-control" placeholder="Longitud" required readonly>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <input type="text" name="latitud" id="latitud" class="form-control" placeholder="Latitud" required readonly>
+                        </div>
+                        <div class="col-lg-12 mb-3">
+                            <div id="map" style="height: 300px;"></div>
+                        </div>
+                        <div class="col-lg-6 mb-3 d-flex justify-content-center align-items-center">
+                            <button type="submit" id="guardar" class="btn btn-primary btn-block">Guardar</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

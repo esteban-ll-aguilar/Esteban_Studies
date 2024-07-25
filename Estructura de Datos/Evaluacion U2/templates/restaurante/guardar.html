@@ -1,0 +1,51 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+
+            
+                    <div class="row">
+                        <div class="col-lg-7 col-12 p-0">
+                            <form class="custom-form booking-form" method="post" action="/nuevo_restaurante/guardar" role="form">
+                                <div class="text-center mb-4 pb-lg-2">
+                                    <em class="text-bg-dark">Universidad Nacional de Loja</em>
+
+                                    <h2 class="text-bg-dark">Registro de Restaurantes</h2>
+                                    
+                                    
+                                    <a href="/"  class="btn btn-primary a_regresar">Regresar</a>
+                                </div>
+
+                                <div class="booking-form-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12">
+                                            <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <input type="text" name="codigoDePermiso" class="form-control" placeholder="Codigo de Permiso" required maxlength='13' minlength='13'>
+                                        </div>
+
+                                        <div class="col-lg-6 col-12">
+                                            <input type="text" class="form-control" name="estrellas" placeholder="Estrellas" required maxlength="1">
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                        </div>
+                                    <button type="submit" id="guardar" class="btn btn-primary a_regresar text-center">Guardar</button>
+
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-lg-5 col-12 p-0">
+                            <div class="booking-form-image-wrap">
+                                
+                                <img src="{{ url_for('static', filename='images/barman-with-fruits.jpg')}}" class="booking-form-image img-fluid" alt="">
+                            </div>
+
+                        </div>
+                    </div>
+            
+
+{% endblock %}
+
+

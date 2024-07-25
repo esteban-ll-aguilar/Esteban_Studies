@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nombre": "Simon Bolivar",
+        "direccion": "Torricelli",
+        "latitud": "-49878555",
+        "longitud": "45557789",
+        "detalle": "El detalle fue modificado"
+    },
+    {
+        "id": 2,
+        "nombre": "San Cortetino",
+        "direccion": "Torricelli",
+        "latitud": "-498785555",
+        "longitud": "45557744",
+        "detalle": "El parque fue inventado"
+    },
+    {
+        "id": 3,
+        "nombre": "San Tomas",
+        "direccion": "Torricelli",
+        "latitud": "-4987852",
+        "longitud": "45557789",
+        "detalle": "El parque fue inventado"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "nombre": "Plato fuerte",
+        "precio": 42.0,
+        "restauranteId": 1
+    },
+    {
+        "id": 2,
+        "nombre": "gourmet",
+        "precio": 25.0,
+        "restauranteId": 3
+    },
+    {
+        "id": 3,
+        "nombre": "Parrillada",
+        "precio": 33.0,
+        "restauranteId": 3
+    },
+    {
+        "id": 4,
+        "nombre": "Comida rapida",
+        "precio": 36.0,
+        "restauranteId": 3
+    },
+    {
+        "id": 5,
+        "nombre": "Pollo",
+        "precio": 52.0,
+        "restauranteId": 3
+    }
+]

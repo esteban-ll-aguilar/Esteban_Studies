@@ -1,0 +1,165 @@
+{% extends "template.html" %}
+{% block style %}
+    .separator-row td {
+        border-bottom: 2px solid #ff0000; /* Cambia #ff0000 por el color que prefieras */
+        padding: 0;
+        height: 2px; /* Ajusta el grosor de la línea */
+    }
+    .separator-col {
+        border-right: 2px solid #ff0000; /* Cambia #ff0000 por el color que prefieras */
+        padding: 0;
+        width: 2px; /* Ajusta el grosor de la línea */
+    }
+    
+{% endblock %}
+{% block text_img %}Lista de Clientes{% endblock %}
+{% block content %}
+<section class="custom-video booking-form text-center">
+    <div class="text-center mb-4 pb-lg-2">
+        <em class="text-bg-dark">Universidad Nacional de Loja</em>
+        <h2 class="text-bg-dark">Restaurantes</h2>
+            <a href="/" class="btn btn-primary a_regresar">Regresar</a>
+            
+            <div class="custom-border">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="atributo" class="text-bg-dark"><strong>Ordenar Por:</strong></label>
+                            <select name="atributo" id="atributo" class="form-control custom-border-select">
+                                <option value="----">-----</option>
+                                <option value="_nombre">Nombres</option>
+                                <option value="_codigoDePermiso">C. Permiso</option>
+                                <option value="_estrellas">Estrellas</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="metodoOrdenacion" id="metodoOrdenacion" class="form-control custom-border-select">
+                                
+                        </div>
+                        <div class="form-group">
+                            <label for="orden" class="text-bg-dark"><strong>Orden:</strong></label>
+                            <select name="orden" id="orden" class="form-control custom-border-select">
+                                <option value="1">Ascendente</option>
+                                <option value="2">Descendente</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="criterioBusqueda" class="text-bg-dark"><strong>Buscar por:</strong></label>
+                            <select name="criterioBusqueda" id="criterioBusqueda" class="form-control custom-border-select">
+                                <option value="_nombre">Nombres</option>
+                                <option value="_codigoDePermiso">C. Permiso</option>
+                                <option value="_estrellas">Estrellas</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input  type="hidden" name="metodoBusqueda" id="metodoBusqueda" class="form-control custom-border-select">
+                        </div>
+                        <div class="form-group">
+                            <label for="search" class="text-bg-dark"><strong>Buscar:</strong></label>
+                            <input type="text" class="form-control text-center form-bi-search-heart" id="search" name="search" placeholder="--------">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+    </div>
+
+    <div class="booking-form-body">
+        <div class="table-responsive">
+            <table class="table table-bordered text-bg-dark" id="tabla">
+                <thead>
+                    <tr>
+                        <th>nombre</th>
+                        <th>codigoDePermiso</th>
+                        <th>estrellas</th>
+                        <th colspan='2'>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in lista %}
+                    <tr>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{ item.codigoDePermiso }}</td>
+                        <td>{{ item.estrellas }}</td>
+                        <td>
+                            <a href="restaurantes/editar/{{ item.id }}" class="btn btn-primary a_regresar" style='padding: 4px 8px; font-size: 12px;'>Editar</a>
+                        </td>
+                        <td>
+                            <a href="restaurantes/detalle/{{ item.id }}" class="btn btn-primary a_regresar" style='padding: 4px 8px; font-size: 12px;'>Ver</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script>
+    
+    if (atributo && orden){
+        [atributo, metodoOrdenacion, orden].forEach(element => {
+            element.addEventListener('change', () => {
+                const atributo = document.getElementById('atributo');
+                const metodoOrdenacion = 1
+                const orden = document.getElementById('orden');
+                
+                ordenate(atributo.value, metodoOrdenacion, orden.value);
+            });
+        });
+    }
+
+    if (criterioBusqueda){
+        [metodoBusqueda, criterioBusqueda].forEach(element => {
+            element.addEventListener('change', () => {
+                search();
+            });
+        });
+    }
+
+    $('#search').keyup(function() {
+        search();
+    }); 
+
+    function search() {
+        const metodo = document.getElementById('metodoBusqueda').value;
+        const atrib = document.getElementById('criterioBusqueda').value;
+        const search = $('#search').val();
+        console.log(search, atrib, metodo);
+        tabla("http://127.0.0.1:5000//restaurantes/search/"+search+"/"+atrib+"/1"+"");
+    }
+
+    function ordenate(atributo,metodoOrdenacion,orden){
+        tabla('http://127.0.0.1:5000/restaurantes/'+atributo+'/1/'+orden+'');
+    }
+    function tabla(url){
+        $.ajax({
+            method: "GET",
+            url: url,
+            contentType: 'json',
+            success: function(data){
+                console.log(data);
+                if (data.code == 200){
+                    var html = '';
+                    $.each(data.data, function(i, item){
+                        html += '<tr>';
+                        html += '<td>'+item.nombre+'</td>';
+                        html += '<td>'+item.codigoDePermiso+'</td>';
+                        html += '<td>'+item.estrellas+'</td>';
+                        html += '<td><a href="restaurantes/editar/'+item.id+'"  class="btn btn-primary a_regresar"  style="padding: 4px 8px; font-size: 12px;">Editar</a></td>';
+                        html += '<td><a href="restaurantes/detalle/'+item.id+'"  class="btn btn-primary a_regresar" style="padding: 4px 8px; font-size: 12px;">Ver</a></td>';
+                        html += '</tr>';
+                    });
+                    $('#tabla tbody').html(html);
+                }
+            }
+        });
+    }
+    
+</script>
+
+{% endblock %}

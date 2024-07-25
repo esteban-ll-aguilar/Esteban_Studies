@@ -1,0 +1,138 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+
+<section class="custom-video booking-form text-center" >
+    <div class="text-center mb-4 pb-lg-2">
+        <em class="text-bg-dark">Universidad Nacional de Loja</em>
+
+        <h2 class="text-bg-dark">Menus Emitidas</h2>
+        
+        <div class="custom-border">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="atributo" class="text-bg-dark"><strong>Ordenar Por:</strong></label>
+                        <select name="atributo" id="atributo" class="form-control custom-border-select">
+                            <option value="----">-----</option>
+                            <option value="_nombre">Nobre</option>
+                            <option value="_precio">Precio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="metodoOrdenacion" id="metodoOrdenacion" class="form-control custom-border-select">
+                            
+                    </div>
+                    <div class="form-group">
+                        <label for="orden" class="text-bg-dark"><strong>Orden:</strong></label>
+                        <select name="orden" id="orden" class="form-control custom-border-select">
+                            <option  value="1">Ascendente</option>
+                            <option value="2">Descendente</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="criterioBusqueda" class="text-bg-dark"><strong>Buscar por:</strong></label>
+                        <select name="criterioBusqueda" id="criterioBusqueda" class="form-control custom-border-select">
+                            <option value="_precio">Precio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input  type="hidden" name="metodoBusqueda" id="metodoBusqueda" class="form-control custom-border-select">
+                    </div>
+                    <div class="form-group">
+                        <label for="search" class="text-bg-dark"><strong>Buscar:</strong></label>
+                        <input type="text" class="form-control text-center form-bi-search-heart" id="search" name="search" placeholder="--------">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="booking-form-body table-responsive" >
+        <table class="table  table-bordered text-bg-dark" id="tabla">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in lista %}
+                <tr>
+                    <td>{{ item.nombre }}</td>
+                    <td>$ {{ item.precio }}</td>
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<script>
+    
+
+    if (atributo && orden){
+        [atributo, metodoOrdenacion, orden].forEach(element => {
+            element.addEventListener('change', () => {
+                const atributo = document.getElementById('atributo');
+                const metodoOrdenacion = 1
+                const orden = document.getElementById('orden');
+                
+                ordenate(atributo.value, metodoOrdenacion, orden.value);
+            });
+        });
+    }
+
+    if (criterioBusqueda){
+        [metodoBusqueda, criterioBusqueda].forEach(element => {
+            element.addEventListener('change', () => {
+                search();
+            });
+        });
+    }
+    
+    $('#search').keyup(function() {
+        search();
+    }); 
+
+    function search() {
+        const metodo = document.getElementById('metodoBusqueda').value;
+        const atrib = document.getElementById('criterioBusqueda').value;
+        const search = $('#search').val();
+        console.log(search, atrib, metodo);
+        tabla("http://127.0.0.1:5000//restaurantes/menu/search/"+search+"/"+atrib+"/1"+"");
+    }
+
+    function ordenate(atributo,metodoOrdenacion,orden){
+        tabla('http://127.0.0.1:5000//restaurantes/menu/'+atributo+'/'+'1/'+orden+'');
+    }
+    function tabla(url){
+        $.ajax({
+            method: "GET",
+            url: url,
+            contentType: 'json',
+            success: function(data){
+                console.log(data);
+                if (data.code == 200){
+                    var html = '';
+                    $.each(data.data, function(i, item){
+                        html += '<tr>';
+                        html += '<td>'+item.nombre+'</td>';
+                        html += '<td> $'+item.precio+'</td>';
+                        
+                        html += '</tr>';
+                    });
+                    $('#tabla tbody').html(html);
+                }
+            }
+        });
+    }
+    
+
+    
+</script>
+{% endblock %}

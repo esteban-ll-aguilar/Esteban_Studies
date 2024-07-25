@@ -1,0 +1,52 @@
+{% extends 'template.html' %}
+
+<title>{% block title %}Retenciones{% endblock %}</title>
+        
+<style>{% block style %}{% endblock %}</style>
+{% block content %}
+<section class="custom-video booking-form text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="text-center mb-4">
+                    <em class="text-bg-dark">Universidad Nacional de Loja</em>
+                    <h2 class="text-bg-dark">¡Bienvenido de nuevo, {{ data._nombre }}!</h2>
+                    <p class="text-bg-dark">¡Es genial verte de nuevo! <br>¿En qué podemos ayudarte hoy?</p>
+                </div>
+            </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-bg-dark" id="tabla">
+                        <thead>
+                            <tr>
+                                <th>Ver Menus</th>
+                                <th>Crear Menu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="booking-form-image-wrap">
+                                        <img src="{{ url_for('static', filename='images/img/factura.jpg')}}" class="booking-form-image img-fluid" style="height: 100px;width: 200px;">
+                                    </div>
+                                </td> 
+                                <td>
+                                    <div class="booking-form-image-wrap">
+                                        <img src="{{ url_for('static', filename='images/img/retencion.jpg')}}" class="booking-form-image img-fluid" style="height: 100px;width: 200px;">
+                                    </div>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="/restaurantes/vermenus/{{ data._id }}"  class="btn btn-primary a_regresar" >Ir</a>
+                                </td>
+                                <td>
+                                    <a href="/restaurantes/crearmenu/{{ data._id }}"  class="btn btn-primary a_regresar" >Ir</a>
+                                </td>
+                            
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

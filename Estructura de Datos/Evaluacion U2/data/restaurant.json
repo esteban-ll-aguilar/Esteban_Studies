@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nombre": "Restairante",
+        "codigoDePermiso": "518448484fghf",
+        "estrellas": 4
+    },
+    {
+        "id": 2,
+        "nombre": "La buena Zazon",
+        "codigoDePermiso": "5434534534534",
+        "estrellas": 3
+    },
+    {
+        "id": 3,
+        "nombre": "Salcedo",
+        "codigoDePermiso": "5156161615915",
+        "estrellas": 5
+    },
+    {
+        "id": 4,
+        "nombre": "Marcelo",
+        "codigoDePermiso": "1515155551511",
+        "estrellas": 4
+    }
+]
