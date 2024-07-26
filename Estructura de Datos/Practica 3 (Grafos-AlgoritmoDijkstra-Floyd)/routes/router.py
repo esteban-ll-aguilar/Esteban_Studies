@@ -67,7 +67,7 @@ def buscar_camino_corto():
         search = DijkstraAlgorithm(negociograph.get_graph, int(data['origen']), int(data['destino']))
         search.dijkstra
     else:
-        search = FloydWarshallAlgorithm(negociograph.get_graph, int(data['destino']), int(data['origen']))
+        search = FloydWarshallAlgorithm(negociograph.get_graph, int(data['origen']), int(data['destino']))
         search.floydWarshall
     return redirect('/negocio/grafo_negocio', code=302)
 
