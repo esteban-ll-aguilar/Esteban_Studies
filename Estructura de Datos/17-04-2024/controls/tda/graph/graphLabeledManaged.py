@@ -71,6 +71,8 @@ class GraphLabeledManaged(GraphManaged):
             return self.adjacent(v)
         raise ArrayPositionException("No se encontro el vertice")
     
+    def
+    
     def newGraph(self, num_vertex):
         return GraphLabeledManaged(num_vertex)
     

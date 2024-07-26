@@ -41,3 +41,7 @@ class GraphLabeledNoManaged(GraphLabeledManaged, GraphNoManaged):
         return GraphLabeledNoManaged(num_vertex)
     
     
+    def allVertexConnected(self):
+        return super().allVertexConnected()
+    
+    

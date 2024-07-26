@@ -73,7 +73,9 @@ class GraphLabeledManaged(GraphManaged):
     
     def newGraph(self, num_vertex):
         return GraphLabeledManaged(num_vertex)
-    
+    @property
+    def allVertexConnected(self):
+        return super().allVertexConnected
     
     
 #python -m pydoct -w Esteban_Studies/17-04-2024/controls/tda/graph/graphLabeled.py

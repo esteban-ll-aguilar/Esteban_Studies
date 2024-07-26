@@ -77,6 +77,14 @@ class GraphManaged(Graph):
         self.__numVer += 1
         self.__listAdjacent.append(Linked_List())
         
+    @property
+    def allVertexConnected(self):
+        band = True
+        for i in range(0, self.num_vertex):
+            if self.__listAdjacent[i].isEmpty:
+                band = False
+                break
+        return band
         
     def newGraph(self, num_vertex):
         return GraphManaged(num_vertex)

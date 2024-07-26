@@ -50,6 +50,10 @@ def grafo_negocio():
     ng.get_graph
     if list.isEmpty:
         return render_template('negocio/grafo.html', negocios=[], grafonegocio=[])
+    
+    if ng.get_graph.allVertexConnected != True:
+        return render_template('graph/graph.html')
+    
     return render_template('negocio/grafo.html' , negocios=negocio.to_dict_lista())
 
 #BUSCAR CAMINO
