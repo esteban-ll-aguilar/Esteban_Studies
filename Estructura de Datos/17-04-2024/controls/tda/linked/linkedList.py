@@ -108,28 +108,33 @@ class Linked_List(object):
             return element
 
     
-    def detele(self, pos):
-        pos = pos 
+    def detele(self, pos=0):
+        pos = pos
+        eliminado = None 
         if self.isEmpty:
             raise LinkedEmptyException("List is Empty")
         elif pos < 0 or pos >= self._length:
             raise ArrayPositionException("Position is out of range")
         elif pos == 0:
+            eliminado = self.__head._data
             self.__head = self.__head._next
             self.__length -= 1
             
         elif pos == self._length -1:
             self.__last = self.getNode(pos-1)
-            #restarId
+            eliminado = self.__last._next._data
             self.__length -= 1
         else:
             node_preview = self.getNode(pos-1)
+            eliminado = node_preview._next._data
             node_last = node_preview._next._next
             node_preview._next = node_last
             self.__length -= 1
             
         for i in range(pos, self._length):
             self.getNode(i)._data._id = i+1
+            
+        return eliminado
 
     """Obtiene el objeto nodo"""
     def getNode(self, pos):

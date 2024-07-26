@@ -41,12 +41,17 @@ class Node():
     def _succesors(self, value):
         self.__succesors = value
 
-        
-        
-        
     def set_current_capacity(self, ccjb, ccjl):
         self.__jb._current_capacity = ccjb
         self.__jl._current_capacity = ccjl
+        
+    def addSuccessor(self, rules):
+        self.__succesors = Linked_List()
+        for i in range(0, rules._length):
+            aux =  rules.get(i)
+            aux._father = self
+            self.__succesors.add(aux, self.__succesors._length)
+        
         
     def __str__(self) -> str:
         return f"JG: {self.__jb} --|-|-- JP: {self.__jl}"

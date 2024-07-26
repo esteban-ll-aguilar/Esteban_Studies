@@ -36,6 +36,7 @@ from controls.tda.graph.searchMethod.dijkstraAlgorithm import DijkstraAlgorithm
 from controls.tda.graph.searchMethod.floydWarshallAlgorithm import FloydWarshallAlgorithm
 from controls.tda.tree.jug.node import Node as JugNode
 from controls.tda.tree.jug.rules import Rules
+from controls.tda.tree.jug.jugTree import JugTree
 
 from time import time
 
@@ -78,9 +79,15 @@ print(tree.getHeigth)
 # tree.in_orders().print
 
 node = JugNode()
+nodeF = JugNode()
 
 node.set_current_capacity(0,0)
-print(node)
+nodeF.set_current_capacity(2,3)
 
-rule = Rules()
-rule.rules(node._jb, node._jl).print
+justree = JugTree(node, nodeF)
+result = justree.search()
+if result is not None:
+    print(justree.route(result))
+    print("Lo logre: ", result)
+else:
+    print("No hay na'")
