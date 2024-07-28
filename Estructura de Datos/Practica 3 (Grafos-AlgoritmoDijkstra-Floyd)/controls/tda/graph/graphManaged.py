@@ -9,7 +9,6 @@ class GraphManaged(Graph):
         self.__numVer = num_vert
         self.__numEdg = 0
         self.__listAdjacent =[]
-        
         for i in range(0,num_vert):
             self.__listAdjacent.append(Linked_List())
             
@@ -19,9 +18,21 @@ class GraphManaged(Graph):
     @property
     def num_edges(self):
         return self.__numEdg
-    
     def setNumEdges(self, number):
         self.__numEdg = number
+        
+    def insert_edges(self, v1, v2):
+        self.insert_edges_weigth(v1, v2, nan)
+        
+    def adjacent(self, v1):
+        return self.__listAdjacent[v1]
+    
+    def get_list_adjacent(self):
+        return self.__listAdjacent
+
+    def addVertex(self):
+        self.__numVer += 1
+        self.__listAdjacent.append(Linked_List())
     
     def exist_edges(self, v1, v2):
         band = False
@@ -36,7 +47,6 @@ class GraphManaged(Graph):
         else:
             raise ArrayPositionException("Delimites out")
         return band
-        
         
     def weigth_edges(self, v1, v2):
         weigth = None
@@ -63,19 +73,6 @@ class GraphManaged(Graph):
                 self.__listAdjacent[v1].add(adj, self.__listAdjacent[v1]._length)
         else:
             raise ArrayPositionException("Delimites out")
-        
-    def insert_edges(self, v1, v2):
-        self.insert_edges_weigth(v1, v2, nan)
-        
-    def adjacent(self, v1):
-        return self.__listAdjacent[v1]
-    
-    def get_list_adjacent(self):
-        return self.__listAdjacent
-
-    def addVertex(self):
-        self.__numVer += 1
-        self.__listAdjacent.append(Linked_List())
         
     @property
     def allVertexConnected(self):

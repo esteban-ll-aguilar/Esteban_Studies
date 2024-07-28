@@ -6,13 +6,13 @@
         <em class="text-black">Universidad Nacional de Loja</em>
         <h2 class="text-black">Lista de lista</h2>
         <a href="/" class="btn custom-btn custom-border-btn btn-info">Regresar</a>
-        <a href="/negocio/grafo_negocio" target="_blank" class="btn custom-btn custom-border-btn btn-success">Negocio Grafo</a>
+        <a href="/parque/grafo_parque" target="_blank" class="btn custom-btn custom-border-btn btn-success">Ver Caminos</a>
     </div>
     <div class="booking-form-body table-responsive">
         <div class="card bg-black">
             <div class="card-header">
                 <h5 class="text-black">Agregar Adyacencias</h5>
-                <form class="custom-form booking-form" method="post" action="/negocio/grafo_negocio/agregar_adyacencia" role="form">
+                <form class="custom-form booking-form" method="post" action="/parque/grafo_parque/agregar_adyacencia" role="form">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-6 col-12">
@@ -57,14 +57,14 @@
                         <td><b>{{ item.nombre }}</b></td>
                         {% for itemList in grafolista %}
                             {% if itemList.labelId == item.id %}
-                                {% for negocio in lista %}
+                                {% for parque in lista %}
                                     <td>
                                         {% for destino in itemList.destinations %}
-                                            {% if destino.to == negocio.id %}
+                                            {% if destino.to == parque.id %}
                                                 {{ destino.weigth }}
                                             {% endif %}
                                         {% endfor %}
-                                        {% if item.id == negocio.id %}
+                                        {% if item.id == parque.id %}
                                                 ---
                                         {% endif %}
                                     </td>

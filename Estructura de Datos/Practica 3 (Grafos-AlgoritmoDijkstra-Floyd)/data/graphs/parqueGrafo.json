@@ -1,0 +1,107 @@
+[
+    {
+        "labelId": 1,
+        "destinations": [
+            {
+                "from": 1,
+                "to": 3
+            },
+            {
+                "from": 1,
+                "to": 5
+            },
+            {
+                "from": 1,
+                "to": 4
+            },
+            {
+                "from": 1,
+                "to": 2
+            }
+        ]
+    },
+    {
+        "labelId": 2,
+        "destinations": [
+            {
+                "from": 2,
+                "to": 1
+            },
+            {
+                "from": 2,
+                "to": 3
+            },
+            {
+                "from": 2,
+                "to": 5
+            },
+            {
+                "from": 2,
+                "to": 4
+            }
+        ]
+    },
+    {
+        "labelId": 3,
+        "destinations": [
+            {
+                "from": 3,
+                "to": 1
+            },
+            {
+                "from": 3,
+                "to": 2
+            },
+            {
+                "from": 3,
+                "to": 5
+            },
+            {
+                "from": 3,
+                "to": 4
+            }
+        ]
+    },
+    {
+        "labelId": 4,
+        "destinations": [
+            {
+                "from": 4,
+                "to": 1
+            },
+            {
+                "from": 4,
+                "to": 2
+            },
+            {
+                "from": 4,
+                "to": 3
+            },
+            {
+                "from": 4,
+                "to": 5
+            }
+        ]
+    },
+    {
+        "labelId": 5,
+        "destinations": [
+            {
+                "from": 5,
+                "to": 1
+            },
+            {
+                "from": 5,
+                "to": 2
+            },
+            {
+                "from": 5,
+                "to": 3
+            },
+            {
+                "from": 5,
+                "to": 4
+            }
+        ]
+    }
+]

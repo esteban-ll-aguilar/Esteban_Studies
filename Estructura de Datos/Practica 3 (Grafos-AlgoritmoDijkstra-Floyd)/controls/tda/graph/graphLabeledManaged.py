@@ -11,15 +11,12 @@ class GraphLabeledManaged(GraphManaged):
         
         for i in range(0, num_vert):
             self.__labels.append(nan)
-            
-            
+    
     def getVertex(self, label):
         try:
             return self.__labelsVertex[str(label)]
         except:
             return -1
-        
-        
         
     def getVertexAux(self, label):
         id = -1
@@ -33,12 +30,9 @@ class GraphLabeledManaged(GraphManaged):
     def labelVertex(self, vertex, label):
         self.__labels[vertex] = label
         self.__labelsVertex[str(label)] = vertex
-        #print(self.__labels)
-        #print(self.__labelsVertex)
         
     def getLabel(self, vertex):
         return self.__labels[vertex]
-    
     
     def exist_edges_E(self, label1, label2):
         v = self.getVertex(label1)
@@ -71,11 +65,14 @@ class GraphLabeledManaged(GraphManaged):
             return self.adjacent(v)
         raise ArrayPositionException("No se encontro el vertice")
     
-    def newGraph(self, num_vertex):
-        return GraphLabeledManaged(num_vertex)
     @property
     def allVertexConnected(self):
         return super().allVertexConnected
+    
+    def newGraph(self, num_vertex):
+        return GraphLabeledManaged(num_vertex)
+    
+    
     
     
 #python -m pydoct -w Esteban_Studies/17-04-2024/controls/tda/graph/graphLabeled.py

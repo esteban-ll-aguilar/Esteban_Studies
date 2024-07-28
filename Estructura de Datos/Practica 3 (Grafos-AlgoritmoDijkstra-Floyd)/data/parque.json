@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nombre": "Parque Cruzpamba",
+        "direccion": "Celica, Cruzpamba, Celica, Loja, Ecuador",
+        "horario": "8am - 7pm",
+        "longitud": -80.00464179203847,
+        "latitud": -4.156106517297619
+    },
+    {
+        "id": 2,
+        "nombre": "Parque Pedrito",
+        "direccion": "Manuel Espinoza, Cdla. de los Ingenieros, Cuenca, Azuay, 010209, Ecuador",
+        "horario": "8am - 7pm",
+        "longitud": -78.95984953908746,
+        "latitud": -2.8894573
+    },
+    {
+        "id": 3,
+        "nombre": "Central Park",
+        "direccion": "Great Lawn Ball Field 8, 86th Street Transverse, Manhattan, New York County, New York, 10024, United States",
+        "horario": "8am - 7pm",
+        "longitud": -73.9653627406542,
+        "latitud": 40.7827725
+    },
+    {
+        "id": 4,
+        "nombre": "Hyde Park",
+        "direccion": "Hyde Park, North Carriage Drive, Paddington, London, Greater London, England, W2 2LY, United Kingdom",
+        "horario": "8am - 7pm",
+        "longitud": -0.1622074056037135,
+        "latitud": 51.5074889
+    },
+    {
+        "id": 5,
+        "nombre": "Golden Gate Park",
+        "direccion": "46, Overlook Drive, Richmond District, San Francisco, California, 94122, United States",
+        "horario": "8am - 7pm",
+        "longitud": -122.48218371117709,
+        "latitud": 37.769368099999994
+    }
+]

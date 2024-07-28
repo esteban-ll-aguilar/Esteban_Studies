@@ -3,8 +3,8 @@ import numpy as np
 class FloydWarshallAlgorithm:
     def __init__(self, graph: object = None,  start: int = 0, end: int = 0):
         self.__graph = graph
-        self.__start = end - 1 if start > 0 else 0
-        self.__end = start - 1 if end > 0 else 0
+        self.__start = end - 1 if end > 0 else 0
+        self.__end = start - 1 if start > 0 else 0
         self.__matrix = np.full((self.__graph.num_vertex, self.__graph.num_vertex), np.inf)
         self.__distance = np.full((self.__graph.num_vertex, self.__graph.num_vertex), -1)
         self.__parent = np.full((self.__graph.num_vertex, self.__graph.num_vertex), -1)

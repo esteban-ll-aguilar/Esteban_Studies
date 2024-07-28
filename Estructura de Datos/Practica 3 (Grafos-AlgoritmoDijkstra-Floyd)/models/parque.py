@@ -1,4 +1,4 @@
-class Negocio():
+class Parque():
     def __init__(self):
         self.__id = 0
         self.__nombre = ""
@@ -71,7 +71,7 @@ class Negocio():
         
     
     def deserializar(self, data):
-        negocio = Negocio()
+        negocio = Parque()
         negocio._id = data['id']
         negocio._nombre = data['nombre']
         negocio._direccion = data['direccion']

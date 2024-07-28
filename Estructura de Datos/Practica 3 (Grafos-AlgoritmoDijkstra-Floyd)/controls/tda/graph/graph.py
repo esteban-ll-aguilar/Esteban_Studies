@@ -38,6 +38,10 @@ class Graph:
     def newGraph(self, num_vertex):
         raise NotImplementedError("Please implement this method")
     
+    @property
+    def allVertexConnected(self):
+        raise NotImplementedError("Please implement this method")
+    
     def paint_search_graph(self,nameComponent='mynetworkSearch', file="graphSearch.js"):
         self.paint_graph_labeled(file=file, nameComponent=nameComponent, mostrarCamino=True)
         
@@ -114,7 +118,8 @@ class Graph:
                         weigths.append(adj._weigth) if adj._weigth not in weigths else weigths
                         js += '{\nfrom: '+str(i)+', to: '+str(adj._destination)+', label: "'+str(adj._weigth)+'"},'
         js += ']);\n'
-        js += 'var container = document.getElementById("'+nameComponent+'"); \n var data = { nodes: nodes, edges: edges, }; \n var options = {}; \nvar network = new vis.Network(container, data, options);'
+        js += 'var container = document.getElementById("'+nameComponent+'"); \n var data = { nodes: nodes, edges: edges, }; \n '
+        js += 'var options = {}; \nvar network = new vis.Network(container, data, options);'
         
         camino =""
         llaves = list(caminos.keys())
@@ -152,38 +157,31 @@ class Graph:
     
 
     def __transform_graphLabeled__(self):
-        json = "["
+        out = []
         for i in range(0, self.num_vertex):
+            vertexId = self.getVertex(self.getLabel(i))+1
+            info = {'labelId': vertexId, 'destinations': []}
             adjs = self.adjacent(i)
-            json += '\n\t{\n\t\t"labelId":' + f"{str(self.getVertex(self.getLabel(i))+1)},"
-            #json += '\n\t\t"label": "' + str(self.getLabel(i)) + '",'
             if not adjs.isEmpty:
-                json += '\n\t\t"destinations": ['
                 for j in range(0, adjs._length):
                     adj = adjs.get(j)
-                    json += '\n\t\t\t{\n\t\t\t\t"from":'+f"{str(self.getVertex(self.getLabel(i))+1)}"+', \n\t\t\t\t"to":'+str(adj._destination+1)+'\n\t\t\t},'
-                json = json[:-1]
-                json += '\n\t\t]'
-                json += '\n\t},'
-            else:
-                json += '\n\t\t"destinations": []\n'
-                json = json[:-1]
-                json +='\n\t},'
-            adjs = self.adjacent(i)
-        json = json[:-1]
-        json += "\n]"
-        
-        return json
+                    info['destinations'].append({
+                        'from': vertexId,
+                        'to': adj._destination+1
+                    })
+            out.append(info)
+        return json.dumps(out, indent=4)
     
     def save_graph_labeled(self, file='graph.json'):
         url = self.__URLFILEGRAPHJSON+file
+        
         a = open(url , 'w')
         a.write(self.__transform_graphLabeled__())
         a.close()
         
     
     
-    def recontruct_graph_labeled_with_lat_long(self, file='graph.json', atype: object = None, model: object=None):
+    def recontruct_graph_labeled(self, file='graph.json', atype: object = None, model: object=None):
         #al decir model nos referimos al modelo de daoControl del modelo base
         #con a type nos referimos al modelos de los graphs
         url = self.__URLFILEGRAPHJSON + file
@@ -225,11 +223,6 @@ class Graph:
                     })
                 out.append(info)
         return out
-            
-        
-
-    
-
 
         
 def calculate_weigth_geograpics(model1: object = None, model2: object = None):

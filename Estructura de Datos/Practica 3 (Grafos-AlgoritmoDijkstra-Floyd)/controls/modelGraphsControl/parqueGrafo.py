@@ -1,13 +1,13 @@
 from controls.tda.graph.graphLabeledNoManaged import GraphLabeledManaged
 from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
-from controls.modelDaoControls.negocioDaoControl import NegocioDaoControl
+from controls.modelDaoControls.parqueDaoControl import ParqueDaoControl
 import os, sys
-class NegocioGrafo:
+class ParqueGrafo:
     def __init__(self):
         print(sys.path[0])
         self.__name = os.path.basename((__file__)).replace('.py', '.json')
         self.__grafo = None
-        self.__ndao = NegocioDaoControl()
+        self.__ndao = ParqueDaoControl()
         
     def create_graph(self):
         list = self.__ndao._lista
@@ -26,13 +26,11 @@ class NegocioGrafo:
         if self.__grafo == None:
             return []
         if self.__grafo.existFileGraph(self.__name):
-            self.__grafo = self.__grafo.recontruct_graph_labeled_with_lat_long(file=self.__name,atype=self.__grafo, model=NegocioDaoControl)
+            self.__grafo = self.__grafo.recontruct_graph_labeled(file=self.__name,atype=self.__grafo, model=ParqueDaoControl)
         self.__grafo.save_graph_labeled(file=self.__name)
         self.__grafo.paint_graph_labeled()
         return self.__grafo
     
-    
-        
     @property
     def save_graph(self):
         self.__grafo.save_graph_labeled(file=self.__name)

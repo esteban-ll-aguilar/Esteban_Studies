@@ -12,16 +12,16 @@
     }
     
 {% endblock %}
-{% block text_img %}Restaurantes{% endblock %}
+{% block text_img %}Parques{% endblock %}
 {% block content %}
 <section class="custom-video booking-form text-center">
     <div class="text-center mb-4 pb-lg-2">
         <em class="text-black">Universidad Nacional de Loja</em>
 
-        <h2 class="text-bg-black">Lista de Restaurantes</h2>
-        <a href="negocio/formulario" class="btn custom-btn custom-border-btn btn-info">Formulario</a>
-        <a href="negocio/grafo_negocio" class="btn custom-btn custom-border-btn btn-success">Negocio Grafo</a>
-        <a href="negocio/grafo_ver_admin" class="btn custom-btn custom-border-btn  btn-warning">Matriz de Adyacencia</a>
+        <h2 class="text-bg-black">Lista de Parques</h2>
+        <a href="parque/formulario" class="btn custom-btn custom-border-btn btn-info">Formulario</a>
+        <a href="parque/grafo_parque" class="btn custom-btn custom-border-btn btn-success">Parque Grafo</a>
+        <a href="parque/grafo_ver_admin" class="btn custom-btn custom-border-btn  btn-warning">Matriz de Adyacencia</a>
     </div>
     <!--<div id="map"></div>-->
     <div class="booking-form-body table-responsive-lg">
@@ -44,7 +44,7 @@
                     <td>{{ item.longitud }}</td>
                     <td>{{ item.latitud }}</td>
                     <!--<td>
-                        <a href="negocio/editar/{{ item.id }}" class="btn custom-btn custom-border-btn ">Editar</a>
+                        <a href="parque/editar/{{ item.id }}" class="btn custom-btn custom-border-btn ">Editar</a>
                     </td>-->
                 </tr>
                 {% endfor %}
