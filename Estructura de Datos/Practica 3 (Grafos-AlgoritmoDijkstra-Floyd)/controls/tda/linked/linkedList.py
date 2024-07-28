@@ -62,6 +62,7 @@ class Linked_List(object):
             self.__length += 1
     
     def edit(self, data, pos = 0):
+        pos = pos-1
         if pos == 0:
             self.__head._data = data
         elif pos == self.__length:            

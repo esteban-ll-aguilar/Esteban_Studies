@@ -10,6 +10,7 @@ class DijkstraAlgorithm:
         self.__distance = [np.inf] * self.__graph.num_vertex
         self.__parent = [-1] * self.__graph.num_vertex
         self._camino = None
+        
         if self.__graph.allVertexConnected == False:
             raise Exception("No se puede realizar el algoritmo debido a que no todos los vertices estan conectados")
         if self.__start < 0 or self.__start >= self.__graph.num_vertex or self.__end < 0 or self.__end >= self.__graph.num_vertex:

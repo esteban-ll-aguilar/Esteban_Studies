@@ -83,6 +83,8 @@ def grafo_ver_admin():
         return render_template('parque/adyacencias.html', lista=parque.to_dict_lista(), grafolista=parquegraph.obtainWeigths)
     return render_template('parque/adyacencias.html')
 
+
+
 @router.route('/parque/grafo_parque/agregar_adyacencia', methods=['POST'])
 def agregar_adyacencia():
     data = request.form
@@ -112,6 +114,20 @@ def parque_guardar():
     return redirect('/', code=302)
 
 
+
+@router.route('/parque/modificar/<int:id>', methods=['POST'])
+def parque_modificar(id):
+    parque = ParqueDaoControl()
+    data = request.form
+    print(data)
+    parque._parque._id = id
+    parque._parque._nombre = data['nombre']
+    parque._parque._direccion = data['direccion']
+    parque._parque._horario = data['horario']
+    parque._parque._longitud = float(data['longitud'])
+    parque._parque._latitud = float(data['latitud'])
+    parque.merge(id)
+    return redirect('/', code=302)
 
 
 

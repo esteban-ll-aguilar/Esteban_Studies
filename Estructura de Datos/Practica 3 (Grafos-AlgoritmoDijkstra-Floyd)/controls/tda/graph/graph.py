@@ -35,6 +35,7 @@ class Graph:
     
     def getVertex(self, label):
         raise NotImplementedError("Please implement this method")
+    
     def newGraph(self, num_vertex):
         raise NotImplementedError("Please implement this method")
     
@@ -134,7 +135,7 @@ class Graph:
         if mostrarCamino: 
             js += '\nvar advertencia = document.getElementById("advertencia");\nadvertencia.innerHTML = ""'
             js += '\nvar camino = document.getElementById("camino");\n camino.innerHTML = "'+camino+'";'
-            js += '\nvar weigths = document.getElementById("weigths");\n weigths.innerHTML = "Distancia Total de recorrido: '+str(sum(weigths))+' km";'
+            js += '\nvar weigths = document.getElementById("weigths");\n weigths.innerHTML = "Distancia Total de recorrido: '+str(round(sum(weigths),2))+' km";'
             
         a = open(url , 'w')
         a.write(js)

@@ -23,6 +23,9 @@ class ParqueDaoControl(DaoAdapter):
     def save(self):
         self.__parque._id = self._lista._length + 1
         self._save(self.__parque)
+        
+    def merge(self, pos):
+        self._merge(self.__parque, pos=pos)
     
         
     
