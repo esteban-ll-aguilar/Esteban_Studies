@@ -25,22 +25,30 @@ from controls.tda.graph.graphLabeledManaged import GraphLabeledManaged
 from controls.tda.graph.graphLabeledNoManaged import GraphLabeledNoManaged
 from controls.tda.graph.searchMethod.dijkstraAlgorithm import DijkstraAlgorithm
 from controls.tda.graph.searchMethod.floydWarshallAlgorithm import FloydWarshallAlgorithm
-from controls.modelGraphsControl.negocioGrafo import NegocioGrafo
+from controls.modelGraphsControl.parqueGrafo import ParqueGrafo
 
 from time import time
 
-negocio = NegocioGrafo()
-graph = negocio.get_graph
+parque = ParqueGrafo()
+graph = parque.get_graph
+dijktra = DijkstraAlgorithm(graph,start=1, end=15)
+dijktra.dijkstra
+floy = FloydWarshallAlgorithm(graph, start=1,end=15)
+floy.floydWarshall
+
 print(graph.allVertexConnected)
 
 
 inicio = time()
 print("----------------- Algoritmo de Dijkstra -----------------")
-dijktra = DijkstraAlgorithm(graph,start=1, end=10)
+dijktra = DijkstraAlgorithm(graph,start=1, end=15)
 dijktra.dijkstra
-print("Tiempo de ejecucion Dijkstra: ", time()-inicio)
+tiempoDijkstra = time()-inicio
+
 inicio = time()
 print("----------------- Algoritmo de Floyd Warshall -----------------")
-floy = FloydWarshallAlgorithm(graph, start=1,end=10)
+floy = FloydWarshallAlgorithm(graph, start=1,end=15)
 floy.floydWarshall
+
+print("Tiempo de ejecucion Dijkstra: ", tiempoDijkstra)
 print("Tiempo de ejecucion Floyd Warshall: ", time()-inicio)

@@ -9,6 +9,11 @@ class FloydWarshallAlgorithm:
         self.__distance = np.full((self.__graph.num_vertex, self.__graph.num_vertex), -1)
         self.__parent = np.full((self.__graph.num_vertex, self.__graph.num_vertex), -1)
         self.__camino = None
+        
+        if self.__graph.allVertexConnected == False:
+            raise Exception("No se puede realizar el algoritmo debido a que no todos los vertices estan conectados")
+        if self.__start < 0 or self.__start >= self.__graph.num_vertex or self.__end < 0 or self.__end >= self.__graph.num_vertex:
+            raise Exception("No se puede realizar el algoritmo debido a que los vertices no existen")
     
     @property
     def initMatrix(self):

@@ -9,7 +9,12 @@ class DijkstraAlgorithm:
         self.__visited = [False] * self.__graph.num_vertex
         self.__distance = [np.inf] * self.__graph.num_vertex
         self.__parent = [-1] * self.__graph.num_vertex
-        self.__camino = []
+        self._camino = None
+        if self.__graph.allVertexConnected == False:
+            raise Exception("No se puede realizar el algoritmo debido a que no todos los vertices estan conectados")
+        if self.__start < 0 or self.__start >= self.__graph.num_vertex or self.__end < 0 or self.__end >= self.__graph.num_vertex:
+            raise Exception("No se puede realizar el algoritmo debido a que los vertices no existen")
+        
         
     def __minDistance(self):
         min = np.inf
@@ -28,15 +33,15 @@ class DijkstraAlgorithm:
             camino.append(crawl+1)
             crawl = self.__parent[crawl]
         camino.append(self.__start+1)
-        self.__camino = camino[::-1]
+        self._camino = camino[::-1]
         if self.__distance[self.__end] == np.inf:
-            self.__camino = None
+            self._camino = None
             return "No existe camino"
         return camino
     
     @property
     def _paint_search_graph(self):
-        camino = self.__camino
+        camino = self._camino
         if camino == None:
             newGraph = self.__graph.newGraph(0)   
             newGraph.paint_search_graph()
@@ -58,7 +63,7 @@ class DijkstraAlgorithm:
         print("Algoritmo de Dijkstra")
         print("Camino minimo entre: " + str(self.__start+1) + " y " + str(self.__end+1))
         print("Distancia: " + str(self.__distance[self.__end]))
-        print("Camino: ", self.__camino)
+        print("Camino: ", self._camino)
         print("Vertex \t\t Distance")
         for i in range(0, self.__graph.num_vertex):
             print(str(i+1) + " \t\t " + str(self.__distance[i]))
