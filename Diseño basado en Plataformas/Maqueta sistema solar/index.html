@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Visualización interactiva del Sistema Solar creada con CSS puro. Explora los planetas, sus lunas, anillos y más elementos del espacio." />
+  <title>Sistema Solar Ultra Avanzado</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪐</text></svg>" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+<body>  <div class="space">
+    <!-- Efectos de nebulosa cósmica -->
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+    
+    <!-- Estrellas generadas con CSS puro -->
+    <div class="stars"></div>
+    
+    <!-- Estrellas que parpadean -->
+    <div class="twinkling-stars">
+      <div class="twinkle-1"></div>
+      <div class="twinkle-2"></div>
+      <div class="twinkle-3"></div>
+      <div class="twinkle-4"></div>
+      <div class="twinkle-5"></div>
+      <div class="twinkle-6"></div>
+      <div class="twinkle-7"></div>
+      <div class="twinkle-8"></div>
+      <div class="twinkle-9"></div>
+      <div class="twinkle-10"></div>
+    </div>
+    
+    <!-- Estrellas fugaces -->
+    <div class="shooting-stars">
+      <div class="shooting-star-1"></div>
+      <div class="shooting-star-2"></div>
+      <div class="shooting-star-3"></div>
+    </div>
+    
+    <!-- Sol central -->
+    <div class="sun"></div>
+
+    <!-- Cometa -->
+    <div class="comet-orbit">
+      <div class="comet">
+        <div class="comet-tail"></div>
+      </div>
+    </div>
+
+    <!-- Mercurio -->
+    <div class="orbit mercury-orbit">
+      <div class="planet mercury"></div>
+    </div>
+
+    <!-- Venus -->
+    <div class="orbit venus-orbit">
+      <div class="planet venus"></div>
+    </div>
+
+    <!-- Tierra y Luna -->
+    <div class="orbit earth-orbit">
+      <div class="planet earth">
+        <div class="moon-orbit earth-moon-orbit">
+          <div class="moon earth-moon"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marte y sus lunas -->
+    <div class="orbit mars-orbit">
+      <div class="planet mars">
+        <div class="moon-orbit mars-moon1-orbit">
+          <div class="moon mars-moon1"></div>
+        </div>
+        <div class="moon-orbit mars-moon2-orbit">
+          <div class="moon mars-moon2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cinturón de asteroides -->
+    <div class="asteroid-belt"></div>
+
+    <!-- Júpiter y sus lunas -->
+    <div class="orbit jupiter-orbit">
+      <div class="planet jupiter">
+        <div class="moon-orbit jupiter-moon1-orbit">
+          <div class="moon jupiter-moon1"></div>
+        </div>
+        <div class="moon-orbit jupiter-moon2-orbit">
+          <div class="moon jupiter-moon2"></div>
+        </div>
+        <div class="moon-orbit jupiter-moon3-orbit">
+          <div class="moon jupiter-moon3"></div>
+        </div>
+        <div class="moon-orbit jupiter-moon4-orbit">
+          <div class="moon jupiter-moon4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Saturno y sus anillos -->
+    <div class="orbit saturn-orbit">
+      <div class="planet saturn">
+        <div class="rings saturn-rings"></div>
+      </div>
+    </div>
+
+    <!-- Urano y sus anillos -->
+    <div class="orbit uranus-orbit">
+      <div class="planet uranus">
+        <div class="rings uranus-rings"></div>
+        <div class="moon-orbit uranus-moon1-orbit">
+          <div class="moon uranus-moon1"></div>
+        </div>
+        <div class="moon-orbit uranus-moon2-orbit">
+          <div class="moon uranus-moon2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Neptuno y su luna -->
+    <div class="orbit neptune-orbit">
+      <div class="planet neptune">
+        <div class="moon-orbit neptune-moon-orbit">
+          <div class="moon neptune-moon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel de información -->
+  <div class="planet-info">
+    <h2>Sistema Solar Ultra Avanzado</h2>
+    <p>Visualización de los 8 planetas del sistema solar, con sus lunas principales, anillos, cinturón de asteroides y cometas. Todo creado con CSS puro, sin JavaScript.</p>
+    <p style="margin-top: 8px; font-size: 0.7rem; color: #4b9fe1;">Las órbitas, rotaciones y efectos visuales se generan mediante animaciones CSS avanzadas.</p>
+  </div>
+</body>
+</html>
