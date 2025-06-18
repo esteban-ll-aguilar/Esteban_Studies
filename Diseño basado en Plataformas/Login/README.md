@@ -2,6 +2,14 @@
 
 Este proyecto consiste en un template de login moderno con características de UI/UX avanzadas, incluyendo modo claro/oscuro, opciones de login con correo y Google, y una interfaz responsiva.
 
+## Modo Claro
+![Login modo claro](./images/claro.png)
+
+
+## Modo Oscuro
+![Login modo claro](./images/oscuro.png)
+
+
 ## Descripción del Proyecto
 
 Un template de interfaz de usuario para un sistema de login, diseñado con las mejores prácticas de UI/UX, que incluye:

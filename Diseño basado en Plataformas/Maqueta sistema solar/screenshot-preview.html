@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screenshot del Sistema Solar</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #000510 0%, #02062e 40%, #040c3c 60%, #01051e 100%);
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    
+    .container {
+      position: relative;
+      width: 800px;
+      height: 500px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 150, 255, 0.3);
+    }
+    
+    .space {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+    }
+    
+    /* Estrellas de fondo */
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 230px 50px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 320px 80px, #eee, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 400px 140px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 450px 40px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 500px 100px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 550px 160px, #eee, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 600px 60px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 650px 200px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 700px 80px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 750px 220px, #eee, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 50px 250px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 100px 300px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 150px 350px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 200px 400px, #eee, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 250px 450px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 300px 350px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 350px 300px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 400px 350px, #eee, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 450px 400px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 500px 350px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 550px 300px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 600px 350px, #eee, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 650px 400px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 700px 350px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 750px 300px, #fff, rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 800px 500px;
+    }
+    
+    /* Nebulosa */
+    .nebula {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at 30% 40%, rgba(80, 0, 100, 0.2) 0%, rgba(80, 0, 100, 0) 50%),
+        radial-gradient(circle at 70% 60%, rgba(0, 30, 120, 0.2) 0%, rgba(0, 30, 120, 0) 45%),
+        radial-gradient(ellipse at 80% 20%, rgba(0, 100, 120, 0.1) 0%, rgba(0, 100, 120, 0) 60%),
+        radial-gradient(ellipse at 10% 70%, rgba(100, 40, 0, 0.15) 0%, rgba(100, 40, 0, 0) 50%);
+      opacity: 0.7;
+    }
+    
+    /* Sistema Solar */
+    .solar-system {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 600px;
+      height: 600px;
+      transform: translate(-50%, -50%);
+    }
+    
+    /* Sol */
+    .sun {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle at center, #fff 0%, #ffdf00 20%, #ff9900 40%, #ff4400 100%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 40px #ff9900, 0 0 80px #ff4400;
+    }
+    
+    /* Órbitas */
+    .orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .mercury-orbit {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .venus-orbit {
+      width: 140px;
+      height: 140px;
+    }
+    
+    .earth-orbit {
+      width: 180px;
+      height: 180px;
+    }
+    
+    .mars-orbit {
+      width: 220px;
+      height: 220px;
+    }
+    
+    .asteroid-belt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.1);
+      border: 6px dotted rgba(255, 255, 255, 0.1);
+    }
+    
+    .jupiter-orbit {
+      width: 340px;
+      height: 340px;
+    }
+    
+    .saturn-orbit {
+      width: 420px;
+      height: 420px;
+    }
+    
+    .uranus-orbit {
+      width: 480px;
+      height: 480px;
+    }
+    
+    .neptune-orbit {
+      width: 540px;
+      height: 540px;
+    }
+    
+    /* Planetas */
+    .planet {
+      position: absolute;
+      border-radius: 50%;
+    }
+    
+    .mercury {
+      width: 8px;
+      height: 8px;
+      background: #b5b5b5;
+      top: 50%;
+      left: 5px;
+      transform: translateY(-50%);
+    }
+    
+    .venus {
+      width: 12px;
+      height: 12px;
+      background: #e8cda7;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+    }
+    
+    .earth {
+      width: 14px;
+      height: 14px;
+      background: #4f86f7;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+    }
+    
+    .mars {
+      width: 10px;
+      height: 10px;
+      background: #c1440e;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+    }
+    
+    .jupiter {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(to bottom, #c9a980, #a67c52, #c9a980, #a67c52, #c9a980);
+      top: 50%;
+      left: 30px;
+      transform: translateY(-50%);
+    }
+    
+    .saturn {
+      width: 26px;
+      height: 26px;
+      background: #e4d191;
+      top: 50%;
+      left: 40px;
+      transform: translateY(-50%);
+    }
+    
+    .uranus {
+      width: 18px;
+      height: 18px;
+      background: #c9eeff;
+      top: 50%;
+      left: 45px;
+      transform: translateY(-50%);
+    }
+    
+    .neptune {
+      width: 18px;
+      height: 18px;
+      background: #5b5ddf;
+      top: 50%;
+      left: 50px;
+      transform: translateY(-50%);
+    }
+    
+    /* Anillos de Saturno */
+    .saturn-rings {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60px;
+      height: 12px;
+      background: rgba(205, 182, 136, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) rotateX(70deg);
+    }
+    
+    /* Título del proyecto */
+    .title {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      letter-spacing: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="space">
+      <div class="stars"></div>
+      <div class="nebula"></div>
+      <div class="solar-system">
+        <!-- Sol -->
+        <div class="sun"></div>
+        
+        <!-- Órbitas y planetas -->
+        <div class="orbit mercury-orbit">
+          <div class="planet mercury"></div>
+        </div>
+        
+        <div class="orbit venus-orbit">
+          <div class="planet venus"></div>
+        </div>
+        
+        <div class="orbit earth-orbit">
+          <div class="planet earth"></div>
+        </div>
+        
+        <div class="orbit mars-orbit">
+          <div class="planet mars"></div>
+        </div>
+        
+        <div class="asteroid-belt"></div>
+        
+        <div class="orbit jupiter-orbit">
+          <div class="planet jupiter"></div>
+        </div>
+        
+        <div class="orbit saturn-orbit">
+          <div class="planet saturn">
+            <div class="saturn-rings"></div>
+          </div>
+        </div>
+        
+        <div class="orbit uranus-orbit">
+          <div class="planet uranus"></div>
+        </div>
+        
+        <div class="orbit neptune-orbit">
+          <div class="planet neptune"></div>
+        </div>
+      </div>
+    </div>
+    <div class="title">SISTEMA SOLAR INTERACTIVO</div>
+  </div>
+</body>
+</html>

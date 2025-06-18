@@ -1,5 +1,7 @@
 # Maqueta del Sistema Solar
 
+![Visualización del Sistema Solar](./images/image.png)
+
 ## Descripción del Proyecto
 Este proyecto es una visualización interactiva del Sistema Solar creada completamente con HTML y CSS puro, sin utilizar JavaScript. La maqueta representa los 8 planetas del sistema solar con sus características distintivas, incluyendo:
 
@@ -36,3 +38,13 @@ Este proyecto es una visualización interactiva del Sistema Solar creada complet
 
 ## Propósito Educativo
 Esta maqueta sirve como herramienta educativa para visualizar la estructura básica del sistema solar y las relaciones espaciales entre sus componentes. Además, demuestra el potencial de CSS moderno para crear visualizaciones complejas sin necesidad de JavaScript.
+
+## Imagen del Proyecto
+La imagen al inicio de este README muestra una captura de pantalla del proyecto en funcionamiento. Para actualizar esta imagen:
+
+1. Abre el archivo `index.html` en un navegador web moderno
+2. Usa la herramienta de captura de pantalla de tu sistema operativo o navegador para capturar la visualización
+3. Guarda la imagen como `screenshot.png` en la carpeta raíz del proyecto
+4. Alternativamente, puedes abrir el archivo `screenshot-preview.html` que muestra una versión estática del sistema solar para capturar la imagen
+
+También puedes abrir el archivo `screenshot-preview.html` incluido en este proyecto para ver una representación visual estática del sistema solar que puedes usar como imagen de referencia.
