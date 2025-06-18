@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Template</title>    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Sign-In API -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="theme-toggle">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+
+        <div class="login-container">
+            <div class="login-image">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80" alt="Login Image">
+            </div>
+            <div class="login-form">
+                <div class="logo">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h1>Bienvenido</h1>
+                <p class="subtitle">Inicia sesión para continuar</p>
+                
+                <form>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Contraseña" required>
+                        <i class="fas fa-eye-slash toggle-password"></i>
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <div class="remember">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Recordar cuenta</label>
+                        </div>
+                        <a href="#" class="forgot">¿Olvidaste la contraseña?</a>
+                    </div>
+                    
+                    <button type="submit" class="login-btn" >Iniciar Sesión</button>
+                      <div class="divider">
+                        <span>o</span>
+                    </div>
+                    
+                    <!-- Botón de Google mejorado -->
+                    <div class="google-signin-container">
+                        <div id="g_id_onload"
+                             data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                             data-context="signin"
+                             data-ux_mode="popup"
+                             data-callback="handleCredentialResponse"
+                             data-auto_prompt="false">
+                        </div>
+                        
+                        <div class="g_id_signin"
+                             data-type="standard"
+                             data-shape="rectangular"
+                             data-theme="outline"
+                             data-text="signin_with"
+                             data-size="large"
+                             data-logo_alignment="left"
+                             data-width="100%">
+                        </div>
+                        
+                        <!-- Botón alternativo personalizado para Google -->
+                        <button type="button" class="google-btn">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo">
+                            <span>Continuar con Google</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="signup-link">
+                    ¿No tienes una cuenta? <a href="#">Regístrate ahora</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
