@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - SportBoards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <style>
+        .navbar-custom {
+            background-color: #1a237e;
+        }
+        .sidebar {
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            min-height: calc(100vh - 56px);
+            position: sticky;
+            top: 56px;
+        }
+        .sidebar-link {
+            padding: 0.75rem 1.25rem;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            border-radius: 0.25rem;
+            margin-bottom: 0.25rem;
+            transition: all 0.3s;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: #e9ecef;
+            color: #1a237e;
+        }
+        .sidebar-link i {
+            margin-right: 0.75rem;
+            font-size: 1.1rem;
+        }
+        .sidebar-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            color: #6c757d;
+            font-weight: bold;
+            padding: 1rem 1.25rem 0.5rem;
+        }
+        .card-admin {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        .card-admin:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .admin-icon {
+            font-size: 2.5rem;
+            color: #1a237e;
+        }
+        .table-hover tbody tr:hover {
+            background-color: rgba(26, 35, 126, 0.05);
+        }
+        .permission-badge {
+            border-radius: 20px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .search-form .form-control {
+            border-radius: 50px;
+            padding-left: 2.5rem;
+        }
+        .search-form .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+        .status-active {
+            background-color: #28a745;
+        }
+        .status-inactive {
+            background-color: #dc3545;
+        }
+        .status-pending {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="bi bi-trophy-fill me-2"></i>
+                <span>SportBoards</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clasifications.html">Clasificaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="stadistics_sports.html">Estadísticas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="administration_panel.html">Administración</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle text-white d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-2" width="32" height="32" alt="Profile">
+                            <span>Carlos Mendoza</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="bi bi-person me-2"></i>Mi Perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 p-0 sidebar">
+                <div class="sidebar-heading">General</div>
+                <a href="#" class="sidebar-link active">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Panel Principal</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-bar-chart"></i>
+                    <span>Informes</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>Eventos</span>
+                </a>
+
+                <div class="sidebar-heading">Gestión</div>
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-people"></i>
+                    <span>Usuarios</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-trophy"></i>
+                    <span>Equipos</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-dribbble"></i>
+                    <span>Deportes</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-flag"></i>
+                    <span>Torneos</span>
+                </a>
+
+                <div class="sidebar-heading">Configuración</div>
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-gear"></i>
+                    <span>Ajustes</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-shield-lock"></i>
+                    <span>Permisos</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <span>Registros</span>
+                </a>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-10 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3>Panel de Administración</h3>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Administración</li>
+                        </ol>
+                    </nav>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="row mb-4">
+                    <div class="col-md-3 mb-3">
+                        <div class="card card-admin h-100">
+                            <div class="card-body d-flex">
+                                <div class="admin-icon rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+                                <div>
+                                    <h6 class="text-muted mb-1">Usuarios</h6>
+                                    <h3 class="mb-0">1,248</h3>
+                                    <small class="text-success"><i class="bi bi-arrow-up"></i> 12% este mes</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card card-admin h-100">
+                            <div class="card-body d-flex">
+                                <div class="admin-icon rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-trophy-fill"></i>
+                                </div>
+                                <div>
+                                    <h6 class="text-muted mb-1">Equipos</h6>
+                                    <h3 class="mb-0">86</h3>
+                                    <small class="text-success"><i class="bi bi-arrow-up"></i> 5% este mes</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card card-admin h-100">
+                            <div class="card-body d-flex">
+                                <div class="admin-icon rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-dribbble"></i>
+                                </div>
+                                <div>
+                                    <h6 class="text-muted mb-1">Deportes</h6>
+                                    <h3 class="mb-0">12</h3>
+                                    <small class="text-muted"><i class="bi bi-dash"></i> Sin cambios</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card card-admin h-100">
+                            <div class="card-body d-flex">
+                                <div class="admin-icon rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-flag-fill"></i>
+                                </div>
+                                <div>
+                                    <h6 class="text-muted mb-1">Torneos Activos</h6>
+                                    <h3 class="mb-0">8</h3>
+                                    <small class="text-danger"><i class="bi bi-arrow-down"></i> 2% este mes</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management -->
+                <div class="card card-admin mb-4">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0">Gestión de Usuarios</h5>
+                        <button class="btn btn-primary rounded-pill">
+                            <i class="bi bi-plus-circle me-1"></i>Nuevo Usuario
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <form class="position-relative search-form">
+                                    <i class="bi bi-search search-icon"></i>
+                                    <input type="text" class="form-control" placeholder="Buscar usuarios...">
+                                </form>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary">
+                                        <i class="bi bi-funnel me-1"></i>Filtrar
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="#">Todos los usuarios</a></li>
+                                        <li><a class="dropdown-item" href="#">Administradores</a></li>
+                                        <li><a class="dropdown-item" href="#">Entrenadores</a></li>
+                                        <li><a class="dropdown-item" href="#">Deportistas</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Activos</a></li>
+                                        <li><a class="dropdown-item" href="#">Inactivos</a></li>
+                                    </ul>
+                                </div>
+                                <button class="btn btn-outline-secondary ms-2">
+                                    <i class="bi bi-download"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="checkAll">
+                                                <label class="form-check-label" for="checkAll"></label>
+                                            </div>
+                                        </th>
+                                        <th scope="col">Usuario</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Rol</th>
+                                        <th scope="col">Facultad</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox">
+                                                <label class="form-check-label"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-2" width="40" height="40" alt="Profile">
+                                                <div>
+                                                    <h6 class="mb-0">Carlos Mendoza</h6>
+                                                    <small class="text-muted">@carlos_mendoza</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>carlos.mendoza@universidad.edu</td>
+                                        <td>
+                                            <span class="badge permission-badge bg-primary">Administrador</span>
+                                        </td>
+                                        <td>Ingeniería</td>
+                                        <td>
+                                            <span class="status-indicator status-active"></span>
+                                            Activo
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi bi-three-dots"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Ver</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-lock me-2"></i>Cambiar rol</a></li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Eliminar</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox">
+                                                <label class="form-check-label"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle me-2" width="40" height="40" alt="Profile">
+                                                <div>
+                                                    <h6 class="mb-0">Ana García</h6>
+                                                    <small class="text-muted">@ana_garcia</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>ana.garcia@universidad.edu</td>
+                                        <td>
+                                            <span class="badge permission-badge bg-success">Entrenador</span>
+                                        </td>
+                                        <td>Medicina</td>
+                                        <td>
+                                            <span class="status-indicator status-active"></span>
+                                            Activo
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi bi-three-dots"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Ver</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-lock me-2"></i>Cambiar rol</a></li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Eliminar</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox">
+                                                <label class="form-check-label"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle me-2" width="40" height="40" alt="Profile">
+                                                <div>
+                                                    <h6 class="mb-0">Roberto Sánchez</h6>
+                                                    <small class="text-muted">@roberto_sanchez</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>roberto.sanchez@universidad.edu</td>
+                                        <td>
+                                            <span class="badge permission-badge bg-info">Deportista</span>
+                                        </td>
+                                        <td>Ciencias</td>
+                                        <td>
+                                            <span class="status-indicator status-inactive"></span>
+                                            Inactivo
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi bi-three-dots"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Ver</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-lock me-2"></i>Cambiar rol</a></li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Eliminar</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox">
+                                                <label class="form-check-label"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://randomuser.me/api/portraits/women/22.jpg" class="rounded-circle me-2" width="40" height="40" alt="Profile">
+                                                <div>
+                                                    <h6 class="mb-0">Laura Martínez</h6>
+                                                    <small class="text-muted">@laura_martinez</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>laura.martinez@universidad.edu</td>
+                                        <td>
+                                            <span class="badge permission-badge bg-secondary">Coordinador</span>
+                                        </td>
+                                        <td>Artes</td>
+                                        <td>
+                                            <span class="status-indicator status-pending"></span>
+                                            Pendiente
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi bi-three-dots"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Ver</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Editar</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-lock me-2"></i>Cambiar rol</a></li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Eliminar</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="text-muted">
+                                Mostrando 1-4 de 1,248 usuarios
+                            </div>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination mb-0">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Role and Permissions Management -->
+                <div class="card card-admin">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                        <h5 class="mb-0">Roles y Permisos</h5>
+                        <button class="btn btn-primary rounded-pill">
+                            <i class="bi bi-plus-circle me-1"></i>Nuevo Rol
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">Rol</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Usuarios</th>
+                                        <th scope="col">Permisos</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-primary me-2">
+                                                    <i class="bi bi-shield-fill"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Administrador</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Acceso completo al sistema</td>
+                                        <td>8</td>
+                                        <td>
+                                            <div class="d-flex flex-wrap gap-1">
+                                                <span class="badge bg-secondary">Crear</span>
+                                                <span class="badge bg-secondary">Editar</span>
+                                                <span class="badge bg-secondary">Eliminar</span>
+                                                <span class="badge bg-secondary">+12</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-success me-2">
+                                                    <i class="bi bi-person-badge-fill"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Entrenador</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Gestión de equipos y deportistas</td>
+                                        <td>22</td>
+                                        <td>
+                                            <div class="d-flex flex-wrap gap-1">
+                                                <span class="badge bg-secondary">Ver</span>
+                                                <span class="badge bg-secondary">Editar</span>
+                                                <span class="badge bg-secondary">+5</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-info me-2">
+                                                    <i class="bi bi-person-fill"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Deportista</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Usuario básico del sistema</td>
+                                        <td>1,202</td>
+                                        <td>
+                                            <div class="d-flex flex-wrap gap-1">
+                                                <span class="badge bg-secondary">Ver</span>
+                                                <span class="badge bg-secondary">+2</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="text-secondary me-2">
+                                                    <i class="bi bi-people-fill"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Coordinador</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Gestión de torneos y eventos</td>
+                                        <td>16</td>
+                                        <td>
+                                            <div class="d-flex flex-wrap gap-1">
+                                                <span class="badge bg-secondary">Ver</span>
+                                                <span class="badge bg-secondary">Crear</span>
+                                                <span class="badge bg-secondary">Editar</span>
+                                                <span class="badge bg-secondary">+4</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

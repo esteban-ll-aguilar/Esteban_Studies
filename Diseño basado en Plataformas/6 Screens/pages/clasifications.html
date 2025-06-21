@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificaciones - SportBoards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <style>
+        .navbar-custom {
+            background-color: #1a237e;
+        }
+        .tournament-header {
+            background: linear-gradient(135deg, #1a237e 0%, #4a148c 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .tournament-logo {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .tournament-logo i {
+            font-size: 4rem;
+            color: #1a237e;
+        }
+        .bracket {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+        .round {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 200px;
+            margin-right: 40px;
+        }
+        .round-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .match {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .match:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            width: 40px;
+            height: 2px;
+            background-color: #ccc;
+        }
+        .team {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            margin-bottom: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            min-height: 50px;
+            position: relative;
+        }
+        .team.winner {
+            background-color: #e8f5e9;
+            border-left: 3px solid #28a745;
+        }
+        .team.loser {
+            opacity: 0.7;
+        }
+        .team-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .team-name {
+            flex-grow: 1;
+            font-weight: 500;
+        }
+        .team-score {
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        .faculty-badge {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 0.7rem;
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .champion {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .champion-trophy {
+            font-size: 4rem;
+            color: gold;
+            margin-bottom: 1rem;
+        }
+        .champion-team {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .champion-faculty {
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .final-score {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .bracket-container {
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+        .tournament-info {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            height: 100%;
+        }
+        .tournament-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .tournament-info-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        .tournament-info-content {
+            flex-grow: 1;
+        }
+        .tournament-info-title {
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+        .tournament-info-value {
+            color: #6c757d;
+        }
+        .nav-tabs .nav-link {
+            border: none;
+            color: #6c757d;
+            font-weight: 500;
+            padding: 1rem 1.5rem;
+        }
+        .nav-tabs .nav-link.active {
+            color: #1a237e;
+            border-bottom: 3px solid #1a237e;
+        }
+        .team-container {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+        .team-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        }
+        .team-rank {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a237e;
+            width: 40px;
+            text-align: center;
+        }
+        .team-details {
+            flex-grow: 1;
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="bi bi-trophy-fill me-2"></i>
+                <span>SportBoards</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="clasifications.html">Clasificaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="stadistics_sports.html">Estadísticas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="administration_panel.html">Administración</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle text-white d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-2" width="32" height="32" alt="Profile">
+                            <span>Carlos Mendoza</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="bi bi-person me-2"></i>Mi Perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tournament Header -->
+    <div class="tournament-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-2 text-center mb-4 mb-lg-0">
+                    <div class="tournament-logo mx-auto">
+                        <i class="bi bi-dribbble"></i>
+                    </div>
+                </div>
+                <div class="col-lg-7 text-center text-lg-start mb-4 mb-lg-0">
+                    <h1>Liga Universitaria de Baloncesto 2025</h1>
+                    <p class="lead mb-0">Torneo Interfacultades | 16 Equipos</p>
+                    <div class="d-flex flex-wrap gap-3 mt-3">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-calendar-event me-2"></i>
+                            <span>15 Abr - 20 Jun 2025</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-geo-alt me-2"></i>
+                            <span>Gimnasio Central</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-people me-2"></i>
+                            <span>Estado: En Curso</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-center text-lg-end">
+                    <button class="btn btn-light rounded-pill px-4 me-2">
+                        <i class="bi bi-download me-2"></i>Descargar Bracket
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tournament Content -->
+    <div class="container pb-5">
+        <ul class="nav nav-tabs mb-4" id="tournamentTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="bracket-tab" data-bs-toggle="tab" data-bs-target="#bracket-tab-pane" type="button" role="tab" aria-controls="bracket-tab-pane" aria-selected="true">
+                    <i class="bi bi-diagram-3 me-2"></i>Bracket
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="teams-tab" data-bs-toggle="tab" data-bs-target="#teams-tab-pane" type="button" role="tab" aria-controls="teams-tab-pane" aria-selected="false">
+                    <i class="bi bi-people me-2"></i>Equipos
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="standings-tab" data-bs-toggle="tab" data-bs-target="#standings-tab-pane" type="button" role="tab" aria-controls="standings-tab-pane" aria-selected="false">
+                    <i class="bi bi-table me-2"></i>Posiciones
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="results-tab" data-bs-toggle="tab" data-bs-target="#results-tab-pane" type="button" role="tab" aria-controls="results-tab-pane" aria-selected="false">
+                    <i class="bi bi-clipboard-data me-2"></i>Resultados
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="tournamentTabContent">
+            <!-- Bracket Tab -->
+            <div class="tab-pane fade show active" id="bracket-tab-pane" role="tabpanel" aria-labelledby="bracket-tab" tabindex="0">
+                <div class="row mb-4">
+                    <div class="col-lg-9 mb-4 mb-lg-0">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="bracket-container">
+                                    <div class="bracket">
+                                        <!-- Octavos de Final -->
+                                        <div class="round">
+                                            <div class="round-title">Octavos de Final</div>
+                                            <div class="match">
+                                                <div class="team winner">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Halcones</div>
+                                                    <div class="team-score">78</div>
+                                                    <span class="faculty-badge">Ingeniería</span>
+                                                </div>
+                                                <div class="team loser">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Leones</div>
+                                                    <div class="team-score">65</div>
+                                                    <span class="faculty-badge">Artes</span>
+                                                </div>
+                                            </div>
+                                            <div class="match">
+                                                <div class="team winner">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Panteras</div>
+                                                    <div class="team-score">82</div>
+                                                    <span class="faculty-badge">Medicina</span>
+                                                </div>
+                                                <div class="team loser">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Tigres</div>
+                                                    <div class="team-score">71</div>
+                                                    <span class="faculty-badge">Arquitectura</span>
+                                                </div>
+                                            </div>
+                                            <div class="match">
+                                                <div class="team winner">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Lobos</div>
+                                                    <div class="team-score">75</div>
+                                                    <span class="faculty-badge">Ciencias</span>
+                                                </div>
+                                                <div class="team loser">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Osos</div>
+                                                    <div class="team-score">70</div>
+                                                    <span class="faculty-badge">Economía</span>
+                                                </div>
+                                            </div>
+                                            <div class="match">
+                                                <div class="team winner">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Águilas</div>
+                                                    <div class="team-score">90</div>
+                                                    <span class="faculty-badge">Derecho</span>
+                                                </div>
+                                                <div class="team loser">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Tiburones</div>
+                                                    <div class="team-score">76</div>
+                                                    <span class="faculty-badge">Educación</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Cuartos de Final -->
+                                        <div class="round">
+                                            <div class="round-title">Cuartos de Final</div>
+                                            <div class="match">
+                                                <div class="team winner">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Halcones</div>
+                                                    <div class="team-score">85</div>
+                                                    <span class="faculty-badge">Ingeniería</span>
+                                                </div>
+                                                <div class="team loser">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Panteras</div>
+                                                    <div class="team-score">81</div>
+                                                    <span class="faculty-badge">Medicina</span>
+                                                </div>
+                                            </div>
+                                            <div class="match">
+                                                <div class="team winner">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Águilas</div>
+                                                    <div class="team-score">88</div>
+                                                    <span class="faculty-badge">Derecho</span>
+                                                </div>
+                                                <div class="team loser">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Lobos</div>
+                                                    <div class="team-score">79</div>
+                                                    <span class="faculty-badge">Ciencias</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Semifinales -->
+                                        <div class="round">
+                                            <div class="round-title">Semifinales</div>
+                                            <div class="match">
+                                                <div class="team winner">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Halcones</div>
+                                                    <div class="team-score">92</div>
+                                                    <span class="faculty-badge">Ingeniería</span>
+                                                </div>
+                                                <div class="team loser">
+                                                    <div class="team-logo">
+                                                        <i class="bi bi-dribbble"></i>
+                                                    </div>
+                                                    <div class="team-name">Águilas</div>
+                                                    <div class="team-score">89</div>
+                                                    <span class="faculty-badge">Derecho</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Final -->
+                                        <div class="round">
+                                            <div class="round-title">Final</div>
+                                            <div class="champion">
+                                                <div class="champion-trophy">
+                                                    <i class="bi bi-trophy-fill"></i>
+                                                </div>
+                                                <div class="champion-team">Halcones</div>
+                                                <div class="champion-faculty">Facultad de Ingeniería</div>
+                                                <div class="final-score">92 - 89</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3">
+                        <div class="tournament-info">
+                            <h5 class="mb-4">Información del Torneo</h5>
+                            
+                            <div class="tournament-info-item">
+                                <div class="tournament-info-icon">
+                                    <i class="bi bi-trophy"></i>
+                                </div>
+                                <div class="tournament-info-content">
+                                    <h6 class="tournament-info-title">Formato</h6>
+                                    <div class="tournament-info-value">Eliminación directa</div>
+                                </div>
+                            </div>
+                            
+                            <div class="tournament-info-item">
+                                <div class="tournament-info-icon">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <div class="tournament-info-content">
+                                    <h6 class="tournament-info-title">Equipos</h6>
+                                    <div class="tournament-info-value">16 equipos participantes</div>
+                                </div>
+                            </div>
+                            
+                            <div class="tournament-info-item">
+                                <div class="tournament-info-icon">
+                                    <i class="bi bi-calendar-event"></i>
+                                </div>
+                                <div class="tournament-info-content">
+                                    <h6 class="tournament-info-title">Duración</h6>
+                                    <div class="tournament-info-value">15 de abril - 20 de junio 2025</div>
+                                </div>
+                            </div>
+                            
+                            <div class="tournament-info-item">
+                                <div class="tournament-info-icon">
+                                    <i class="bi bi-geo-alt"></i>
+                                </div>
+                                <div class="tournament-info-content">
+                                    <h6 class="tournament-info-title">Sede</h6>
+                                    <div class="tournament-info-value">Gimnasio Central Universitario</div>
+                                </div>
+                            </div>
+                            
+                            <div class="tournament-info-item">
+                                <div class="tournament-info-icon">
+                                    <i class="bi bi-award"></i>
+                                </div>
+                                <div class="tournament-info-content">
+                                    <h6 class="tournament-info-title">Premio</h6>
+                                    <div class="tournament-info-value">Trofeo y representación en torneo nacional</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <button class="btn btn-outline-primary w-100">
+                                    <i class="bi bi-calendar-plus me-2"></i>Ver calendario completo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Teams Tab -->
+            <div class="tab-pane fade" id="teams-tab-pane" role="tabpanel" aria-labelledby="teams-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="team-container">
+                            <div class="team-rank">1</div>
+                            <div class="team-logo">
+                                <i class="bi bi-dribbble"></i>
+                            </div>
+                            <div class="team-details">
+                                <h5 class="mb-1">Halcones</h5>
+                                <div class="text-muted">Facultad de Ingeniería</div>
+                                <div class="d-flex mt-2">
+                                    <span class="badge bg-success me-2">Campeón 2025</span>
+                                    <span class="badge bg-secondary">12 jugadores</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="team-container">
+                            <div class="team-rank">2</div>
+                            <div class="team-logo">
+                                <i class="bi bi-dribbble"></i>
+                            </div>
+                            <div class="team-details">
+                                <h5 class="mb-1">Águilas</h5>
+                                <div class="text-muted">Facultad de Derecho</div>
+                                <div class="d-flex mt-2">
+                                    <span class="badge bg-warning me-2">Subcampeón 2025</span>
+                                    <span class="badge bg-secondary">10 jugadores</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="team-container">
+                            <div class="team-rank">3</div>
+                            <div class="team-logo">
+                                <i class="bi bi-dribbble"></i>
+                            </div>
+                            <div class="team-details">
+                                <h5 class="mb-1">Panteras</h5>
+                                <div class="text-muted">Facultad de Medicina</div>
+                                <div class="d-flex mt-2">
+                                    <span class="badge bg-secondary">11 jugadores</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="team-container">
+                            <div class="team-rank">4</div>
+                            <div class="team-logo">
+                                <i class="bi bi-dribbble"></i>
+                            </div>
+                            <div class="team-details">
+                                <h5 class="mb-1">Lobos</h5>
+                                <div class="text-muted">Facultad de Ciencias</div>
+                                <div class="d-flex mt-2">
+                                    <span class="badge bg-secondary">12 jugadores</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="team-container">
+                            <div class="team-rank">5</div>
+                            <div class="team-logo">
+                                <i class="bi bi-dribbble"></i>
+                            </div>
+                            <div class="team-details">
+                                <h5 class="mb-1">Tigres</h5>
+                                <div class="text-muted">Facultad de Arquitectura</div>
+                                <div class="d-flex mt-2">
+                                    <span class="badge bg-secondary">10 jugadores</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="team-container">
+                            <div class="team-rank">6</div>
+                            <div class="team-logo">
+                                <i class="bi bi-dribbble"></i>
+                            </div>
+                            <div class="team-details">
+                                <h5 class="mb-1">Osos</h5>
+                                <div class="text-muted">Facultad de Economía</div>
+                                <div class="d-flex mt-2">
+                                    <span class="badge bg-secondary">11 jugadores</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Standings Tab -->
+            <div class="tab-pane fade" id="standings-tab-pane" role="tabpanel" aria-labelledby="standings-tab" tabindex="0">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">Pos</th>
+                                        <th scope="col">Equipo</th>
+                                        <th scope="col">Facultad</th>
+                                        <th scope="col">J</th>
+                                        <th scope="col">G</th>
+                                        <th scope="col">P</th>
+                                        <th scope="col">PF</th>
+                                        <th scope="col">PC</th>
+                                        <th scope="col">Dif</th>
+                                        <th scope="col">Pts</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">1</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-trophy-fill text-warning me-2"></i>
+                                                Halcones
+                                            </div>
+                                        </td>
+                                        <td>Ingeniería</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                        <td>0</td>
+                                        <td>255</td>
+                                        <td>235</td>
+                                        <td>+20</td>
+                                        <td class="fw-bold">6</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">2</td>
+                                        <td>Águilas</td>
+                                        <td>Derecho</td>
+                                        <td>3</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>267</td>
+                                        <td>245</td>
+                                        <td>+22</td>
+                                        <td class="fw-bold">5</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">3</td>
+                                        <td>Panteras</td>
+                                        <td>Medicina</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>163</td>
+                                        <td>156</td>
+                                        <td>+7</td>
+                                        <td class="fw-bold">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">4</td>
+                                        <td>Lobos</td>
+                                        <td>Ciencias</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>154</td>
+                                        <td>149</td>
+                                        <td>+5</td>
+                                        <td class="fw-bold">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">5</td>
+                                        <td>Tigres</td>
+                                        <td>Arquitectura</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>1</td>
+                                        <td>71</td>
+                                        <td>82</td>
+                                        <td>-11</td>
+                                        <td class="fw-bold">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">6</td>
+                                        <td>Osos</td>
+                                        <td>Economía</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>1</td>
+                                        <td>70</td>
+                                        <td>75</td>
+                                        <td>-5</td>
+                                        <td class="fw-bold">1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results Tab -->
+            <div class="tab-pane fade" id="results-tab-pane" role="tabpanel" aria-labelledby="results-tab" tabindex="0">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Final</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <div class="text-muted small">20 Jun 2025</div>
+                                    <div class="text-muted small">18:00</div>
+                                </div>
+                                <div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="fw-bold me-2">Halcones</span>
+                                        <span class="badge bg-light text-dark">Ingeniería</span>
+                                        <span class="ms-auto fw-bold">92</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="fw-bold me-2">Águilas</span>
+                                        <span class="badge bg-light text-dark">Derecho</span>
+                                        <span class="ms-auto fw-bold">89</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge bg-primary">Final</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Semifinales</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <div class="text-muted small">15 Jun 2025</div>
+                                    <div class="text-muted small">18:00</div>
+                                </div>
+                                <div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="fw-bold me-2">Halcones</span>
+                                        <span class="badge bg-light text-dark">Ingeniería</span>
+                                        <span class="ms-auto fw-bold">92</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="fw-bold me-2">Águilas</span>
+                                        <span class="badge bg-light text-dark">Derecho</span>
+                                        <span class="ms-auto fw-bold">89</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge bg-primary">Semifinal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Cuartos de Final</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between p-3 border rounded mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <div class="text-muted small">10 Jun 2025</div>
+                                    <div class="text-muted small">18:00</div>
+                                </div>
+                                <div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="fw-bold me-2">Halcones</span>
+                                        <span class="badge bg-light text-dark">Ingeniería</span>
+                                        <span class="ms-auto fw-bold">85</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="fw-bold me-2">Panteras</span>
+                                        <span class="badge bg-light text-dark">Medicina</span>
+                                        <span class="ms-auto fw-bold">81</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge bg-primary">Cuartos</span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-center justify-content-between p-3 border rounded">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <div class="text-muted small">10 Jun 2025</div>
+                                    <div class="text-muted small">16:00</div>
+                                </div>
+                                <div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="fw-bold me-2">Águilas</span>
+                                        <span class="badge bg-light text-dark">Derecho</span>
+                                        <span class="ms-auto fw-bold">88</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="fw-bold me-2">Lobos</span>
+                                        <span class="badge bg-light text-dark">Ciencias</span>
+                                        <span class="ms-auto fw-bold">79</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="badge bg-primary">Cuartos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

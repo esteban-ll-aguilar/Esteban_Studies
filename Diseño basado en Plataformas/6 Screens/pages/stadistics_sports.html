@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas Deportivas - SportBoards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <style>
+        .navbar-custom {
+            background-color: #1a237e;
+        }
+        .stats-header {
+            background: linear-gradient(135deg, #1a237e 0%, #4a148c 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        .filter-bar {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .stat-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            height: 100%;
+            margin-bottom: 20px;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card-header {
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .stat-card-body {
+            padding: 1.5rem;
+            position: relative;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .stat-icon {
+            font-size: 2rem;
+            opacity: 0.2;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+        }
+        .progress-stat {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        .progress-value {
+            font-weight: 600;
+        }
+        .team-comparison {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+        .comparison-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .comparison-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        .comparison-bar {
+            height: 8px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .comparison-indicator {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto;
+        }
+        .table-responsive {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .table-stats th {
+            background-color: #1a237e;
+            color: white;
+            font-weight: 500;
+            border: none;
+        }
+        .table-stats td {
+            vertical-align: middle;
+        }
+        .rank-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .top-rank {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .rank-player {
+            display: flex;
+            align-items: center;
+        }
+        .rank-player-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        .sport-filter-btn {
+            border-radius: 50px;
+            padding: 8px 20px;
+            margin-right: 10px;
+            font-weight: 500;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .sport-filter-btn.active {
+            background-color: #1a237e;
+            color: white;
+        }
+        .sport-filter-btn:not(.active):hover {
+            border-color: #1a237e;
+            color: #1a237e;
+        }
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-right: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            margin-right: 5px;
+        }
+        .player-performance-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .player-performance-header {
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .player-performance-body {
+            padding: 20px;
+        }
+        .performance-metric {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .metric-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        .metric-change {
+            margin-left: 10px;
+            font-size: 0.8rem;
+        }
+        .increase {
+            color: #28a745;
+        }
+        .decrease {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="bi bi-bar-chart-fill me-2"></i>
+            SportBoards
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="dahboard.html">
+                        <i class="bi bi-speedometer2 me-1"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="stadistics_sports.html">
+                        <i class="bi bi-graph-up me-1"></i> Estadísticas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="clasifications.html">
+                        <i class="bi bi-trophy me-1"></i> Clasificaciones
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="administration_panel.html">
+                        <i class="bi bi-gear me-1"></i> Administración
+                    </a>
+                </li>
+            </ul>
+            <div class="d-flex align-items-center">
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://via.placeholder.com/40" alt="Usuario" width="32" height="32" class="rounded-circle me-2">
+                        <span>Nombre Usuario</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="profile.html"><i class="bi bi-person me-2"></i>Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Ajustes</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="login.html"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Header Section -->
+<header class="stats-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1><i class="bi bi-graph-up-arrow me-2"></i>Estadísticas Deportivas</h1>
+                <p class="lead">Analiza rendimiento, tendencias y comparativas por deporte y temporada</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-light">
+                        <i class="bi bi-cloud-download me-1"></i> Exportar
+                    </button>
+                    <button type="button" class="btn btn-outline-light">
+                        <i class="bi bi-share me-1"></i> Compartir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <!-- Filters -->
+    <div class="filter-bar mb-4">
+        <div class="row align-items-center">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control border-start-0" placeholder="Buscar estadística...">
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <select class="form-select">
+                    <option selected>Temporada 2024-2025</option>
+                    <option>Temporada 2023-2024</option>
+                    <option>Temporada 2022-2023</option>
+                    <option>Histórico completo</option>
+                </select>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-secondary active">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <i class="bi bi-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sport Category Filter -->
+    <div class="mb-4 text-center">
+        <button class="btn sport-filter-btn active">Todos</button>
+        <button class="btn sport-filter-btn">Fútbol</button>
+        <button class="btn sport-filter-btn">Baloncesto</button>
+        <button class="btn sport-filter-btn">Tenis</button>
+        <button class="btn sport-filter-btn">Atletismo</button>
+        <button class="btn sport-filter-btn">Natación</button>
+    </div>
+
+    <!-- Summary Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-6 col-lg-3">
+            <div class="card stat-card">
+                <div class="stat-card-body">
+                    <i class="bi bi-people stat-icon text-primary"></i>
+                    <div class="stat-value text-primary">5,842</div>
+                    <div class="stat-label">Deportistas Registrados</div>
+                    <div class="text-success small mt-2">
+                        <i class="bi bi-arrow-up"></i> 12% vs mes anterior
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card stat-card">
+                <div class="stat-card-body">
+                    <i class="bi bi-calendar3 stat-icon text-info"></i>
+                    <div class="stat-value text-info">1,245</div>
+                    <div class="stat-label">Eventos Realizados</div>
+                    <div class="text-success small mt-2">
+                        <i class="bi bi-arrow-up"></i> 8% vs temporada anterior
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card stat-card">
+                <div class="stat-card-body">
+                    <i class="bi bi-trophy stat-icon text-warning"></i>
+                    <div class="stat-value text-warning">356</div>
+                    <div class="stat-label">Competiciones</div>
+                    <div class="text-success small mt-2">
+                        <i class="bi bi-arrow-up"></i> 15% vs temporada anterior
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card stat-card">
+                <div class="stat-card-body">
+                    <i class="bi bi-building stat-icon text-danger"></i>
+                    <div class="stat-value text-danger">128</div>
+                    <div class="stat-label">Clubs Participantes</div>
+                    <div class="text-success small mt-2">
+                        <i class="bi bi-arrow-up"></i> 5% vs temporada anterior
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-lg-8">
+            <!-- Performance Chart -->
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Rendimiento por Deporte</h5>
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Mensual</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Anual</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="sportsPerformanceChart" height="250"></canvas>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #4e73df;"></div>
+                            <span>Fútbol</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #1cc88a;"></div>
+                            <span>Baloncesto</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #f6c23e;"></div>
+                            <span>Tenis</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #e74a3b;"></div>
+                            <span>Atletismo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Comparison -->
+            <div class="team-comparison mb-4">
+                <h5 class="mb-4">Comparativa de Equipos Principales</h5>
+                <div class="row align-items-center mb-4">
+                    <div class="col-4 text-center">
+                        <img src="https://via.placeholder.com/60" alt="Equipo A" class="team-logo mb-2">
+                        <h6>Equipo A</h6>
+                    </div>
+                    <div class="col-4 text-center">
+                        <div class="comparison-value">72% <small>vs</small> 65%</div>
+                        <div class="comparison-label">Porcentaje de Victorias</div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <img src="https://via.placeholder.com/60" alt="Equipo B" class="team-logo mb-2">
+                        <h6>Equipo B</h6>
+                    </div>
+                </div>
+                <div class="row align-items-center mb-4">
+                    <div class="col-5">
+                        <div class="progress comparison-bar">
+                            <div class="progress-bar bg-primary" style="width: 72%"></div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-center">
+                        <div class="comparison-indicator bg-primary">
+                            <i class="bi bi-arrow-right"></i>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="progress comparison-bar">
+                            <div class="progress-bar bg-secondary" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-center mb-4">
+                    <div class="col-4 text-center">
+                        <div class="comparison-value">87</div>
+                        <div class="comparison-label">Partidos Ganados</div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <div class="comparison-value">24</div>
+                        <div class="comparison-label">Partidos Empatados</div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <div class="comparison-value">12</div>
+                        <div class="comparison-label">Partidos Perdidos</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Players Table -->
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Mejores Jugadores - Fútbol</h5>
+                        <select class="form-select form-select-sm" style="width: auto;">
+                            <option selected>Goles</option>
+                            <option>Asistencias</option>
+                            <option>Minutos Jugados</option>
+                            <option>Valoración</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-stats mb-0">
+                            <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th width="40%">Jugador</th>
+                                    <th width="20%">Equipo</th>
+                                    <th width="15%">Goles</th>
+                                    <th width="20%">Promedio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="rank-number top-rank">1</div>
+                                    </td>
+                                    <td>
+                                        <div class="rank-player">
+                                            <img src="https://via.placeholder.com/40" alt="Jugador 1" class="rank-player-img">
+                                            <div>
+                                                <div class="fw-bold">Cristiano Ronaldo</div>
+                                                <small class="text-muted">Delantero</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Manchester United</td>
+                                    <td class="fw-bold">32</td>
+                                    <td>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 95%"></div>
+                                        </div>
+                                        <small class="text-muted">0.82 por partido</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="rank-number top-rank">2</div>
+                                    </td>
+                                    <td>
+                                        <div class="rank-player">
+                                            <img src="https://via.placeholder.com/40" alt="Jugador 2" class="rank-player-img">
+                                            <div>
+                                                <div class="fw-bold">Lionel Messi</div>
+                                                <small class="text-muted">Delantero</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Paris Saint-Germain</td>
+                                    <td class="fw-bold">29</td>
+                                    <td>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 90%"></div>
+                                        </div>
+                                        <small class="text-muted">0.76 por partido</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="rank-number top-rank">3</div>
+                                    </td>
+                                    <td>
+                                        <div class="rank-player">
+                                            <img src="https://via.placeholder.com/40" alt="Jugador 3" class="rank-player-img">
+                                            <div>
+                                                <div class="fw-bold">Robert Lewandowski</div>
+                                                <small class="text-muted">Delantero</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>FC Barcelona</td>
+                                    <td class="fw-bold">27</td>
+                                    <td>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 85%"></div>
+                                        </div>
+                                        <small class="text-muted">0.71 por partido</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="rank-number">4</div>
+                                    </td>
+                                    <td>
+                                        <div class="rank-player">
+                                            <img src="https://via.placeholder.com/40" alt="Jugador 4" class="rank-player-img">
+                                            <div>
+                                                <div class="fw-bold">Kylian Mbappé</div>
+                                                <small class="text-muted">Delantero</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Real Madrid</td>
+                                    <td class="fw-bold">25</td>
+                                    <td>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 78%"></div>
+                                        </div>
+                                        <small class="text-muted">0.65 por partido</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="rank-number">5</div>
+                                    </td>
+                                    <td>
+                                        <div class="rank-player">
+                                            <img src="https://via.placeholder.com/40" alt="Jugador 5" class="rank-player-img">
+                                            <div>
+                                                <div class="fw-bold">Erling Haaland</div>
+                                                <small class="text-muted">Delantero</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Manchester City</td>
+                                    <td class="fw-bold">23</td>
+                                    <td>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 70%"></div>
+                                        </div>
+                                        <small class="text-muted">0.62 por partido</small>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer bg-white">
+                    <a href="#" class="btn btn-sm btn-outline-primary">Ver Ranking Completo <i class="bi bi-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-lg-4">
+            <!-- Stats Distribution -->
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Distribución por Deporte</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="sportDistributionChart" height="250"></canvas>
+                </div>
+            </div>
+
+            <!-- Performance Metrics -->
+            <div class="player-performance-card mb-4">
+                <div class="player-performance-header">
+                    <h5 class="mb-0">Métricas de Rendimiento - Fútbol</h5>
+                </div>
+                <div class="player-performance-body">
+                    <div class="performance-metric">
+                        <div>
+                            <div class="fw-bold">Promedio de Goles</div>
+                            <small class="text-muted">Por equipo/partido</small>
+                        </div>
+                        <div class="metric-value">2.4</div>
+                        <div class="metric-change increase">
+                            <i class="bi bi-arrow-up-short"></i> 0.3
+                        </div>
+                    </div>
+                    <div class="performance-metric">
+                        <div>
+                            <div class="fw-bold">Posesión Media</div>
+                            <small class="text-muted">Equipos ganadores</small>
+                        </div>
+                        <div class="metric-value">58%</div>
+                        <div class="metric-change increase">
+                            <i class="bi bi-arrow-up-short"></i> 2%
+                        </div>
+                    </div>
+                    <div class="performance-metric">
+                        <div>
+                            <div class="fw-bold">Disparos a Puerta</div>
+                            <small class="text-muted">Promedio por partido</small>
+                        </div>
+                        <div class="metric-value">14.7</div>
+                        <div class="metric-change increase">
+                            <i class="bi bi-arrow-up-short"></i> 1.2
+                        </div>
+                    </div>
+                    <div class="performance-metric">
+                        <div>
+                            <div class="fw-bold">Faltas Cometidas</div>
+                            <small class="text-muted">Promedio por partido</small>
+                        </div>
+                        <div class="metric-value">12.3</div>
+                        <div class="metric-change decrease">
+                            <i class="bi bi-arrow-down-short"></i> 0.8
+                        </div>
+                    </div>
+                    <div class="performance-metric">
+                        <div>
+                            <div class="fw-bold">Tarjetas Amarillas</div>
+                            <small class="text-muted">Promedio por partido</small>
+                        </div>
+                        <div class="metric-value">3.1</div>
+                        <div class="metric-change decrease">
+                            <i class="bi bi-arrow-down-short"></i> 0.4
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latest Records -->
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Récords Recientes</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item p-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-trophy-fill text-warning me-3 fs-4"></i>
+                                <div>
+                                    <div class="fw-bold">Mayor número de puntos en una temporada</div>
+                                    <div>100 puntos - Manchester City (2022-2023)</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item p-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-trophy-fill text-warning me-3 fs-4"></i>
+                                <div>
+                                    <div class="fw-bold">Mayor número de goles en un partido</div>
+                                    <div>5 goles - Erling Haaland vs Leicester City</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item p-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-trophy-fill text-warning me-3 fs-4"></i>
+                                <div>
+                                    <div class="fw-bold">Racha más larga sin perder</div>
+                                    <div>34 partidos - Liverpool FC (2022-2023)</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item p-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-trophy-fill text-warning me-3 fs-4"></i>
+                                <div>
+                                    <div class="fw-bold">Mayor número de asistencias en una temporada</div>
+                                    <div>24 asistencias - Kevin De Bruyne (2023-2024)</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer bg-white">
+                    <a href="#" class="btn btn-sm btn-outline-primary w-100">Ver Todos los Récords</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Over Time Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Tendencias de Rendimiento por Temporada</h5>
+                        <select class="form-select form-select-sm" style="width: 200px;">
+                            <option selected>Todas las categorías</option>
+                            <option>Fútbol - Primera División</option>
+                            <option>Baloncesto - Liga ACB</option>
+                            <option>Tenis - Grand Slam</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="seasonalTrendsChart" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="bi bi-bar-chart-fill me-2"></i>SportBoards</h5>
+                <p class="small">Plataforma de análisis y estadísticas deportivas para equipos, entrenadores y aficionados.</p>
+            </div>
+            <div class="col-md-3">
+                <h6>Enlaces Rápidos</h6>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white-50">Inicio</a></li>
+                    <li><a href="#" class="text-white-50">Estadísticas</a></li>
+                    <li><a href="#" class="text-white-50">Clasificaciones</a></li>
+                    <li><a href="#" class="text-white-50">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>Síguenos</h6>
+                <div class="d-flex">
+                    <a href="#" class="text-white me-2"><i class="bi bi-facebook fs-5"></i></a>
+                    <a href="#" class="text-white me-2"><i class="bi bi-twitter fs-5"></i></a>
+                    <a href="#" class="text-white me-2"><i class="bi bi-instagram fs-5"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-youtube fs-5"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-3 bg-secondary">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start">
+                <small class="text-white-50">&copy; 2025 SportBoards. Todos los derechos reservados.</small>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <small class="text-white-50"><a href="#" class="text-white-50">Términos y condiciones</a> · <a href="#" class="text-white-50">Privacidad</a></small>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Sample charts for demonstration
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sports Performance Chart
+        const performanceCtx = document.getElementById('sportsPerformanceChart').getContext('2d');
+        new Chart(performanceCtx, {
+            type: 'line',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                datasets: [
+                    {
+                        label: 'Fútbol',
+                        data: [65, 72, 78, 75, 82, 87],
+                        borderColor: '#4e73df',
+                        backgroundColor: 'rgba(78, 115, 223, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: 'Baloncesto',
+                        data: [58, 65, 72, 68, 75, 82],
+                        borderColor: '#1cc88a',
+                        backgroundColor: 'rgba(28, 200, 138, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: 'Tenis',
+                        data: [70, 68, 74, 78, 82, 85],
+                        borderColor: '#f6c23e',
+                        backgroundColor: 'rgba(246, 194, 62, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: 'Atletismo',
+                        data: [62, 67, 73, 77, 85, 92],
+                        borderColor: '#e74a3b',
+                        backgroundColor: 'rgba(231, 74, 59, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 50,
+                        grid: {
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Sport Distribution Chart
+        const distributionCtx = document.getElementById('sportDistributionChart').getContext('2d');
+        new Chart(distributionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Fútbol', 'Baloncesto', 'Tenis', 'Atletismo', 'Natación', 'Otros'],
+                datasets: [{
+                    data: [35, 25, 15, 10, 8, 7],
+                    backgroundColor: [
+                        '#4e73df',
+                        '#1cc88a',
+                        '#f6c23e',
+                        '#e74a3b',
+                        '#36b9cc',
+                        '#858796'
+                    ],
+                    hoverOffset: 4,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 15
+                        }
+                    }
+                }
+            }
+        });
+
+        // Seasonal Trends Chart
+        const trendsCtx = document.getElementById('seasonalTrendsChart').getContext('2d');
+        new Chart(trendsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
+                datasets: [
+                    {
+                        label: 'Torneos',
+                        data: [65, 75, 80, 85, 90, 95],
+                        backgroundColor: '#4e73df',
+                        borderRadius: 5,
+                        barPercentage: 0.6
+                    },
+                    {
+                        label: 'Participantes',
+                        data: [1200, 1500, 1800, 2200, 2600, 3000],
+                        backgroundColor: '#1cc88a',
+                        borderRadius: 5,
+                        barPercentage: 0.6
+                    },
+                    {
+                        label: 'Clubes',
+                        data: [45, 55, 65, 78, 95, 110],
+                        backgroundColor: '#f6c23e',
+                        borderRadius: 5,
+                        barPercentage: 0.6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            borderDash: [2, 4],
+                            drawBorder: false
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
