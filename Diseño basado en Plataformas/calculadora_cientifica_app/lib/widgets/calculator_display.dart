@@ -12,62 +12,51 @@ class CalculatorDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(24)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(16.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8.0,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          // Entrada del usuario
+          Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+            child: Text(
+              input,
+              style: const TextStyle(fontSize: 32),
+              textAlign: TextAlign.right,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            // Historial de entrada
+          ),
+          
+          // Resultado
+          if (output.isNotEmpty)
             Container(
-              height: 80,
-              alignment: Alignment.bottomRight,
-              child: SingleChildScrollView(
-                reverse: true,
-                scrollDirection: Axis.horizontal,
-                child: Text(
-                  input.isEmpty ? "0" : input,
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
-                    fontFamily: 'Courier New',
-                  ),
-                  textAlign: TextAlign.right,
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            // Resultado
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              reverse: true,
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
               child: AnimatedDefaultTextStyle(
                 style: TextStyle(
-                  fontSize: 48,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontFamily: 'Courier New',
+                  fontSize: 24,
+                  color: Theme.of(context).colorScheme.primary,
+                  fontFamily: 'Roboto',
                 ),
                 duration: const Duration(milliseconds: 200),
                 child: Text(output),
               ),
             ),
-          ],
-        ),
+        ],
       ),
     );
   }

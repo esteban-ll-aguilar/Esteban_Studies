@@ -4,12 +4,29 @@ import 'package:flutter/services.dart';
 class CalculatorKeyboard extends StatelessWidget {
   final Function(String) onButtonPressed;
   final bool showScientificButtons;
+  final Function(bool) onModeChanged;
+  final VoidCallback onHistoryPressed;
+  final VoidCallback onSettingsPressed;
+  final VoidCallback onThemePressed;
+  final int currentIndex;
+  final Function(int) onTabSelected;
 
   const CalculatorKeyboard({
     super.key,
     required this.onButtonPressed,
     required this.showScientificButtons,
+    this.onModeChanged = _defaultCallback,
+    this.onHistoryPressed = _defaultVoidCallback,
+    this.onSettingsPressed = _defaultVoidCallback,
+    this.onThemePressed = _defaultVoidCallback,
+    this.currentIndex = 0,
+    this.onTabSelected = _defaultIndexCallback,
   });
+
+  // Default callbacks to avoid null checks
+  static void _defaultCallback(bool value) {}
+  static void _defaultVoidCallback() {}
+  static void _defaultIndexCallback(int index) {}
 
   @override
   Widget build(BuildContext context) {
@@ -225,6 +242,181 @@ class CalculatorKeyboard extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  /// Construye un Drawer (Sidebar) personalizado para la calculadora
+  static Widget buildDrawer(BuildContext context, {
+    required VoidCallback onHistoryPressed,
+    required VoidCallback onSettingsPressed,
+    required VoidCallback onThemePressed,
+  }) {
+    return Drawer(
+      elevation: 16.0,
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Icon(
+                  Icons.calculate_rounded,
+                  color: Colors.white,
+                  size: 40,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Calculadora Científica',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Versión 1.0.0',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8),
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.history),
+            title: const Text('Historial'),
+            onTap: () {
+              Navigator.pop(context);
+              onHistoryPressed();
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: const Text('Configuración'),
+            onTap: () {
+              Navigator.pop(context);
+              onSettingsPressed();
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.color_lens),
+            title: const Text('Cambiar tema'),
+            onTap: () {
+              Navigator.pop(context);
+              onThemePressed();
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.info_outline),
+            title: const Text('Acerca de'),
+            onTap: () {
+              Navigator.pop(context);
+              _showAboutDialog(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Construye un AppBar personalizado para la calculadora
+  static PreferredSizeWidget buildAppBar(BuildContext context, {
+    required String title,
+    required bool showScientificButtons,
+    required Function(bool) onModeChanged,
+  }) {
+    return AppBar(
+      title: Text(title),
+      centerTitle: true,
+      elevation: 0,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      foregroundColor: Theme.of(context).colorScheme.onSurface,
+      actions: [
+        Tooltip(
+          message: showScientificButtons ? 'Modo básico' : 'Modo científico',
+          child: Switch(
+            value: showScientificButtons,
+            onChanged: onModeChanged,
+            activeColor: Theme.of(context).colorScheme.primary,
+            activeTrackColor: Theme.of(context).colorScheme.primaryContainer,
+            inactiveThumbColor: Theme.of(context).colorScheme.surfaceVariant,
+            inactiveTrackColor: Theme.of(context).colorScheme.outline,
+          ),
+        ),
+        const SizedBox(width: 8),
+      ],
+    );
+  }
+
+  /// Construye un BottomNavigationBar para la calculadora
+  static Widget buildBottomNavigationBar(BuildContext context, {
+    required int currentIndex,
+    required Function(int) onTabSelected,
+  }) {
+    return BottomNavigationBar(
+      currentIndex: currentIndex,
+      onTap: onTabSelected,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      selectedItemColor: Theme.of(context).colorScheme.primary,
+      unselectedItemColor: Theme.of(context).colorScheme.onSurfaceVariant,
+      elevation: 8.0,
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calculate),
+          label: 'Calculadora',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.functions),
+          label: 'Funciones',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.architecture),
+          label: 'Conversión',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.history_edu),
+          label: 'Historial',
+        ),
+      ],
+    );
+  }
+
+  /// Muestra un diálogo de información sobre la aplicación
+  static void _showAboutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Acerca de Calculadora Científica'),
+        content: const SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Una calculadora científica avanzada con múltiples funcionalidades.'),
+              SizedBox(height: 12),
+              Text('Desarrollada con Flutter.'),
+              SizedBox(height: 12),
+              Text('© 2023 - Todos los derechos reservados'),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cerrar'),
+          ),
+        ],
       ),
     );
   }
