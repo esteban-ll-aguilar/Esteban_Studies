@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../mcp/mcp.dart'; // Importamos el MCP
 
 class CalculatorDisplay extends StatelessWidget {
   final String input;
@@ -28,6 +29,86 @@ class CalculatorDisplay extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          // Botón de MCP
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              StreamBuilder<MCPAction>(
+                stream: MCPService().actionStream,
+                builder: (context, snapshot) {
+                  // Determinar el color del indicador basado en la actividad reciente
+                  Color indicatorColor = Colors.grey;
+                  IconData iconData = Icons.assistant_outlined;
+                  
+                  if (snapshot.hasData) {
+                    // Cambiar color basado en el tipo de acción
+                    switch (snapshot.data!.type) {
+                      case MCPActionType.prediction:
+                        indicatorColor = Colors.purple;
+                        iconData = Icons.psychology;
+                        break;
+                      case MCPActionType.suggestion:
+                        indicatorColor = Colors.blue;
+                        iconData = Icons.lightbulb_outline;
+                        break;
+                      case MCPActionType.automatic:
+                        indicatorColor = Colors.orange;
+                        iconData = Icons.auto_fix_high;
+                        break;
+                      case MCPActionType.notification:
+                        indicatorColor = Colors.teal;
+                        iconData = Icons.notifications_active;
+                        break;
+                    }
+                  }
+                  
+                  return Row(
+                    children: [
+                      // Pequeño indicador de actividad
+                      Container(
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: indicatorColor,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Icon(
+                        iconData,
+                        color: indicatorColor,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 6),
+                      IconButton(
+                        icon: const Icon(Icons.assistant),
+                        tooltip: 'Asistente MCP Predictivo',
+                        onPressed: () {
+                          // Mostrar una acción de ejemplo del MCP
+                          final action = MCPAction(
+                            type: MCPActionType.prediction,
+                            message: "¿Puedo ayudarte a predecir tus próximos cálculos?",
+                            action: () {
+                              // Aquí iría la lógica real
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('¡MCP Predictivo activado! Analizando patrones matemáticos...'),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            },
+                            icon: Icons.psychology,
+                          );
+                          
+                          MCPNotificationManager().showAction(context, action);
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ],
+          ),
           // Entrada del usuario
           Container(
             alignment: Alignment.centerRight,

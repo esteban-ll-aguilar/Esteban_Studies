@@ -2,6 +2,8 @@ import 'package:calculadora_cientifica_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screens/calculator_screen.dart';
+import 'mcp/mcp.dart'; // Importamos el MCP
+import 'dart:async'; // Para Timer
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +17,47 @@ void main() {
       statusBarIconBrightness: Brightness.light,
     ),
   );
+  
+  // Inicializamos el servicio MCP
+  final mcpService = MCPService();
+  
+  // Configuramos el sistema MCP con acciones de ejemplo
+  _initializeMCP(mcpService);
+  
   runApp(const MyApp());
+}
+
+// Inicializar MCP con algunos datos de entrenamiento para demostración
+void _initializeMCP(MCPService mcpService) {
+  // Secuencia de acciones para entrenar el modelo predictivo
+  final trainingActions = [
+    '+', '2', '=',
+    '+', '3', '=',
+    '+', '2', '=',
+    '×', '2', '=',
+    '÷', '4', '=',
+    'sin', '30', ')',
+    'sin', '45', ')',
+    'sin', '60', ')',
+    '+', '10', '=',
+    '+', '10', '=',
+    '√', '16', ')',
+  ];
+  
+  // Ejecutar las acciones de entrenamiento con un retraso para simular uso real
+  Timer.periodic(const Duration(milliseconds: 50), (timer) {
+    if (trainingActions.isEmpty) {
+      timer.cancel();
+      return;
+    }
+    
+    final action = trainingActions.removeAt(0);
+    mcpService.trackUserAction(action);
+    
+    if (trainingActions.isEmpty) {
+      timer.cancel();
+    }
+  });
 }
 
 class MyApp extends StatefulWidget {
@@ -27,6 +69,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   ThemeMode _themeMode = ThemeMode.system;
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   void toggleTheme(ThemeMode mode) {
     setState(() {
@@ -39,6 +82,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Calculadora Científica',
       debugShowCheckedModeBanner: false,
+      navigatorKey: _navigatorKey,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
@@ -97,8 +141,18 @@ class _MyAppState extends State<MyApp> {
           ), 
         ),
       ),
-      themeMode: ThemeMode.system,
-      home: const HomePage(),
+      themeMode: _themeMode,
+      home: Builder(
+        builder: (context) {
+          // Configuramos un listener para las acciones del MCP
+          MCPService().actionStream.listen((action) {
+            // Usamos el MCPNotificationManager para mostrar las acciones
+            MCPNotificationManager().showAction(context, action);
+          });
+          
+          return const HomePage();
+        },
+      ),
     );
   }
 }
